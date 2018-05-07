@@ -1,12 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EDeanery.BLL.Services.Abstract
 {
-    public interface IService<in TEntity>
+    public interface IService<TEntity, in TIdentity>
     {
         Task AddAsync(TEntity entity);
-        Task DeleteAsync(TEntity entity);
+        Task DeleteAsync(TIdentity id);
         Task UpdateAsync(TEntity entity);
-        Task GetAll();
+        Task<ICollection<TEntity>> GetAll();
+        Task<TEntity> GetById(TIdentity id);
     }
 }

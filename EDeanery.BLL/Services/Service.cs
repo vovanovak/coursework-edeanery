@@ -1,42 +1,44 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using EDeanery.BLL.Services.Abstract;
 using EDeanery.DAL.Repositories.Abstract;
-using EDeanery.DAL.UnitOfWork;
 using EDeanery.DAL.UnitOfWork.Abstract;
 
 namespace EDeanery.BLL.Services
 {
-    public abstract class Service<T> : IService<T>
+    public abstract class Service<TEntity, TIdentity> : IService<TEntity, TIdentity>
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IRepository<T> _repository;
+        protected readonly IUnitOfWork UnitOfWork;
+        protected abstract IRepository<TEntity, TIdentity> Repository { get; }
 
         protected Service(IUnitOfWork unitOfWork)
         {
-            _unitOfWork = unitOfWork;
-            _repository = GetCurrentTypeRepository(_unitOfWork);
-        }
-        
-        public Task AddAsync(T entity)
-        {
-            throw new System.NotImplementedException();
+            UnitOfWork = unitOfWork;
         }
 
-        public Task DeleteAsync(T entity)
+        public virtual async Task AddAsync(TEntity entity)
         {
-            throw new System.NotImplementedException();
+            await Repository.AddAsync(entity);
         }
 
-        public Task UpdateAsync(T entity)
+        public virtual async Task DeleteAsync(TIdentity id)
         {
-            throw new System.NotImplementedException();
+            await Repository.DeleteAsync(id);
         }
 
-        public Task GetAll()
+        public virtual async Task UpdateAsync(TEntity entity)
         {
-            throw new System.NotImplementedException();
+            await Repository.UpdateAsync(entity);
         }
 
-        protected abstract IRepository<T> GetCurrentTypeRepository(IUnitOfWork unitOfWork);
+        public virtual async Task<ICollection<TEntity>> GetAll()
+        {
+            return await Repository.GetAll();
+        }
+
+        public virtual async Task<TEntity> GetById(TIdentity id)
+        {
+            return await Repository.GetById(id);
+        }
     }
 }

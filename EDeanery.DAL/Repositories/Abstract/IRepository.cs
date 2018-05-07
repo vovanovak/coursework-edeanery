@@ -1,12 +1,15 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EDeanery.DAL.Repositories.Abstract
 {
-    public interface IRepository<T>
+    public interface IRepository<TEntity, in TIdentity>
     {
-        Task AddAsync(T entity);
-        Task DeleteAsync(T entity);
-        Task UpdateAsync(T entity);
-        Task GetAll();
+        Task AddAsync(TEntity entity);
+        Task DeleteAsync(TIdentity id);
+        Task UpdateAsync(TEntity entity);
+        Task<ICollection<TEntity>> GetAll();
+        Task<TEntity> GetById(TIdentity id);
     }
 }

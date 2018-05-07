@@ -6,4 +6,7 @@
     <Folder Include="DAOs" />
     <Folder Include="Mappers" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EDeanery.BLL\EDeanery.BLL.csproj" />
+  </ItemGroup>
 </Project>
