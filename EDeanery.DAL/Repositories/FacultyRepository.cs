@@ -1,0 +1,57 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using EDeanery.BLL.Domain.Entities;
+using EDeanery.DAL.Context.Abstract;
+using EDeanery.DAL.Mappers.Abstract;
+using EDeanery.DAL.Repositories.Abstract;
+using Microsoft.EntityFrameworkCore;
+
+namespace EDeanery.DAL.Repositories
+{
+    public class FacultyRepository : IFacultyRepository
+    {
+        private readonly IEdeaneryDbContext _context;
+        private readonly IMapper<Faculty, DAOs.Faculty> _facultyMapper;
+        private readonly IMapper<DAOs.Faculty, Faculty> _daoFacultyMapper;
+
+        public FacultyRepository(
+            IEdeaneryDbContext context,
+            IMapper<Faculty, DAOs.Faculty> FacultyMapper,
+            IMapper<DAOs.Faculty, Faculty> daoFacultyMapper)
+        {
+            _context = context;
+            _facultyMapper = FacultyMapper;
+            _daoFacultyMapper = daoFacultyMapper;
+        }
+
+        public async Task AddAsync(Faculty entity)
+        {
+            var dao = _facultyMapper.Map(entity);
+            await _context.Faculties.AddAsync(dao);
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var faculty = await _context.Faculties.SingleOrDefaultAsync(d => d.FacultyId == id);
+            _context.Faculties.Remove(faculty);
+        }
+
+        public void UpdateAsync(Faculty entity)
+        {
+            var dao = _facultyMapper.Map(entity);
+            _context.Faculties.Update(dao);
+        }
+
+        public async Task<ICollection<Faculty>> GetAll()
+        {
+            var facultyDaos = await _context.Faculties.ToListAsync();
+            return facultyDaos.Select(d => _daoFacultyMapper.Map(d)).ToList();
+        }
+
+        public async Task<Faculty> GetById(int id)
+        {
+            return _daoFacultyMapper.Map(await _context.Faculties.SingleOrDefaultAsync(d => d.FacultyId == id));
+        }
+    }
+}

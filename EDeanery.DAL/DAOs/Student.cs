@@ -16,7 +16,9 @@ namespace EDeanery.DAL.DAOs
         public string SpecialityName { get; set; }
         public int Course { get; set; }
         public bool OnBudget { get; set; }
+        public int GroupId { get; set; }
         public Group Group { get; set; }
+        public int DormitoryRoomId { get; set; }
         public DormitoryRoom DormitoryRoom { get; set; }
     }
 }

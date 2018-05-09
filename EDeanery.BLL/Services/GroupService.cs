@@ -17,11 +17,13 @@ namespace EDeanery.BLL.Services
         public async Task AddStudentAsync(int groupId, int studentId)
         {
             await UnitOfWork.GroupRepository.AddStudentAsync(groupId, studentId);
+            await UnitOfWork.SaveChangesAsync();
         }
 
         public async Task DeleteStudentAsync(int groupId, int studentId)
         {
             await UnitOfWork.GroupRepository.DeleteStudentAsync(groupId, studentId);
+            await UnitOfWork.SaveChangesAsync();
         }
     }
 }

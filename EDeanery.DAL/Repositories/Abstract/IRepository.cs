@@ -7,7 +7,7 @@ namespace EDeanery.DAL.Repositories.Abstract
     {
         Task AddAsync(TEntity entity);
         Task DeleteAsync(TIdentity id);
-        Task UpdateAsync(TEntity entity);
+        void UpdateAsync(TEntity entity);
         Task<ICollection<TEntity>> GetAll();
         Task<TEntity> GetById(TIdentity id);
     }

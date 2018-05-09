@@ -8,6 +8,6 @@ namespace EDeanery.BLL.Domain.Entities
         public string Name { get; set; }
         public int MaxCountOfMembers { get; set; }
         public ICollection<Faculty> MainFaculties { get; set; }
-        public ICollection<Student> Students { get; set; }
+        public ICollection<DormitoryRoom> Rooms { get; set; }
     }
 }

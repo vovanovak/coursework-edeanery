@@ -6,6 +6,7 @@ namespace EDeanery.DAL.DAOs
     {
         public int GroupId { get; set; }
         public string GroupName { get; set; }
+        public int SpecialityId { get; set; }
         public Speciality Speciality { get; set; }
         public ICollection<GroupStudent> GroupStudents { get; set; }
     }

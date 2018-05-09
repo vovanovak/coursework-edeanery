@@ -8,5 +8,6 @@ namespace EDeanery.DAL.DAOs
         public string Name { get; set; }
         public int MaxCountOfMembers { get; set; }
         public ICollection<DormitoryFaculty> DormitoryFaculties { get; set; }
+        public ICollection<DormitoryRoom> DormitoryRooms { get; set; }
     }
 }

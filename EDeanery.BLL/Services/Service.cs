@@ -19,16 +19,19 @@ namespace EDeanery.BLL.Services
         public virtual async Task AddAsync(TEntity entity)
         {
             await Repository.AddAsync(entity);
+            await UnitOfWork.SaveChangesAsync();
         }
 
         public virtual async Task DeleteAsync(TIdentity id)
         {
             await Repository.DeleteAsync(id);
+            await UnitOfWork.SaveChangesAsync();
         }
 
         public virtual async Task UpdateAsync(TEntity entity)
         {
-            await Repository.UpdateAsync(entity);
+            Repository.UpdateAsync(entity);
+            await UnitOfWork.SaveChangesAsync();
         }
 
         public virtual async Task<ICollection<TEntity>> GetAll()

@@ -1,4 +1,5 @@
-﻿using EDeanery.DAL.Repositories.Abstract;
+﻿using System.Threading.Tasks;
+using EDeanery.DAL.Repositories.Abstract;
 
 namespace EDeanery.DAL.UnitOfWork.Abstract
 {
@@ -10,5 +11,6 @@ namespace EDeanery.DAL.UnitOfWork.Abstract
         IGroupRepository GroupRepository { get; set; }
         ISpecialityRepository SpecialityRepository { get; set; }
         IStudentRepository StudentRepository { get; set; }
+        Task<int> SaveChangesAsync();
     }
 }
