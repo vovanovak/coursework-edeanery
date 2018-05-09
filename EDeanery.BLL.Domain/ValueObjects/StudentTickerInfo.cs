@@ -1,4 +1,4 @@
-﻿namespace EDeanery.BLL.ValueObjects
+﻿namespace EDeanery.BLL.Domain.ValueObjects
 {
     public struct StudentTickerInfo
     {

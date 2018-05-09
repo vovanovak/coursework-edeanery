@@ -1,4 +1,4 @@
-﻿namespace EDeanery.BLL.Entities
+﻿namespace EDeanery.BLL.Domain.Entities
 {
     public class Speciality
     {

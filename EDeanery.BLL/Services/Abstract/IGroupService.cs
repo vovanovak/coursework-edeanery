@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using EDeanery.BLL.Entities;
+using EDeanery.BLL.Domain.Entities;
 
 namespace EDeanery.BLL.Services.Abstract
 {

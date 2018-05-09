@@ -1,5 +1,4 @@
-﻿using EDeanery.BLL.Entities;
-using EDeanery.BLL.Services.Abstract;
+﻿using EDeanery.BLL.Domain.Entities;
 
 namespace EDeanery.DAL.Repositories.Abstract
 {

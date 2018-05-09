@@ -1,4 +1,4 @@
-﻿using EDeanery.BLL.Entities;
+﻿using EDeanery.BLL.Domain.Entities;
 using EDeanery.BLL.Services.Abstract;
 using EDeanery.DAL.Repositories.Abstract;
 using EDeanery.DAL.UnitOfWork.Abstract;

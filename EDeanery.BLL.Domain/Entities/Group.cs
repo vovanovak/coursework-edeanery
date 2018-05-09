@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace EDeanery.BLL.Entities
+namespace EDeanery.BLL.Domain.Entities
 {
     public class Group
     {

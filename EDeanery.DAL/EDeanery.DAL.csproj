@@ -7,6 +7,6 @@
     <Folder Include="Mappers" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EDeanery.BLL\EDeanery.BLL.csproj" />
+    <ProjectReference Include="..\EDeanery.BLL.Domain\EDeanery.BLL.Domain.csproj" />
   </ItemGroup>
 </Project>

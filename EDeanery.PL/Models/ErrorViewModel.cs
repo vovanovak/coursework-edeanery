@@ -1,5 +1,3 @@
-using System;
-
 namespace EDeanery.PL.Models
 {
     public class ErrorViewModel
