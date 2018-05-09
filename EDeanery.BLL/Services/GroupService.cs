@@ -14,14 +14,14 @@ namespace EDeanery.BLL.Services
 
         protected override IRepository<Group, int> Repository => UnitOfWork.GroupRepository;
 
-        public Task AddStudentAsync(Group @group, Student student)
+        public async Task AddStudentAsync(int groupId, int studentId)
         {
-            throw new System.NotImplementedException();
+            await UnitOfWork.GroupRepository.AddStudentAsync(groupId, studentId);
         }
 
-        public Task DeleteStudentAsync(Group @group, Student student)
+        public async Task DeleteStudentAsync(int groupId, int studentId)
         {
-            throw new System.NotImplementedException();
+            await UnitOfWork.GroupRepository.DeleteStudentAsync(groupId, studentId);
         }
     }
 }

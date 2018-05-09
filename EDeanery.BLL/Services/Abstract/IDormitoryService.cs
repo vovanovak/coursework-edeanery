@@ -1,7 +1,9 @@
-﻿namespace EDeanery.BLL.Services.Abstract
+﻿using System.Threading.Tasks;
+using EDeanery.BLL.Domain.Entities;
+
+namespace EDeanery.BLL.Services.Abstract
 {
-    public interface IDormitoryService
+    public interface IDormitoryService : IService<Dormitory, int>
     {
-        
     }
 }

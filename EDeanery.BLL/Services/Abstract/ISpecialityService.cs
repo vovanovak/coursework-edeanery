@@ -1,7 +1,8 @@
-﻿namespace EDeanery.BLL.Services.Abstract
+﻿using EDeanery.BLL.Domain.Entities;
+
+namespace EDeanery.BLL.Services.Abstract
 {
-    public interface ISpecialityService
+    public interface ISpecialityService : IService<Speciality, int>
     {
-        
     }
 }

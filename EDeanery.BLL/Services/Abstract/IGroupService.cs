@@ -5,7 +5,7 @@ namespace EDeanery.BLL.Services.Abstract
 {
     public interface IGroupService : IService<Group, int>
     {
-        Task AddStudentAsync(Group group, Student student);
-        Task DeleteStudentAsync(Group group, Student student);
+        Task AddStudentAsync(int groupId, int studentId);
+        Task DeleteStudentAsync(int groupId, int studentId);
     }
 }
