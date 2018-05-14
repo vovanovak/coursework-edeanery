@@ -2,7 +2,7 @@
 
 namespace EDeanery.DAL.DAOs
 {
-    public class Student
+    public class StudentEntity
     {
         public int StudentId { get; set; }
         public string IdentificationCode { get; set; }
@@ -17,8 +17,8 @@ namespace EDeanery.DAL.DAOs
         public int Course { get; set; }
         public bool OnBudget { get; set; }
         public int GroupId { get; set; }
-        public Group Group { get; set; }
+        public GroupEntity GroupEntity { get; set; }
         public int DormitoryRoomId { get; set; }
-        public DormitoryRoom DormitoryRoom { get; set; }
+        public DormitoryRoomEntity DormitoryRoomEntity { get; set; }
     }
 }

@@ -1,11 +1,11 @@
 ﻿namespace EDeanery.DAL.DAOs
 {
-    public class DormitoryFaculty
+    public class DormitoryFacultyEntity
     {
         public int DormitoryFacultyId { get; set; }
         public int DormitoryId { get; set; }
         public int FacultyId { get; set; }
-        public Dormitory Dormitory { get; set; }
-        public Faculty Faculty { get; set; }
+        public DormitoryEntity DormitoryEntity { get; set; }
+        public FacultyEntity FacultyEntity { get; set; }
     }
 }

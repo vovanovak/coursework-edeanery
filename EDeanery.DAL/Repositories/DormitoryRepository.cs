@@ -12,13 +12,13 @@ namespace EDeanery.DAL.Repositories
     public class DormitoryRepository : IDormitoryRepository
     {
         private readonly IEdeaneryDbContext _context;
-        private readonly IMapper<Dormitory, DAOs.Dormitory> _dormitoryMapper;
-        private readonly IMapper<DAOs.Dormitory, Dormitory> _daoDormitoryMapper;
+        private readonly IMapper<Dormitory, DAOs.DormitoryEntity> _dormitoryMapper;
+        private readonly IMapper<DAOs.DormitoryEntity, Dormitory> _daoDormitoryMapper;
 
         public DormitoryRepository(
             IEdeaneryDbContext context,
-            IMapper<Dormitory, DAOs.Dormitory> dormitoryMapper,
-            IMapper<DAOs.Dormitory, Dormitory> daoDormitoryMapper)
+            IMapper<Dormitory, DAOs.DormitoryEntity> dormitoryMapper,
+            IMapper<DAOs.DormitoryEntity, Dormitory> daoDormitoryMapper)
         {
             _context = context;
             _dormitoryMapper = dormitoryMapper;

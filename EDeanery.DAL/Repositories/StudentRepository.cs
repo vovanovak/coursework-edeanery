@@ -12,13 +12,13 @@ namespace EDeanery.DAL.Repositories
     public class StudentRepository : IStudentRepository
     {
         private readonly IEdeaneryDbContext _context;
-        private readonly IMapper<Student, DAOs.Student> _studentMapper;
-        private readonly IMapper<DAOs.Student, Student> _daoStudentMapper;
+        private readonly IMapper<Student, DAOs.StudentEntity> _studentMapper;
+        private readonly IMapper<DAOs.StudentEntity, Student> _daoStudentMapper;
 
         public StudentRepository(
             IEdeaneryDbContext context,
-            IMapper<Student, DAOs.Student> StudentMapper,
-            IMapper<DAOs.Student, Student> daoStudentMapper)
+            IMapper<Student, DAOs.StudentEntity> StudentMapper,
+            IMapper<DAOs.StudentEntity, Student> daoStudentMapper)
         {
             _context = context;
             _studentMapper = StudentMapper;
@@ -64,7 +64,10 @@ namespace EDeanery.DAL.Repositories
 
         public async Task<IReadOnlyCollection<Student>> GetStudentsByGroup(string search)
         {
-            throw new System.NotImplementedException();
+            var studentDaos = await _context.Students.Include(s => s.GroupEntity)
+                .Where(s => EF.Functions.Like(s.GroupEntity.GroupName, $"%{search}%")).ToListAsync();
+
+            return studentDaos.Select(s => _daoStudentMapper.Map(s)).ToList();
         }
     }
 }

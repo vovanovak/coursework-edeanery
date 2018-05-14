@@ -2,14 +2,14 @@
 
 namespace EDeanery.DAL.Mappers.Abstract
 {
-    public class StudentMapper : IMapper<Student, DAOs.Student>, IMapper<DAOs.Student, Student>
+    public class StudentMapper : IMapper<Student, DAOs.StudentEntity>, IMapper<DAOs.StudentEntity, Student>
     {
-        public DAOs.Student Map(Student entity)
+        public DAOs.StudentEntity Map(Student entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public Student Map(DAOs.Student entity)
+        public Student Map(DAOs.StudentEntity entity)
         {
             throw new System.NotImplementedException();
         }

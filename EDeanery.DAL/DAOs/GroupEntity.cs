@@ -2,12 +2,12 @@
 
 namespace EDeanery.DAL.DAOs
 {
-    public class Group
+    public class GroupEntity
     {
         public int GroupId { get; set; }
         public string GroupName { get; set; }
         public int SpecialityId { get; set; }
-        public Speciality Speciality { get; set; }
-        public ICollection<GroupStudent> GroupStudents { get; set; }
+        public SpecialityEntity SpecialityEntity { get; set; }
+        public ICollection<GroupStudentEntity> GroupStudents { get; set; }
     }
 }

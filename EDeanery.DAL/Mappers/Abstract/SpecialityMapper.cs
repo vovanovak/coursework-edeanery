@@ -1,17 +1,35 @@
 ﻿using EDeanery.BLL.Domain.Entities;
+using EDeanery.DAL.DAOs;
 
 namespace EDeanery.DAL.Mappers.Abstract
 {
-    public class SpecialityMapper : IMapper<Speciality, DAOs.Speciality>, IMapper<DAOs.Speciality, Speciality>
+    public class SpecialityMapper : IMapper<Speciality, SpecialityEntity>, IMapper<SpecialityEntity, Speciality>
     {
-        public DAOs.Speciality Map(Speciality entity)
+        private readonly IMapper<FacultyEntity, Faculty> _facultyMapper;
+
+        public SpecialityMapper(IMapper<FacultyEntity, Faculty> facultyMapper)
         {
-            throw new System.NotImplementedException();
+            _facultyMapper = facultyMapper;
+        }
+        
+        public SpecialityEntity Map(Speciality entity)
+        {
+            return new SpecialityEntity
+            {
+                SpecialityId = entity.SpecialityId,
+                SpecialityName = entity.SpecialityName,
+                FacultyId = entity.Faculty.FacultyId
+            };
         }
 
-        public Speciality Map(DAOs.Speciality entity)
+        public Speciality Map(SpecialityEntity entity)
         {
-            throw new System.NotImplementedException();
+            return new Speciality
+            {
+                SpecialityId = entity.SpecialityId,
+                SpecialityName = entity.SpecialityName,
+                Faculty = _facultyMapper.Map(entity.FacultyEntity)
+            };
         }
     }
 }

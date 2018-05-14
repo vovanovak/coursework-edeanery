@@ -12,13 +12,13 @@ namespace EDeanery.DAL.Repositories
     public class FacultyRepository : IFacultyRepository
     {
         private readonly IEdeaneryDbContext _context;
-        private readonly IMapper<Faculty, DAOs.Faculty> _facultyMapper;
-        private readonly IMapper<DAOs.Faculty, Faculty> _daoFacultyMapper;
+        private readonly IMapper<Faculty, DAOs.FacultyEntity> _facultyMapper;
+        private readonly IMapper<DAOs.FacultyEntity, Faculty> _daoFacultyMapper;
 
         public FacultyRepository(
             IEdeaneryDbContext context,
-            IMapper<Faculty, DAOs.Faculty> FacultyMapper,
-            IMapper<DAOs.Faculty, Faculty> daoFacultyMapper)
+            IMapper<Faculty, DAOs.FacultyEntity> FacultyMapper,
+            IMapper<DAOs.FacultyEntity, Faculty> daoFacultyMapper)
         {
             _context = context;
             _facultyMapper = FacultyMapper;

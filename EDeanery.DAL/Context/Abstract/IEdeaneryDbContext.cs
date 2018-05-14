@@ -5,14 +5,14 @@ namespace EDeanery.DAL.Context.Abstract
 {
     public interface IEdeaneryDbContext
     {
-        DbSet<Dormitory> Dormitories { get; set; }
-        DbSet<DormitoryFaculty> DormitoryFaculties { get; set; }
-        DbSet<DormitoryRoom> DormitoryRooms { get; set; }
-        DbSet<DormitoryRoomStudent> DormitoryRoomStudents { get; set; }
-        DbSet<Faculty> Faculties { get; set; }
-        DbSet<Group> Groups { get; set; }
-        DbSet<GroupStudent> GroupStudents { get; set; }
-        DbSet<Speciality> Specialities { get; set; }
-        DbSet<Student> Students { get; set; }
+        DbSet<DormitoryEntity> Dormitories { get; set; }
+        DbSet<DormitoryFacultyEntity> DormitoryFaculties { get; set; }
+        DbSet<DormitoryRoomEntity> DormitoryRooms { get; set; }
+        DbSet<DormitoryRoomStudentEntity> DormitoryRoomStudents { get; set; }
+        DbSet<FacultyEntity> Faculties { get; set; }
+        DbSet<GroupEntity> Groups { get; set; }
+        DbSet<GroupStudentEntity> GroupStudents { get; set; }
+        DbSet<SpecialityEntity> Specialities { get; set; }
+        DbSet<StudentEntity> Students { get; set; }
     }
 }

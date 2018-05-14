@@ -13,13 +13,13 @@ namespace EDeanery.DAL.Repositories
     public class DormitoryRoomRepository : IDormitoryRoomRepository
     {
         private readonly IEdeaneryDbContext _context;
-        private readonly IMapper<DormitoryRoom, DAOs.DormitoryRoom> _dormitoryRoomMapper;
-        private readonly IMapper<DAOs.DormitoryRoom, DormitoryRoom> _daoDormitoryRoomMapper;
+        private readonly IMapper<DormitoryRoom, DormitoryRoomEntity> _dormitoryRoomMapper;
+        private readonly IMapper<DormitoryRoomEntity, DormitoryRoom> _daoDormitoryRoomMapper;
 
         public DormitoryRoomRepository(
             IEdeaneryDbContext context,
-            IMapper<DormitoryRoom, DAOs.DormitoryRoom> dormitoryRoomMapper,
-            IMapper<DAOs.DormitoryRoom, DormitoryRoom> daoDormitoryRoomMapper)
+            IMapper<DormitoryRoom, DormitoryRoomEntity> dormitoryRoomMapper,
+            IMapper<DormitoryRoomEntity, DormitoryRoom> daoDormitoryRoomMapper)
         {
             _context = context;
             _dormitoryRoomMapper = dormitoryRoomMapper;
@@ -62,7 +62,7 @@ namespace EDeanery.DAL.Repositories
                 await _context.DormitoryRooms.SingleOrDefaultAsync(dr => dr.DormitoryRoomId == dormitoryRoomId);
             var student = await _context.Students.SingleOrDefaultAsync(s => s.StudentId == studentId);
 
-            var dormitoryRoomStudent = new DormitoryRoomStudent
+            var dormitoryRoomStudent = new DormitoryRoomStudentEntity
             {
                 DormitoryRoomId = dormitoryRoom.DormitoryRoomId,
                 StudentId = student.StudentId,

@@ -1,17 +1,26 @@
 ﻿using EDeanery.BLL.Domain.Entities;
+using EDeanery.DAL.DAOs;
 
 namespace EDeanery.DAL.Mappers.Abstract
 {
-    public class FacultyMapper : IMapper<Faculty, DAOs.Faculty>, IMapper<DAOs.Faculty, Faculty>
+    public class FacultyMapper : IMapper<Faculty, FacultyEntity>, IMapper<FacultyEntity, Faculty>
     {
-        public DAOs.Faculty Map(Faculty entity)
+        public FacultyEntity Map(Faculty entity)
         {
-            throw new System.NotImplementedException();
+            return new FacultyEntity
+            {
+                FacultyId = entity.FacultyId,
+                Name = entity.Name
+            };
         }
 
-        public Faculty Map(DAOs.Faculty entity)
+        public Faculty Map(FacultyEntity entity)
         {
-            throw new System.NotImplementedException();
+            return new Faculty
+            {
+                FacultyId = entity.FacultyId,
+                Name = entity.Name
+            };
         }
     }
 }

@@ -3,16 +3,34 @@ using EDeanery.BLL.Domain.Entities;
 
 namespace EDeanery.DAL.Mappers.Abstract
 {
-    public class DormitoryRoomMapper : IMapper<DormitoryRoom, DAOs.DormitoryRoom>, IMapper<DAOs.DormitoryRoom, DormitoryRoom>
+    public class DormitoryRoomMapper : IMapper<DormitoryRoom, DAOs.DormitoryRoomEntity>, IMapper<DAOs.DormitoryRoomEntity, DormitoryRoom>
     {
-        public DAOs.DormitoryRoom Map(DormitoryRoom entity)
+        private readonly IMapper<DAOs.StudentEntity, Student> _studentMapper;
+
+        public DormitoryRoomMapper(IMapper<DAOs.StudentEntity, Student> studentMapper)
         {
-            throw new System.NotImplementedException();
+            _studentMapper = studentMapper;
+        }
+        
+        public DAOs.DormitoryRoomEntity Map(DormitoryRoom entity)
+        {
+            return new DAOs.DormitoryRoomEntity
+            {
+                DormitoryRoomId = entity.DormitoryRoomId,
+                DormityRoomName = entity.DormityRoomName,
+                MaxCountInRoom = entity.MaxCountInRoom
+            };
         }
 
-        public DormitoryRoom Map(DAOs.DormitoryRoom entity)
+        public DormitoryRoom Map(DAOs.DormitoryRoomEntity entity)
         {
-            throw new System.NotImplementedException();
+            return new DormitoryRoom
+            {
+                DormitoryRoomId = entity.DormitoryRoomId,
+                DormityRoomName = entity.DormityRoomName,
+                MaxCountInRoom = entity.MaxCountInRoom,
+                Roomers = entity.DormitoryRoomStudents.Select(s => _studentMapper.Map(s.StudentEntity)).ToList()
+            };
         }
     }
 }

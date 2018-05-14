@@ -9,12 +9,12 @@ namespace EDeanery.DAL.UnitOfWork
     {
         private readonly EdeaneryDbContext _edeaneryDbContext;
         
-        public IDormitoryRepository DormitoryRepository { get; set; }
-        public IDormitoryRoomRepository DormitoryRoomRepository { get; set; }
-        public IFacultyRepository FacultyRepository { get; set; }
-        public IGroupRepository GroupRepository { get; set; }
-        public ISpecialityRepository SpecialityRepository { get; set; }
-        public IStudentRepository StudentRepository { get; set; }
+        public IDormitoryRepository DormitoryRepository { get; }
+        public IDormitoryRoomRepository DormitoryRoomRepository { get; }
+        public IFacultyRepository FacultyRepository { get; }
+        public IGroupRepository GroupRepository { get; }
+        public ISpecialityRepository SpecialityRepository { get; }
+        public IStudentRepository StudentRepository { get; }
 
         public UnitOfWork(
             EdeaneryDbContext edeaneryDbContext,

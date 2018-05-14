@@ -12,13 +12,13 @@ namespace EDeanery.DAL.Repositories
     public class SpecialityRepository : ISpecialityRepository
     {
         private readonly IEdeaneryDbContext _context;
-        private readonly IMapper<Speciality, DAOs.Speciality> _specialityMapper;
-        private readonly IMapper<DAOs.Speciality, Speciality> _daoSpecialityMapper;
+        private readonly IMapper<Speciality, DAOs.SpecialityEntity> _specialityMapper;
+        private readonly IMapper<DAOs.SpecialityEntity, Speciality> _daoSpecialityMapper;
 
         public SpecialityRepository(
             IEdeaneryDbContext context,
-            IMapper<Speciality, DAOs.Speciality> SpecialityMapper,
-            IMapper<DAOs.Speciality, Speciality> daoSpecialityMapper)
+            IMapper<Speciality, DAOs.SpecialityEntity> SpecialityMapper,
+            IMapper<DAOs.SpecialityEntity, Speciality> daoSpecialityMapper)
         {
             _context = context;
             _specialityMapper = SpecialityMapper;

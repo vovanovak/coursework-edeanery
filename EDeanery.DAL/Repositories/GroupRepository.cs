@@ -13,13 +13,13 @@ namespace EDeanery.DAL.Repositories
     public class GroupRepository : IGroupRepository
     {
         private readonly IEdeaneryDbContext _context;
-        private readonly IMapper<Group, DAOs.Group> _groupMapper;
-        private readonly IMapper<DAOs.Group, Group> _daoGroupMapper;
+        private readonly IMapper<Group, GroupEntity> _groupMapper;
+        private readonly IMapper<GroupEntity, Group> _daoGroupMapper;
 
         public GroupRepository(
             IEdeaneryDbContext context,
-            IMapper<Group, DAOs.Group> GroupMapper,
-            IMapper<DAOs.Group, Group> daoGroupMapper)
+            IMapper<Group, GroupEntity> GroupMapper,
+            IMapper<GroupEntity, Group> daoGroupMapper)
         {
             _context = context;
             _groupMapper = GroupMapper;
@@ -57,7 +57,7 @@ namespace EDeanery.DAL.Repositories
 
         public async Task AddStudentAsync(int groupId, int studentId)
         {
-            await _context.GroupStudents.AddAsync(new GroupStudent
+            await _context.GroupStudents.AddAsync(new GroupStudentEntity
             {
                 StudentId = studentId,
                 GroupId = groupId

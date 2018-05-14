@@ -5,12 +5,12 @@ namespace EDeanery.DAL.UnitOfWork.Abstract
 {
     public interface IUnitOfWork
     {
-        IDormitoryRepository DormitoryRepository { get; set; }
-        IDormitoryRoomRepository DormitoryRoomRepository { get; set; }
-        IFacultyRepository FacultyRepository { get; set; }
-        IGroupRepository GroupRepository { get; set; }
-        ISpecialityRepository SpecialityRepository { get; set; }
-        IStudentRepository StudentRepository { get; set; }
+        IDormitoryRepository DormitoryRepository { get; }
+        IDormitoryRoomRepository DormitoryRoomRepository { get; }
+        IFacultyRepository FacultyRepository { get; }
+        IGroupRepository GroupRepository { get; }
+        ISpecialityRepository SpecialityRepository { get; }
+        IStudentRepository StudentRepository { get; }
         Task<int> SaveChangesAsync();
     }
 }
