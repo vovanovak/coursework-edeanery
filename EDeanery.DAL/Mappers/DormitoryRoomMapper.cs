@@ -1,20 +1,22 @@
 ﻿using System.Linq;
 using EDeanery.BLL.Domain.Entities;
+using EDeanery.DAL.DAOs;
+using EDeanery.DAL.Mappers.Abstract;
 
-namespace EDeanery.DAL.Mappers.Abstract
+namespace EDeanery.DAL.Mappers
 {
-    public class DormitoryRoomMapper : IMapper<DormitoryRoom, DAOs.DormitoryRoomEntity>, IMapper<DAOs.DormitoryRoomEntity, DormitoryRoom>
+    public class DormitoryRoomMapper : IMapper<DormitoryRoom, DormitoryRoomEntity>, IMapper<DormitoryRoomEntity, DormitoryRoom>
     {
-        private readonly IMapper<DAOs.StudentEntity, Student> _studentMapper;
+        private readonly IMapper<StudentEntity, Student> _studentMapper;
 
-        public DormitoryRoomMapper(IMapper<DAOs.StudentEntity, Student> studentMapper)
+        public DormitoryRoomMapper(IMapper<StudentEntity, Student> studentMapper)
         {
             _studentMapper = studentMapper;
         }
         
-        public DAOs.DormitoryRoomEntity Map(DormitoryRoom entity)
+        public DormitoryRoomEntity Map(DormitoryRoom entity)
         {
-            return new DAOs.DormitoryRoomEntity
+            return new DormitoryRoomEntity
             {
                 DormitoryRoomId = entity.DormitoryRoomId,
                 DormityRoomName = entity.DormityRoomName,
@@ -22,7 +24,7 @@ namespace EDeanery.DAL.Mappers.Abstract
             };
         }
 
-        public DormitoryRoom Map(DAOs.DormitoryRoomEntity entity)
+        public DormitoryRoom Map(DormitoryRoomEntity entity)
         {
             return new DormitoryRoom
             {

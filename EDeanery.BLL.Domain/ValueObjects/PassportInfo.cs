@@ -2,7 +2,7 @@
 
 namespace EDeanery.BLL.Domain.ValueObjects
 {
-    public struct PassportInfo
+    public class PassportInfo
     {
         public string PassportIdentifier { get; set; }
         public string FirstName { get; set; }

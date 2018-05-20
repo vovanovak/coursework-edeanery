@@ -1,21 +1,21 @@
 ﻿namespace EDeanery.BLL.Domain.ValueObjects
 {
-    public struct StudentTickerInfo
+    public class StudentTicketInfo
     {
-        public string StudentTickerId { get; set; }
+        public string StudentTicketId { get; set; }
         public string FacultyName { get; set; }
         public string SpecialityName { get; set; }
         public int Course { get; set; }
         public bool OnBudget { get; set; }
 
-        public StudentTickerInfo(
-            string studentTickerId,
+        public StudentTicketInfo(
+            string studentTicketId,
             string facultyName,
             string specialityName, 
             int course,
             bool onBudget)
         {
-            StudentTickerId = studentTickerId;
+            StudentTicketId = studentTicketId;
             FacultyName = facultyName;
             SpecialityName = specialityName;
             Course = course;

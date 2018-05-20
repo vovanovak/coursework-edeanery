@@ -11,14 +11,15 @@ namespace EDeanery.DAL.DAOs
         public string LastName { get; set; }
         public string FathersName { get; set; }
         public DateTime BirthDate { get; set; }
-        public string StudentTickerId { get; set; }
+        public string StudentTicketId { get; set; }
         public string FacultyName { get; set; }
         public string SpecialityName { get; set; }
         public int Course { get; set; }
         public bool OnBudget { get; set; }
-        public int GroupId { get; set; }
-        public GroupEntity GroupEntity { get; set; }
-        public int DormitoryRoomId { get; set; }
-        public DormitoryRoomEntity DormitoryRoomEntity { get; set; }
+        public DateTime StartOfLearning { get; set; }
+        public int GroupStudentId { get; set; }
+        public GroupStudentEntity GroupStudentEntity { get; set; }
+        public int DormitoryRoomStudentId { get; set; }
+        public DormitoryRoomStudentEntity DormitoryRoomStudentEntity { get; set; }
     }
 }

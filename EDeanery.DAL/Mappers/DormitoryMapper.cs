@@ -1,8 +1,9 @@
 ﻿using System.Linq;
 using EDeanery.DAL.DAOs;
+using EDeanery.DAL.Mappers.Abstract;
 using Dormitory = EDeanery.BLL.Domain.Entities.Dormitory;
 
-namespace EDeanery.DAL.Mappers.Abstract
+namespace EDeanery.DAL.Mappers
 {
     public class DormitoryMapper : IMapper<Dormitory, DormitoryEntity>, IMapper<DormitoryEntity, Dormitory>
     {
