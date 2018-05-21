@@ -8,6 +8,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDeanery.DAL", "EDeanery.DA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDeanery.BLL.Domain", "EDeanery.BLL.Domain\EDeanery.BLL.Domain.csproj", "{BB2CEE33-5DFB-41CE-A939-58672BFA6372}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deploy", "Deploy", "{EF83D341-D31F-4DFA-BCC3-0F5B6D6519BF}"
+ProjectSection(SolutionItems) = preProject
+	Deploy\init_code_first.ps1 = Deploy\init_code_first.ps1
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

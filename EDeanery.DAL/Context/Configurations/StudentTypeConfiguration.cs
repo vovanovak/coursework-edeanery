@@ -11,8 +11,7 @@ namespace EDeanery.DAL.Context.Configurations
             builder.ToTable("Students");
             builder.HasKey(s => s.StudentId);
             builder.HasOne(g => g.GroupStudentEntity).WithOne(g => g.StudentEntity);
-            builder.HasOne(s => s.DormitoryRoomStudentEntity)
-                .WithOne(g => g.StudentEntity);
+            builder.HasOne(s => s.DormitoryRoomStudentEntity).WithOne(g => g.StudentEntity);
         }
     }
 }

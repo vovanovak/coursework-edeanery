@@ -2,6 +2,7 @@
 using EDeanery.DAL.Context.Configurations;
 using EDeanery.DAL.DAOs;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace EDeanery.DAL.Context
 {
@@ -16,6 +17,15 @@ namespace EDeanery.DAL.Context
         public DbSet<GroupStudentEntity> GroupStudents { get; set; }
         public DbSet<SpecialityEntity> Specialities { get; set; }
         public DbSet<StudentEntity> Students { get; set; }
+
+        public EdeaneryDbContext()
+        {
+        }
+        
+        public EdeaneryDbContext(DbContextOptions<EdeaneryDbContext> options) : base(options)
+        {
+            
+        }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

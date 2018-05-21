@@ -11,8 +11,7 @@ namespace EDeanery.DAL.Context.Configurations
             builder.ToTable("Groups");
             builder.HasKey(g => g.GroupId);
             builder.HasOne(g => g.SpecialityEntity);
-            builder.HasMany(g => g.GroupStudents).WithOne(g => g.GroupEntity)
-                .HasForeignKey();
+            builder.HasMany(g => g.GroupStudents).WithOne(g => g.GroupEntity);
         }
     }
 }

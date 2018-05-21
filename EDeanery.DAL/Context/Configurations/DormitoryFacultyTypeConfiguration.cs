@@ -11,9 +11,9 @@ namespace EDeanery.DAL.Context.Configurations
             builder.ToTable("DormitoryFaculties");
             builder.HasKey(df => df.DormitoryFacultyId);
             builder.HasOne(df => df.DormitoryEntity)
-                .WithMany(d => d.DormitoryFaculties).HasForeignKey();
+                .WithMany(d => d.DormitoryFaculties);
             builder.HasOne(df => df.FacultyEntity)
-                .WithMany(d => d.DormitoryFaculties).HasForeignKey();
+                .WithMany(d => d.DormitoryFaculties);
         }
     }
 }
