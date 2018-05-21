@@ -1,4 +1,5 @@
-﻿using EDeanery.DAL.DAOs;
+﻿using System.Threading.Tasks;
+using EDeanery.DAL.DAOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace EDeanery.DAL.Context.Abstract
@@ -14,5 +15,8 @@ namespace EDeanery.DAL.Context.Abstract
         DbSet<GroupStudentEntity> GroupStudents { get; set; }
         DbSet<SpecialityEntity> Specialities { get; set; }
         DbSet<StudentEntity> Students { get; set; }
+
+        int SaveChanges();
+        Task<int> SaveChangesAsync();
     }
 }

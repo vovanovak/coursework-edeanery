@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EDeanery.DAL.Context.Configurations
 {
-    public class SpecialityTypeConfiguration : IEntityTypeConfiguration<SpecialityEntity>
+    internal class SpecialityTypeConfiguration : IEntityTypeConfiguration<SpecialityEntity>
     {
         public void Configure(EntityTypeBuilder<SpecialityEntity> builder)
         {

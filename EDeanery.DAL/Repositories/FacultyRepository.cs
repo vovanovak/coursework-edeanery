@@ -3,13 +3,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using EDeanery.BLL.Domain.Entities;
 using EDeanery.DAL.Context.Abstract;
-using EDeanery.DAL.Mappers.Abstract;
 using EDeanery.DAL.Repositories.Abstract;
+using EDeanery.Mappers.Abstract;
 using Microsoft.EntityFrameworkCore;
 
 namespace EDeanery.DAL.Repositories
 {
-    public class FacultyRepository : IFacultyRepository
+    internal class FacultyRepository : IFacultyRepository
     {
         private readonly IEdeaneryDbContext _context;
         private readonly IMapper<Faculty, DAOs.FacultyEntity> _facultyMapper;

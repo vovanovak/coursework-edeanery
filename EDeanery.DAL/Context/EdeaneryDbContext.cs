@@ -1,4 +1,5 @@
-﻿using EDeanery.DAL.Context.Abstract;
+﻿using System.Threading.Tasks;
+using EDeanery.DAL.Context.Abstract;
 using EDeanery.DAL.Context.Configurations;
 using EDeanery.DAL.DAOs;
 using Microsoft.EntityFrameworkCore;
@@ -6,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace EDeanery.DAL.Context
 {
-    public class EdeaneryDbContext : DbContext, IEdeaneryDbContext
+    internal class EdeaneryDbContext : DbContext, IEdeaneryDbContext
     {
         public DbSet<DormitoryEntity> Dormitories { get; set; }
         public DbSet<DormitoryFacultyEntity> DormitoryFaculties { get; set; }
@@ -17,7 +18,7 @@ namespace EDeanery.DAL.Context
         public DbSet<GroupStudentEntity> GroupStudents { get; set; }
         public DbSet<SpecialityEntity> Specialities { get; set; }
         public DbSet<StudentEntity> Students { get; set; }
-
+        
         public EdeaneryDbContext()
         {
         }
@@ -41,5 +42,16 @@ namespace EDeanery.DAL.Context
             modelBuilder.ApplyConfiguration(new SpecialityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new StudentTypeConfiguration());
         }
+        
+        public int SaveChanges()
+        {
+            return SaveChanges();
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await SaveChangesAsync();
+        }
+
     }
 }

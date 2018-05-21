@@ -6,7 +6,7 @@ using EDeanery.DAL.UnitOfWork.Abstract;
 
 namespace EDeanery.BLL.Services
 {
-    public abstract class Service<TEntity, TIdentity> : IService<TEntity, TIdentity>
+    internal abstract class Service<TEntity, TIdentity> : IService<TEntity, TIdentity>
     {
         protected readonly IUnitOfWork UnitOfWork;
         protected abstract IRepository<TEntity, TIdentity> Repository { get; }

@@ -1,10 +1,10 @@
 ﻿using EDeanery.BLL.Domain.Entities;
 using EDeanery.DAL.DAOs;
-using EDeanery.DAL.Mappers.Abstract;
+using EDeanery.Mappers.Abstract;
 
 namespace EDeanery.DAL.Mappers
 {
-    public class FacultyMapper : IMapper<Faculty, FacultyEntity>, IMapper<FacultyEntity, Faculty>
+    internal class FacultyMapper : IMapper<Faculty, FacultyEntity>, IMapper<FacultyEntity, Faculty>
     {
         public FacultyEntity Map(Faculty entity)
         {

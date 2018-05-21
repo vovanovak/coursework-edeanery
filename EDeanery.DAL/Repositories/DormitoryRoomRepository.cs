@@ -3,14 +3,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using EDeanery.DAL.Context.Abstract;
 using EDeanery.DAL.DAOs;
-using EDeanery.DAL.Mappers.Abstract;
 using EDeanery.DAL.Repositories.Abstract;
+using EDeanery.Mappers.Abstract;
+using EDeanery.Mappers.Extensions;
 using Microsoft.EntityFrameworkCore;
 using DormitoryRoom = EDeanery.BLL.Domain.Entities.DormitoryRoom;
 
 namespace EDeanery.DAL.Repositories
 {
-    public class DormitoryRoomRepository : IDormitoryRoomRepository
+    internal class DormitoryRoomRepository : IDormitoryRoomRepository
     {
         private readonly IEdeaneryDbContext _context;
         private readonly IMapper<DormitoryRoom, DormitoryRoomEntity> _dormitoryRoomMapper;
@@ -76,6 +77,14 @@ namespace EDeanery.DAL.Repositories
             var dormitoryRoomStudent = await _context.DormitoryRoomStudents.SingleOrDefaultAsync(dr =>
                 dr.StudentId == studentId && dr.DormitoryRoomId == dormitoryRoomId);
             _context.DormitoryRoomStudents.Remove(dormitoryRoomStudent);
+        }
+
+        public async Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsWithFreeSpaces(int dormitoryId)
+        {
+            var freeDormitoryRooms = await _context.DormitoryRooms.Include(dr => dr.DormitoryRoomStudents)
+                .Where(dr => dr.DormitoryRoomStudents.Count() < dr.MaxCountInRoom).ToListAsync();
+
+            return _daoDormitoryRoomMapper.Map(freeDormitoryRooms).ToList();
         }
     }
 }

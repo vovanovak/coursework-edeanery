@@ -8,7 +8,7 @@ namespace EDeanery.DAL.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly EdeaneryDbContext _edeaneryDbContext;
+        private readonly IEdeaneryDbContext _edeaneryDbContext;
         
         public IDormitoryRepository DormitoryRepository { get; }
         public IDormitoryRoomRepository DormitoryRoomRepository { get; }
@@ -18,7 +18,7 @@ namespace EDeanery.DAL.UnitOfWork
         public IStudentRepository StudentRepository { get; }
 
         public UnitOfWork(
-            EdeaneryDbContext edeaneryDbContext,
+            IEdeaneryDbContext edeaneryDbContext,
             IDormitoryRepository dormitoryRepository, 
             IDormitoryRoomRepository dormitoryRoomRepository,
             IFacultyRepository facultyRepository, 

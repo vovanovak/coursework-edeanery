@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using EDeanery.BLL.Domain.Entities;
 
 namespace EDeanery.BLL.Services.Abstract
@@ -7,5 +8,6 @@ namespace EDeanery.BLL.Services.Abstract
     {
         Task AddStudentAsync(int studentId, int dormitoryRoomId);
         Task DeleteStudentAsync(int studentId, int dormitoryRoomId);
+        Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsWithFreeSpaces(int dormitoryId);
     }
 }

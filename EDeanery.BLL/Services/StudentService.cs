@@ -7,7 +7,7 @@ using EDeanery.DAL.UnitOfWork.Abstract;
 
 namespace EDeanery.BLL.Services
 {
-    public class StudentService : Service<Student, int>, IStudentService
+    internal class StudentService : Service<Student, int>, IStudentService
     {
         public StudentService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EDeanery.DAL.Context.Configurations
 {
-    public class StudentTypeConfiguration : IEntityTypeConfiguration<StudentEntity>
+    internal class StudentTypeConfiguration : IEntityTypeConfiguration<StudentEntity>
     {
         public void Configure(EntityTypeBuilder<StudentEntity> builder)
         {

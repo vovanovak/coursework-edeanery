@@ -1,11 +1,11 @@
 ﻿using EDeanery.BLL.Domain.Entities;
 using EDeanery.BLL.Domain.ValueObjects;
 using EDeanery.DAL.DAOs;
-using EDeanery.DAL.Mappers.Abstract;
+using EDeanery.Mappers.Abstract;
 
 namespace EDeanery.DAL.Mappers
 {
-    public class StudentMapper : IMapper<Student, StudentEntity>, IMapper<StudentEntity, Student>
+    internal class StudentMapper : IMapper<Student, StudentEntity>, IMapper<StudentEntity, Student>
     {
         public StudentEntity Map(Student entity)
         {

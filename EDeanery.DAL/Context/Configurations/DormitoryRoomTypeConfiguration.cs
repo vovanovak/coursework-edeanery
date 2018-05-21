@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EDeanery.DAL.Context.Configurations
 {
-    public class DormitoryRoomTypeConfiguration : IEntityTypeConfiguration<DormitoryRoomEntity>
+    internal class DormitoryRoomTypeConfiguration : IEntityTypeConfiguration<DormitoryRoomEntity>
     {
         public void Configure(EntityTypeBuilder<DormitoryRoomEntity> builder)
         {

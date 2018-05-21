@@ -6,7 +6,7 @@ using EDeanery.DAL.UnitOfWork.Abstract;
 
 namespace EDeanery.BLL.Services
 {
-    public class GroupService : Service<Group, int>, IGroupService
+    internal class GroupService : Service<Group, int>, IGroupService
     {
         public GroupService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

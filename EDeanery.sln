@@ -13,6 +13,8 @@ ProjectSection(SolutionItems) = preProject
 	Deploy\init_code_first.ps1 = Deploy\init_code_first.ps1
 EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDeanery.Mappers", "EDeanery.Mappers\EDeanery.Mappers.csproj", "{BFF18105-25E1-4F67-8633-CE307712C789}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,5 +37,9 @@ Global
 		{BB2CEE33-5DFB-41CE-A939-58672BFA6372}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB2CEE33-5DFB-41CE-A939-58672BFA6372}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB2CEE33-5DFB-41CE-A939-58672BFA6372}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFF18105-25E1-4F67-8633-CE307712C789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFF18105-25E1-4F67-8633-CE307712C789}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFF18105-25E1-4F67-8633-CE307712C789}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFF18105-25E1-4F67-8633-CE307712C789}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

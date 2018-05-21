@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using EDeanery.BLL.Domain.Entities;
 using EDeanery.DAL.DAOs;
-using EDeanery.DAL.Mappers.Abstract;
+using EDeanery.Mappers.Abstract;
 
 namespace EDeanery.DAL.Mappers
 {
-    public class DormitoryRoomMapper : IMapper<DormitoryRoom, DormitoryRoomEntity>, IMapper<DormitoryRoomEntity, DormitoryRoom>
+    internal class DormitoryRoomMapper : IMapper<DormitoryRoom, DormitoryRoomEntity>, IMapper<DormitoryRoomEntity, DormitoryRoom>
     {
         private readonly IMapper<StudentEntity, Student> _studentMapper;
 

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EDeanery.DAL.Context.Configurations
 {
-    public class FacultyTypeConfiguration : IEntityTypeConfiguration<FacultyEntity>
+    internal class FacultyTypeConfiguration : IEntityTypeConfiguration<FacultyEntity>
     {
         public void Configure(EntityTypeBuilder<FacultyEntity> builder)
         {

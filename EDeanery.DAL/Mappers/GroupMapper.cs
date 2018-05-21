@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 using EDeanery.BLL.Domain.Entities;
 using EDeanery.DAL.DAOs;
-using EDeanery.DAL.Mappers.Abstract;
+using EDeanery.Mappers.Abstract;
 using Group = EDeanery.BLL.Domain.Entities.Group;
 
 
 namespace EDeanery.DAL.Mappers
 {
-    public class GroupMapper : IMapper<Group, GroupEntity>, IMapper<GroupEntity, Group>
+    internal class GroupMapper : IMapper<Group, GroupEntity>, IMapper<GroupEntity, Group>
     {
         private readonly IMapper<SpecialityEntity, Speciality> _specialityMapper;
         private readonly IMapper<StudentEntity, Student> _studentMapper;

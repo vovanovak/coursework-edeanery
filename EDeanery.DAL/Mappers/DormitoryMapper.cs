@@ -1,17 +1,18 @@
 ﻿using System.Linq;
+using EDeanery.BLL.Domain.Entities;
 using EDeanery.DAL.DAOs;
-using EDeanery.DAL.Mappers.Abstract;
-using Dormitory = EDeanery.BLL.Domain.Entities.Dormitory;
+using EDeanery.Mappers.Abstract;
+using EDeanery.Mappers.Extensions;
 
 namespace EDeanery.DAL.Mappers
 {
-    public class DormitoryMapper : IMapper<Dormitory, DormitoryEntity>, IMapper<DormitoryEntity, Dormitory>
+    internal class DormitoryMapper : IMapper<Dormitory, DormitoryEntity>, IMapper<DormitoryEntity, Dormitory>
     {
-        private readonly IMapper<DormitoryRoomEntity, BLL.Domain.Entities.DormitoryRoom> _dormitoryRoomMapper;
+        private readonly IMapper<DormitoryRoomEntity, DormitoryRoom> _dormitoryRoomMapper;
 
 
         public DormitoryMapper(
-            IMapper<DormitoryRoomEntity, BLL.Domain.Entities.DormitoryRoom> dormitoryRoomMapper)
+            IMapper<DormitoryRoomEntity, DormitoryRoom> dormitoryRoomMapper)
         {
             _dormitoryRoomMapper = dormitoryRoomMapper;
         }
@@ -38,12 +39,12 @@ namespace EDeanery.DAL.Mappers
                 DormitoryId = entity.DormitoryId,
                 Name = entity.Name,
                 MaxCountOfMembers = entity.MaxCountOfMembers,
-                MainFaculties = entity.DormitoryFaculties.Select(f => new BLL.Domain.Entities.Faculty()
+                MainFaculties = entity.DormitoryFaculties.Select(f => new Faculty()
                 {
                     FacultyId = f.FacultyId,
                     Name = f.FacultyEntity.Name
                 }).ToList(),
-                Rooms = entity.DormitoryRooms.Select(dr => _dormitoryRoomMapper.Map(dr)).ToList()
+                Rooms = _dormitoryRoomMapper.Map(entity.DormitoryRooms).ToList()
             };
         }
     }

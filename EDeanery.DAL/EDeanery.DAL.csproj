@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\EDeanery.BLL.Domain\EDeanery.BLL.Domain.csproj" />
+    <ProjectReference Include="..\EDeanery.Mappers\EDeanery.Mappers.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.EntityFrameworkCore, Version=2.0.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">

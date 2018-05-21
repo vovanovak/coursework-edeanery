@@ -3,25 +3,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using EDeanery.BLL.Domain.Entities;
 using EDeanery.DAL.Context.Abstract;
-using EDeanery.DAL.Mappers.Abstract;
+using EDeanery.DAL.DAOs;
 using EDeanery.DAL.Repositories.Abstract;
+using EDeanery.Mappers.Abstract;
 using Microsoft.EntityFrameworkCore;
 
 namespace EDeanery.DAL.Repositories
 {
-    public class SpecialityRepository : ISpecialityRepository
+    internal class SpecialityRepository : ISpecialityRepository
     {
         private readonly IEdeaneryDbContext _context;
-        private readonly IMapper<Speciality, DAOs.SpecialityEntity> _specialityMapper;
-        private readonly IMapper<DAOs.SpecialityEntity, Speciality> _daoSpecialityMapper;
+        private readonly IMapper<Speciality, SpecialityEntity> _specialityMapper;
+        private readonly IMapper<SpecialityEntity, Speciality> _daoSpecialityMapper;
 
         public SpecialityRepository(
             IEdeaneryDbContext context,
-            IMapper<Speciality, DAOs.SpecialityEntity> SpecialityMapper,
-            IMapper<DAOs.SpecialityEntity, Speciality> daoSpecialityMapper)
+            IMapper<Speciality, SpecialityEntity> specialityMapper,
+            IMapper<SpecialityEntity, Speciality> daoSpecialityMapper)
         {
             _context = context;
-            _specialityMapper = SpecialityMapper;
+            _specialityMapper = specialityMapper;
             _daoSpecialityMapper = daoSpecialityMapper;
         }
 

@@ -3,22 +3,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using EDeanery.BLL.Domain.Entities;
 using EDeanery.DAL.Context.Abstract;
-using EDeanery.DAL.Mappers.Abstract;
+using EDeanery.DAL.DAOs;
 using EDeanery.DAL.Repositories.Abstract;
+using EDeanery.Mappers.Abstract;
 using Microsoft.EntityFrameworkCore;
 
 namespace EDeanery.DAL.Repositories
 {
-    public class StudentRepository : IStudentRepository
+    internal class StudentRepository : IStudentRepository
     {
         private readonly IEdeaneryDbContext _context;
-        private readonly IMapper<Student, DAOs.StudentEntity> _studentMapper;
-        private readonly IMapper<DAOs.StudentEntity, Student> _daoStudentMapper;
+        private readonly IMapper<Student, StudentEntity> _studentMapper;
+        private readonly IMapper<StudentEntity, Student> _daoStudentMapper;
 
         public StudentRepository(
             IEdeaneryDbContext context,
-            IMapper<Student, DAOs.StudentEntity> StudentMapper,
-            IMapper<DAOs.StudentEntity, Student> daoStudentMapper)
+            IMapper<Student, StudentEntity> StudentMapper,
+            IMapper<StudentEntity, Student> daoStudentMapper)
         {
             _context = context;
             _studentMapper = StudentMapper;

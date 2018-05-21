@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EDeanery.DAL.Context.Configurations
 {
-    public class DormitoryRoomStudentTypeConfiguration : IEntityTypeConfiguration<DormitoryRoomStudentEntity>
+    internal class DormitoryRoomStudentTypeConfiguration : IEntityTypeConfiguration<DormitoryRoomStudentEntity>
     {
         public void Configure(EntityTypeBuilder<DormitoryRoomStudentEntity> builder)
         {

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EDeanery.DAL.Context.Configurations
 {
-    public class GroupTypeConfiguration : IEntityTypeConfiguration<GroupEntity>
+    internal class GroupTypeConfiguration : IEntityTypeConfiguration<GroupEntity>
     {
         public void Configure(EntityTypeBuilder<GroupEntity> builder)
         {

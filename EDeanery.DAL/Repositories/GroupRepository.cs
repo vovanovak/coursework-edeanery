@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EDeanery.BLL.Domain.Entities;
 using EDeanery.DAL.Context.Abstract;
 using EDeanery.DAL.DAOs;
-using EDeanery.DAL.Mappers.Abstract;
 using EDeanery.DAL.Repositories.Abstract;
+using EDeanery.Mappers.Abstract;
 using Microsoft.EntityFrameworkCore;
-using Group = EDeanery.BLL.Domain.Entities.Group;
 
 namespace EDeanery.DAL.Repositories
 {
-    public class GroupRepository : IGroupRepository
+    internal class GroupRepository : IGroupRepository
     {
         private readonly IEdeaneryDbContext _context;
         private readonly IMapper<Group, GroupEntity> _groupMapper;

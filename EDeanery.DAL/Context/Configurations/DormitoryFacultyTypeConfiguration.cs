@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EDeanery.DAL.Context.Configurations
 {
-    public class DormitoryFacultyTypeConfiguration : IEntityTypeConfiguration<DormitoryFacultyEntity>
+    internal class DormitoryFacultyTypeConfiguration : IEntityTypeConfiguration<DormitoryFacultyEntity>
     {
         public void Configure(EntityTypeBuilder<DormitoryFacultyEntity> builder)
         {

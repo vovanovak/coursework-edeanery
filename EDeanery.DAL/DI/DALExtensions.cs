@@ -3,10 +3,10 @@ using EDeanery.DAL.Context;
 using EDeanery.DAL.Context.Abstract;
 using EDeanery.DAL.DAOs;
 using EDeanery.DAL.Mappers;
-using EDeanery.DAL.Mappers.Abstract;
 using EDeanery.DAL.Repositories;
 using EDeanery.DAL.Repositories.Abstract;
 using EDeanery.DAL.UnitOfWork.Abstract;
+using EDeanery.Mappers.Abstract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -71,7 +71,7 @@ namespace EDeanery.DAL.DI
 
         private static IServiceCollection AddUnitOfWork(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
+            serviceCollection.AddScoped<IUnitOfWork, DAL.UnitOfWork.UnitOfWork>();
 
             return serviceCollection;
         }
