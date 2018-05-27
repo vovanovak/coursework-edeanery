@@ -1,5 +1,6 @@
 ﻿using EDeanery.BLL.DI;
 using EDeanery.DAL.DI;
+using EDeanery.PL.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,8 +25,11 @@ namespace EDeanery.PL
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDAL(Configuration);
-            services.AddBLL();
+            services
+                .AddDAL(Configuration)
+                .AddBLL()
+                .AddPL();
+            
             services.AddMvc();
         }
 
@@ -47,7 +51,7 @@ namespace EDeanery.PL
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Student}/{action=Index}/{id?}");
             });
         }
     }

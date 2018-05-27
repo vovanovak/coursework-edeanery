@@ -1,0 +1,71 @@
+﻿@using EDeanery.PL.Models
+@model StudentPostModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Add student</title>
+    
+    <link href="lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link href="lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
+    
+    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="js/getSpecialitiesByFaculty.js"></script>
+</head>
+<body>
+<div>
+    <h1>Add student</h1>
+    @{
+        string action = this.ViewBag.Action;
+
+        using (Html.BeginForm(action, "Student", FormMethod.Post))
+        {
+            <div>
+                <span>@Html.DisplayFor(m => m.PassportIdentifier)</span> @Html.EditorFor(m => m.PassportIdentifier);
+            </div>
+            <div>
+                <span>@Html.DisplayFor(m => m.FirstName)</span> @Html.EditorFor(m => m.FirstName);
+            </div>
+            <div>
+                <span>@Html.DisplayFor(m => m.LastName)</span> @Html.EditorFor(m => m.LastName);
+            </div>
+            <div>
+                <span>@Html.DisplayFor(m => m.FathersName)</span> @Html.EditorFor(m => m.FathersName);
+            </div>
+            <div>
+                <span>@Html.DisplayFor(m => m.BirthDate)</span> @Html.EditorFor(m => m.BirthDate);
+            </div>
+            <div>
+                <span>@Html.DisplayFor(m => m.IdentificationCode)</span> @Html.EditorFor(m => m.IdentificationCode);
+            </div>
+            <div>
+                <span>@Html.DisplayFor(m => m.StartOfLearningDate)</span> @Html.EditorFor(m => m.StartOfLearningDate);
+            </div>
+            <div>
+                <span>@Html.DisplayFor(m => m.StudentTicketId)</span> @Html.EditorFor(m => m.StudentTicketId);
+            </div>
+            <div>
+                <span>@Html.DisplayFor(m => m.FacultyName)</span> @Html.DropDownListFor(m => m.FacultyName, (IEnumerable<SelectListItem>)ViewBag.Faculties);
+            </div>
+            <div>
+                <span>@Html.DisplayFor(m => m.SpecialityName)</span> @Html.EditorFor(m => m.SpecialityName);
+            </div>
+            <div>
+                <span>@Html.DisplayFor(m => m.Course)</span> @Html.EditorFor(m => m.Course);
+            </div>
+            <div>
+                <span>@Html.DisplayFor(m => m.OnBudget)</span> @Html.EditorFor(m => m.OnBudget);
+            </div>
+            <div>
+                <span>@Html.DisplayFor(m => m.GroupName)</span> @Html.EditorFor(m => m.GroupName);
+            </div>
+            <div>
+                <input type="submit" value="Submit"/>
+            </div>
+        }
+    }
+</div>
+</body>
+</html>

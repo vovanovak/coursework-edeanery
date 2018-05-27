@@ -31,6 +31,8 @@ namespace EDeanery.DAL.Mappers
                 DormitoryRoomId = entity.DormitoryRoomId,
                 DormityRoomName = entity.DormityRoomName,
                 MaxCountInRoom = entity.MaxCountInRoom,
+                DormitoryId = entity.DormitoryId,
+                DormitoryName = entity.DormitoryEntity.Name,
                 Roomers = entity.DormitoryRoomStudents.Select(s => _studentMapper.Map(s.StudentEntity)).ToList()
             };
         }

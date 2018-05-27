@@ -6,6 +6,7 @@ using EDeanery.DAL.Context.Abstract;
 using EDeanery.DAL.DAOs;
 using EDeanery.DAL.Repositories.Abstract;
 using EDeanery.Mappers.Abstract;
+using EDeanery.Mappers.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace EDeanery.DAL.Repositories
@@ -53,6 +54,12 @@ namespace EDeanery.DAL.Repositories
         public async Task<Speciality> GetById(int id)
         {
             return _daoSpecialityMapper.Map(await _context.Specialities.SingleOrDefaultAsync(d => d.SpecialityId == id));
+        }
+
+        public async Task<IReadOnlyCollection<Speciality>> GetByFacultyId(int facultyId)
+        {
+            var specialities = await _context.Specialities.Where(s => s.FacultyId == facultyId).ToListAsync();
+            return _daoSpecialityMapper.Map(specialities).ToList();
         }
     }
 }

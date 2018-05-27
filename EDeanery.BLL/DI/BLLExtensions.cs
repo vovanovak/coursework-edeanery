@@ -18,7 +18,7 @@ namespace EDeanery.BLL.DI
             services.AddScoped<IFacultyService, FacultyService>();
             services.AddScoped<IGroupService, GroupService>();
             services.AddScoped<ISpecialityService, SpecialityService>();
-            services.AddScoped<StudentService, StudentService>();
+            services.AddScoped<IStudentService, StudentService>();
 
             return services;
         }

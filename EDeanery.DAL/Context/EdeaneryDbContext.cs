@@ -43,15 +43,14 @@ namespace EDeanery.DAL.Context
             modelBuilder.ApplyConfiguration(new StudentTypeConfiguration());
         }
         
-        public int SaveChanges()
+        int IEdeaneryDbContext.SaveChanges()
         {
             return SaveChanges();
         }
 
-        public async Task<int> SaveChangesAsync()
+        async Task<int> IEdeaneryDbContext.SaveChangesAsync()
         {
             return await SaveChangesAsync();
         }
-
     }
 }

@@ -11,9 +11,10 @@ using System;
 namespace EDeanery.DAL.Migrations
 {
     [DbContext(typeof(EdeaneryDbContext))]
-    partial class EdeaneryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180527144945_AddDormitoryIdAndName")]
+    partial class AddDormitoryIdAndName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
