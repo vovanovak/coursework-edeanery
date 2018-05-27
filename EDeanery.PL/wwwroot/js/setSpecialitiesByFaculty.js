@@ -1,15 +1,14 @@
-function getSpecialtiesByFacultyId(facultyId) {
+function setSpecialtiesByFacultyId(facultyId) {
     $.ajax({
-        url: "/Students/GetSpecialitiesByFacultyId/" + facultyId,
-        cache: false,
+        url: "/Student/GetSpecialitiesByFacultyId/" + facultyId,
         type: "GET",
         success: function (data) {
-            var markup = "<option value='0'>Select City</option>";
+            var markup = "";
             
             for (var x = 0; x < data.length; x++) {
-                markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                markup += "<option value=" + data[x].value + ">" + data[x].text + "</option>";
             }
-            
+
             $("#specialitiesSelect").html(markup).show();
         },
         error: function (reponse) {

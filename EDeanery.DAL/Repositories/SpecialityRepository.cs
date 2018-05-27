@@ -47,19 +47,24 @@ namespace EDeanery.DAL.Repositories
 
         public async Task<ICollection<Speciality>> GetAll()
         {
-            var specialityDaos = await _context.Specialities.ToListAsync();
+            var specialityDaos = await WithIncludes().ToListAsync();
             return specialityDaos.Select(d => _daoSpecialityMapper.Map(d)).ToList();
         }
 
         public async Task<Speciality> GetById(int id)
         {
-            return _daoSpecialityMapper.Map(await _context.Specialities.SingleOrDefaultAsync(d => d.SpecialityId == id));
+            return _daoSpecialityMapper.Map(await WithIncludes().SingleOrDefaultAsync(d => d.SpecialityId == id));
         }
 
         public async Task<IReadOnlyCollection<Speciality>> GetByFacultyId(int facultyId)
         {
-            var specialities = await _context.Specialities.Where(s => s.FacultyId == facultyId).ToListAsync();
+            var specialities = await WithIncludes().Where(s => s.FacultyId == facultyId).ToListAsync();
             return _daoSpecialityMapper.Map(specialities).ToList();
+        }
+        
+        private IQueryable<SpecialityEntity> WithIncludes()
+        {
+            return _context.Specialities.Include(s => s.FacultyEntity);
         }
     }
 }

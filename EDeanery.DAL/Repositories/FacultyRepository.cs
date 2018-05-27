@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EDeanery.BLL.Domain.Entities;
 using EDeanery.DAL.Context.Abstract;
+using EDeanery.DAL.DAOs;
 using EDeanery.DAL.Repositories.Abstract;
 using EDeanery.Mappers.Abstract;
 using Microsoft.EntityFrameworkCore;
@@ -17,11 +18,11 @@ namespace EDeanery.DAL.Repositories
 
         public FacultyRepository(
             IEdeaneryDbContext context,
-            IMapper<Faculty, DAOs.FacultyEntity> FacultyMapper,
+            IMapper<Faculty, DAOs.FacultyEntity> facultyMapper,
             IMapper<DAOs.FacultyEntity, Faculty> daoFacultyMapper)
         {
             _context = context;
-            _facultyMapper = FacultyMapper;
+            _facultyMapper = facultyMapper;
             _daoFacultyMapper = daoFacultyMapper;
         }
 

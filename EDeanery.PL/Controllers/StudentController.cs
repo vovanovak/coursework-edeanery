@@ -61,7 +61,7 @@ namespace EDeanery.PL.Controllers
             return View();
         }
 
-        [HttpGet, Route("Students/GetSpecialitiesByFacultyId/{facultyId}")]
+        [HttpGet, Route("Student/GetSpecialitiesByFacultyId/{facultyId}")]
         public async Task<IEnumerable<SelectListItem>> GetSpecialitiesByFacultyId([FromRoute] int facultyId)
         {
             var specialities = await _specialityService.GetByFacultyId(facultyId);

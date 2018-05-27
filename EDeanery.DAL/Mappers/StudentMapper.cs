@@ -14,6 +14,8 @@ namespace EDeanery.DAL.Mappers
                 StudentId = entity.StudentId,
                 IdentificationCode = entity.IdentificationCode,
                 PassportIdentifier = entity.PassportInfo.PassportIdentifier,
+                Email = entity.CommunicationInfo.Email,
+                PhoneNumber = entity.CommunicationInfo.PhoneNumber,
                 FirstName = entity.PassportInfo.FirstName,
                 LastName = entity.PassportInfo.LastName,
                 FathersName = entity.PassportInfo.FathersName,

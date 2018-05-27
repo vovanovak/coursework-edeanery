@@ -8,6 +8,7 @@ namespace EDeanery.BLL.Domain.Entities
         public int StudentId { get; set; }
         public string IdentificationCode { get; set; }
         public DateTime StartOfLearningDate { get; set; }
+        public CommunicationInfo CommunicationInfo { get; set; }
         public PassportInfo PassportInfo { get; set; }
         public StudentTicketInfo StudentTicketInfo { get; set; }
         public Group Group { get; set; }

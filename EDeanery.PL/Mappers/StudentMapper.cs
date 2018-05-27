@@ -1,4 +1,5 @@
 ﻿using EDeanery.BLL.Domain.Entities;
+using EDeanery.BLL.Domain.ValueObjects;
 using EDeanery.Mappers.Abstract;
 using EDeanery.PL.Models;
 
@@ -30,7 +31,10 @@ namespace EDeanery.PL.Mappers
         {
             return new Student
             {
-                
+                IdentificationCode = entity.IdentificationCode,
+                StudentTicketInfo = new StudentTicketInfo(entity.StudentTicketId, entity.FacultyName, entity.SpecialityName, entity.Course, entity.OnBudget),
+                StartOfLearningDate = entity.StartOfLearningDate,
+                PassportInfo = new PassportInfo(entity.PassportIdentifier, entity.FirstName, entity.LastName, entity.FathersName, entity.BirthDate)
             };
         }
     }
