@@ -7,6 +7,17 @@ namespace EDeanery.DAL.Mappers
 {
     internal class StudentMapper : IMapper<Student, StudentEntity>, IMapper<StudentEntity, Student>
     {
+        private readonly IMapper<FacultyEntity, Faculty> _facultyMapper;
+        private readonly IMapper<SpecialityEntity, Speciality> _specialityMapper;
+        
+        public StudentMapper(
+            IMapper<FacultyEntity, Faculty> facultyMapper, 
+            IMapper<SpecialityEntity, Speciality> specialityMapper)
+        {
+            _facultyMapper = facultyMapper;
+            _specialityMapper = specialityMapper;
+        }
+        
         public StudentEntity Map(Student entity)
         {
             return new StudentEntity
@@ -21,8 +32,7 @@ namespace EDeanery.DAL.Mappers
                 FathersName = entity.PassportInfo.FathersName,
                 BirthDate = entity.PassportInfo.BirthDate,
                 StudentTicketId = entity.StudentTicketInfo.StudentTicketId,
-                FacultyName = entity.StudentTicketInfo.FacultyName,
-                SpecialityName = entity.StudentTicketInfo.SpecialityName,
+                SpecialityId = entity.StudentTicketInfo.Speciality.SpecialityId,
                 Course = entity.StudentTicketInfo.Course,
                 OnBudget = entity.StudentTicketInfo.OnBudget
             };
@@ -35,15 +45,26 @@ namespace EDeanery.DAL.Mappers
                 StudentId = entity.StudentId,
                 IdentificationCode = entity.IdentificationCode,
                 StartOfLearningDate = entity.StartOfLearning,
-                PassportInfo = new PassportInfo(entity.PassportIdentifier, entity.FirstName, entity.LastName, entity.FathersName, entity.BirthDate),
-                StudentTicketInfo = new StudentTicketInfo(entity.StudentTicketId, entity.FacultyName, entity.SpecialityName, entity.Course, entity.OnBudget),
-                DormitoryRoom = new DormitoryRoom
+                PassportInfo = new PassportInfo(
+                    entity.PassportIdentifier, 
+                    entity.FirstName, 
+                    entity.LastName, 
+                    entity.FathersName, 
+                    entity.BirthDate),
+                StudentTicketInfo = new StudentTicketInfo(
+                    entity.StudentTicketId,
+                    _facultyMapper.Map(entity.SpecialityEntity.FacultyEntity), 
+                    _specialityMapper.Map(entity.SpecialityEntity),
+                    entity.Course, 
+                    entity.OnBudget),
+                CommunicationInfo = new CommunicationInfo(entity.Email, entity.PhoneNumber),
+                DormitoryRoom = entity.DormitoryRoomStudentEntity == null ? null : new DormitoryRoom
                 {
                     DormitoryRoomId = entity.DormitoryRoomStudentEntity.DormitoryRoomEntity.DormitoryRoomId,
                     DormityRoomName = entity.DormitoryRoomStudentEntity.DormitoryRoomEntity.DormityRoomName,
                     MaxCountInRoom = entity.DormitoryRoomStudentEntity.DormitoryRoomEntity.MaxCountInRoom
                 },
-                Group = new Group
+                Group = entity.GroupStudentEntity == null ? null : new Group
                 {
                     GroupId = entity.GroupStudentEntity.GroupEntity.GroupId,
                     GroupName = entity.GroupStudentEntity.GroupEntity.GroupName

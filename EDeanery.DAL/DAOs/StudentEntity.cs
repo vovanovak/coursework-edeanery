@@ -14,8 +14,8 @@ namespace EDeanery.DAL.DAOs
         public string FathersName { get; set; }
         public DateTime BirthDate { get; set; }
         public string StudentTicketId { get; set; }
-        public string FacultyName { get; set; }
-        public string SpecialityName { get; set; }
+        public int SpecialityId { get; set; }
+        public SpecialityEntity SpecialityEntity { get; set; }
         public int Course { get; set; }
         public bool OnBudget { get; set; }
         public DateTime StartOfLearning { get; set; }

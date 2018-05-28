@@ -18,11 +18,11 @@ namespace EDeanery.DAL.Repositories
 
         public StudentRepository(
             IEdeaneryDbContext context,
-            IMapper<Student, StudentEntity> StudentMapper,
+            IMapper<Student, StudentEntity> studentMapper,
             IMapper<StudentEntity, Student> daoStudentMapper)
         {
             _context = context;
-            _studentMapper = StudentMapper;
+            _studentMapper = studentMapper;
             _daoStudentMapper = daoStudentMapper;
         }
 
@@ -46,17 +46,17 @@ namespace EDeanery.DAL.Repositories
 
         public async Task<ICollection<Student>> GetAll()
         {
-            return await _context.Students.Select(d => _daoStudentMapper.Map(d)).ToListAsync();
+            return await GetStudentsWithIncludes().Select(d => _daoStudentMapper.Map(d)).ToListAsync();
         }
 
         public async Task<Student> GetById(int id)
         {
-            return _daoStudentMapper.Map(await _context.Students.SingleOrDefaultAsync(d => d.StudentId == id));
+            return _daoStudentMapper.Map(await GetStudentsWithIncludes().SingleOrDefaultAsync(d => d.StudentId == id));
         }
 
         public async Task<IReadOnlyCollection<Student>> GetStudentsByFullName(string search)
         {
-            var studentDaos = await _context.Students.Where(s =>
+            var studentDaos = await GetStudentsWithIncludes().Where(s =>
                     EF.Functions.Like(s.FirstName, $"%{search}%") || EF.Functions.Like(s.LastName, $"%{search}%"))
                 .ToListAsync();
             
@@ -65,10 +65,22 @@ namespace EDeanery.DAL.Repositories
 
         public async Task<IReadOnlyCollection<Student>> GetStudentsByGroup(string search)
         {
-            var studentDaos = await _context.Students.Include(s => s.GroupStudentEntity).ThenInclude(g => g.GroupEntity)
-                .Where(s => EF.Functions.Like(s.GroupStudentEntity.GroupEntity.GroupName, $"%{search}%")).ToListAsync();
+            var studentDaos = await GetStudentsWithIncludes()
+                .Where(s => EF.Functions.Like(s.GroupStudentEntity.GroupEntity.GroupName, $"%{search}%"))
+                .ToListAsync();
 
             return studentDaos.Select(s => _daoStudentMapper.Map(s)).ToList();
+        }
+
+        private IQueryable<StudentEntity> GetStudentsWithIncludes()
+        {
+            return _context.Students
+                .Include(s => s.SpecialityEntity)
+                    .ThenInclude(s => s.FacultyEntity)
+                .Include(s => s.GroupStudentEntity)
+                    .ThenInclude(g => g.GroupEntity)
+                .Include(s => s.DormitoryRoomStudentEntity)
+                    .ThenInclude(d => d.DormitoryRoomEntity);
         }
     }
 }

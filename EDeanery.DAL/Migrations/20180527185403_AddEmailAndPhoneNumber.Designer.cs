@@ -11,9 +11,10 @@ using System;
 namespace EDeanery.DAL.Migrations
 {
     [DbContext(typeof(EdeaneryDbContext))]
-    partial class EdeaneryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180527185403_AddEmailAndPhoneNumber")]
+    partial class AddEmailAndPhoneNumber
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -162,6 +163,8 @@ namespace EDeanery.DAL.Migrations
 
                     b.Property<string>("Email");
 
+                    b.Property<string>("FacultyName");
+
                     b.Property<string>("FathersName");
 
                     b.Property<string>("FirstName");
@@ -178,7 +181,7 @@ namespace EDeanery.DAL.Migrations
 
                     b.Property<string>("PhoneNumber");
 
-                    b.Property<int>("SpecialityId");
+                    b.Property<string>("SpecialityName");
 
                     b.Property<DateTime>("StartOfLearning");
 
@@ -189,8 +192,6 @@ namespace EDeanery.DAL.Migrations
                     b.HasIndex("GroupStudentId")
                         .IsUnique()
                         .HasFilter("[GroupStudentId] IS NOT NULL");
-
-                    b.HasIndex("SpecialityId");
 
                     b.ToTable("Students");
                 });
@@ -258,11 +259,6 @@ namespace EDeanery.DAL.Migrations
                     b.HasOne("EDeanery.DAL.DAOs.GroupStudentEntity", "GroupStudentEntity")
                         .WithOne("StudentEntity")
                         .HasForeignKey("EDeanery.DAL.DAOs.StudentEntity", "GroupStudentId");
-
-                    b.HasOne("EDeanery.DAL.DAOs.SpecialityEntity", "SpecialityEntity")
-                        .WithMany("Students")
-                        .HasForeignKey("SpecialityId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

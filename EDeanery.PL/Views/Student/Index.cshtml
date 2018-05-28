@@ -6,12 +6,47 @@
 <html>
 <head>
     <title>Students</title>
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
 </head>
 <body>
-<div>
-    <table>
-        
+<div id="indexContainer">
+    <h1>Students</h1>
+    <table class="table table-striped">
+        <thead>
+        <th>FullName</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Identification Code</th> 
+        <th>Birth Date</th> 
+        <th>Passport Identifier</th> 
+        <th>Student Ticket</th> 
+        <th>Faculty</th> 
+        </thead>
+        <tbody>
+        @foreach (StudentGetModel student in ViewBag.Students)
+        {
+            <tr>
+                <td>@Html.ActionLink(student.FullName, "GetStudentById", new { studentId = student.StudentId })</td>
+                <td>@student.Email</td>
+                <td>@student.PhoneNumber</td>
+                <td>@student.IdentificationCode</td>
+                <td>@student.BirthDate</td>
+                <td>@student.PassportIdentifier</td>
+                <td>@student.StudentTicket</td>
+                <td>@student.FacultyName</td>
+            </tr>
+        }
+        </tbody>
     </table>
+    <div>
+        <a href="@Url.Action("AddOrUpdateStudent", new { add = "true" })" class="btn btn-info">Add</a>
+    </div>
 </div>
 </body>
 </html>

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace EDeanery.Mappers.Abstract
+﻿namespace EDeanery.Mappers.Abstract
 {
     public interface IMapper<TIn, TOut>
     {
