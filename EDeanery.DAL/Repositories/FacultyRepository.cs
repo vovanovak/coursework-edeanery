@@ -30,6 +30,8 @@ namespace EDeanery.DAL.Repositories
         {
             var dao = _facultyMapper.Map(entity);
             await _context.Faculties.AddAsync(dao);
+            await _context.SaveChangesAsync();
+            entity.FacultyId = dao.FacultyId;
         }
 
         public async Task DeleteAsync(int id)

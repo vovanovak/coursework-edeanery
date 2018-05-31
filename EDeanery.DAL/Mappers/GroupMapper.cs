@@ -29,12 +29,6 @@ namespace EDeanery.DAL.Mappers
                 SpecialityId = entity.Speciality.SpecialityId
             };
 
-            group.GroupStudents = entity.Students.Select(s => new GroupStudentEntity
-            {
-                GroupId = entity.GroupId,
-                StudentId = s.StudentId
-            }).ToList();
-
             return group;
         }
 
@@ -45,7 +39,7 @@ namespace EDeanery.DAL.Mappers
                 GroupId = entity.GroupId,
                 GroupName = entity.GroupName,
                 Speciality = _specialityMapper.Map(entity.SpecialityEntity),
-                Students = entity.GroupStudents.Select(s => _studentMapper.Map(s.StudentEntity)).ToList()
+                Students = entity.GroupStudents?.Select(s => _studentMapper.Map(s.StudentEntity)).ToList()
             };
         }
     }

@@ -31,6 +31,8 @@ namespace EDeanery.DAL.Repositories
         {
             var dao = _dormitoryRoomMapper.Map(entity);
             await _context.DormitoryRooms.AddAsync(dao);
+            await _context.SaveChangesAsync();
+            entity.DormitoryRoomId = dao.DormitoryRoomId;
         }
 
         public async Task DeleteAsync(int id)

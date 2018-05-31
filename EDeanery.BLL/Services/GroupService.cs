@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using EDeanery.BLL.Domain.Entities;
 using EDeanery.BLL.Services.Abstract;
 using EDeanery.DAL.Repositories.Abstract;
@@ -14,15 +15,10 @@ namespace EDeanery.BLL.Services
 
         protected override IRepository<Group, int> Repository => UnitOfWork.GroupRepository;
 
-        public async Task AddStudentAsync(int groupId, int studentId)
-        {
-            await UnitOfWork.GroupRepository.AddStudentAsync(groupId, studentId);
-            await UnitOfWork.SaveChangesAsync();
-        }
 
-        public async Task DeleteStudentAsync(int groupId, int studentId)
+        public async Task SetStudentsFromGroup(int groupId, IReadOnlyCollection<int> studentIds)
         {
-            await UnitOfWork.GroupRepository.DeleteStudentAsync(groupId, studentId);
+            await UnitOfWork.GroupRepository.SetStudentsForGroup(groupId, studentIds);
             await UnitOfWork.SaveChangesAsync();
         }
     }

@@ -19,7 +19,6 @@ namespace EDeanery.BLL.Services
         public virtual async Task AddAsync(TEntity entity)
         {
             await Repository.AddAsync(entity);
-            await UnitOfWork.SaveChangesAsync();
         }
 
         public virtual async Task DeleteAsync(TIdentity id)

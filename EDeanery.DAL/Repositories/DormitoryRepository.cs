@@ -29,6 +29,8 @@ namespace EDeanery.DAL.Repositories
         {
             var dao = _dormitoryMapper.Map(entity);
             await _context.Dormitories.AddAsync(dao);
+            await _context.SaveChangesAsync();
+            entity.DormitoryId = dao.DormitoryId;
         }
 
         public async Task DeleteAsync(int id)

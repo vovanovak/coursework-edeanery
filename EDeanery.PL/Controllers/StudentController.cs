@@ -7,6 +7,7 @@ using EDeanery.Mappers.Abstract;
 using EDeanery.Mappers.Extensions;
 using EDeanery.PL.Constants;
 using EDeanery.PL.Models;
+using EDeanery.PL.Providers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -15,41 +16,31 @@ namespace EDeanery.PL.Controllers
     public class StudentController : Controller
     {
         private readonly IStudentService _studentService;
-        private readonly IFacultyService _facultyService;
-        private readonly ISpecialityService _specialityService;
         private readonly IMapper<Student, StudentGetModel> _studentGetModelMapper;
         private readonly IMapper<Student, StudentGetDetailedModel> _studentGetDetailedModelMapper;
         private readonly IMapper<StudentPostModel, Student> _studentPostModelMapper;
         private readonly IMapper<Student, StudentPostModel> _studentToPostModelMapper;
-        private readonly IMapper<Faculty, SelectListItem> _facultySelectListItemMapper;
-        private readonly IMapper<Speciality, SelectListItem> _specialitySelectListItemMapper;
-
+        private readonly IViewBagDataProvider _viewBagDataProvider;
 
         public StudentController(IStudentService studentService,
-            IFacultyService facultyService,
-            ISpecialityService specialityService,
             IMapper<Student, StudentGetModel> studentGetModelMapper,
             IMapper<Student, StudentGetDetailedModel> studentGetDetailedModelMapper,
             IMapper<StudentPostModel, Student> studentPostModelMapper,
             IMapper<Student, StudentPostModel> studentToPostModelMapper,
-            IMapper<Faculty, SelectListItem> facultySelectListItemMapper,
-            IMapper<Speciality, SelectListItem> specialitySelectListItemMapper)
+            IViewBagDataProvider viewBagDataProvider)
         {
             _studentService = studentService;
-            _facultyService = facultyService;
-            _specialityService = specialityService;
             _studentGetModelMapper = studentGetModelMapper;
             _studentGetDetailedModelMapper = studentGetDetailedModelMapper;
             _studentToPostModelMapper = studentToPostModelMapper;
             _studentPostModelMapper = studentPostModelMapper;
-            _facultySelectListItemMapper = facultySelectListItemMapper;
-            _specialitySelectListItemMapper = specialitySelectListItemMapper;
+            _viewBagDataProvider = viewBagDataProvider;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            ViewBag.Students = _studentGetModelMapper.Map(await _studentService.GetAll());
+            ViewBag.Students = _studentGetModelMapper.Map(await _studentService.GetAll()).ToList();
 
             return View();
         }
@@ -64,11 +55,10 @@ namespace EDeanery.PL.Controllers
         [HttpGet]
         public async Task<ActionResult> AddOrUpdateStudent([FromQuery] bool add, [FromQuery] int? studentId)
         {
-            var faculties = await _facultyService.GetAll();
-            ViewBag.Faculties = _facultySelectListItemMapper.Map(faculties);
+            await _viewBagDataProvider.InitFaculties(this.ViewBag);
 
-            var specialities = await _specialityService.GetByFacultyId(faculties.First().FacultyId);
-            ViewBag.Specialities = _specialitySelectListItemMapper.Map(specialities);
+            int facultyId = this.ViewBag.Faculties.First().FacultyId;
+            await _viewBagDataProvider.InitSpecialities(this.ViewBag, facultyId);
 
             StudentPostModel model;
 
@@ -85,14 +75,6 @@ namespace EDeanery.PL.Controllers
             }
 
             return View(model);
-        }
-
-
-        [HttpGet, Route("Student/GetSpecialitiesByFacultyId/{facultyId}")]
-        public async Task<IEnumerable<SelectListItem>> GetSpecialitiesByFacultyId([FromRoute] int facultyId)
-        {
-            var specialities = await _specialityService.GetByFacultyId(facultyId);
-            return _specialitySelectListItemMapper.Map(specialities);
         }
 
         [HttpPost]

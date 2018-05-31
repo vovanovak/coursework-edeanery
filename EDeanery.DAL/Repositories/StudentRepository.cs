@@ -30,6 +30,8 @@ namespace EDeanery.DAL.Repositories
         {
             var dao = _studentMapper.Map(entity);
             await _context.Students.AddAsync(dao);
+            await _context.SaveChangesAsync();
+            entity.StudentId = dao.StudentId;
         }
 
         public async Task DeleteAsync(int id)
@@ -65,11 +67,7 @@ namespace EDeanery.DAL.Repositories
 
         public async Task<IReadOnlyCollection<Student>> GetStudentsByGroup(string search)
         {
-            var studentDaos = await GetStudentsWithIncludes()
-                .Where(s => EF.Functions.Like(s.GroupStudentEntity.GroupEntity.GroupName, $"%{search}%"))
-                .ToListAsync();
-
-            return studentDaos.Select(s => _daoStudentMapper.Map(s)).ToList();
+            return null;
         }
 
         private IQueryable<StudentEntity> GetStudentsWithIncludes()
@@ -77,8 +75,6 @@ namespace EDeanery.DAL.Repositories
             return _context.Students
                 .Include(s => s.SpecialityEntity)
                     .ThenInclude(s => s.FacultyEntity)
-                .Include(s => s.GroupStudentEntity)
-                    .ThenInclude(g => g.GroupEntity)
                 .Include(s => s.DormitoryRoomStudentEntity)
                     .ThenInclude(d => d.DormitoryRoomEntity);
         }

@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using EDeanery.DAL.DAOs;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace EDeanery.DAL.Context.Abstract
 {
@@ -16,6 +17,9 @@ namespace EDeanery.DAL.Context.Abstract
         DbSet<SpecialityEntity> Specialities { get; set; }
         DbSet<StudentEntity> Students { get; set; }
 
+        IDbContextTransaction BeginTransaction();
+        Task<IDbContextTransaction> BeginTransactionAsync();
+        
         int SaveChanges();
         Task<int> SaveChangesAsync();
     }

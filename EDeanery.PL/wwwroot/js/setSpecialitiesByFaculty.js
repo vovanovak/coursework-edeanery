@@ -1,6 +1,6 @@
 function setSpecialtiesByFacultyId(facultyId) {
     $.ajax({
-        url: "/Student/GetSpecialitiesByFacultyId/" + facultyId,
+        url: "/Speciality/GetSpecialitiesByFacultyId/" + facultyId,
         type: "GET",
         success: function (data) {
             var markup = "";

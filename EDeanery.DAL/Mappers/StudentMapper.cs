@@ -63,11 +63,6 @@ namespace EDeanery.DAL.Mappers
                     DormitoryRoomId = entity.DormitoryRoomStudentEntity.DormitoryRoomEntity.DormitoryRoomId,
                     DormityRoomName = entity.DormitoryRoomStudentEntity.DormitoryRoomEntity.DormityRoomName,
                     MaxCountInRoom = entity.DormitoryRoomStudentEntity.DormitoryRoomEntity.MaxCountInRoom
-                },
-                Group = entity.GroupStudentEntity == null ? null : new Group
-                {
-                    GroupId = entity.GroupStudentEntity.GroupEntity.GroupId,
-                    GroupName = entity.GroupStudentEntity.GroupEntity.GroupName
                 }
             };
         }

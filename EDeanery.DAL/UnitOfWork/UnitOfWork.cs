@@ -3,6 +3,8 @@ using EDeanery.DAL.Context;
 using EDeanery.DAL.Context.Abstract;
 using EDeanery.DAL.Repositories.Abstract;
 using EDeanery.DAL.UnitOfWork.Abstract;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace EDeanery.DAL.UnitOfWork
 {
@@ -27,13 +29,17 @@ namespace EDeanery.DAL.UnitOfWork
             IStudentRepository studentRepository)
         {
             _edeaneryDbContext = edeaneryDbContext;
-            
             DormitoryRepository = dormitoryRepository;
             DormitoryRoomRepository = dormitoryRoomRepository;
             FacultyRepository = facultyRepository;
             GroupRepository = groupRepository;
             SpecialityRepository = specialityRepository;
             StudentRepository = studentRepository;
+        }
+
+        public Task<IDbContextTransaction> BeginTransaction()
+        {
+            return (_edeaneryDbContext as DbContext).Database.BeginTransactionAsync();
         }
 
         public async Task<int> SaveChangesAsync()

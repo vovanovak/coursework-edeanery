@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using EDeanery.DAL.Repositories.Abstract;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace EDeanery.DAL.UnitOfWork.Abstract
 {
@@ -11,6 +12,7 @@ namespace EDeanery.DAL.UnitOfWork.Abstract
         IGroupRepository GroupRepository { get; }
         ISpecialityRepository SpecialityRepository { get; }
         IStudentRepository StudentRepository { get; }
+        Task<IDbContextTransaction> BeginTransaction();
         Task<int> SaveChangesAsync();
     }
 }

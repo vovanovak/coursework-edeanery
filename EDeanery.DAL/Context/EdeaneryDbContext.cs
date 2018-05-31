@@ -4,6 +4,7 @@ using EDeanery.DAL.Context.Configurations;
 using EDeanery.DAL.DAOs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace EDeanery.DAL.Context
 {
@@ -18,16 +19,15 @@ namespace EDeanery.DAL.Context
         public DbSet<GroupStudentEntity> GroupStudents { get; set; }
         public DbSet<SpecialityEntity> Specialities { get; set; }
         public DbSet<StudentEntity> Students { get; set; }
-        
+
         public EdeaneryDbContext()
         {
         }
-        
+
         public EdeaneryDbContext(DbContextOptions<EdeaneryDbContext> options) : base(options)
         {
-            
         }
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -42,7 +42,17 @@ namespace EDeanery.DAL.Context
             modelBuilder.ApplyConfiguration(new SpecialityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new StudentTypeConfiguration());
         }
-        
+
+        public IDbContextTransaction BeginTransaction()
+        {
+            return BeginTransaction();
+        }
+
+        public Task<IDbContextTransaction> BeginTransactionAsync()
+        {
+            return BeginTransactionAsync();
+        }
+
         int IEdeaneryDbContext.SaveChanges()
         {
             return SaveChanges();

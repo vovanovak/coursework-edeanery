@@ -9,7 +9,8 @@ namespace EDeanery.PL.Mappers
         IMapper<Student, StudentGetModel>,
         IMapper<Student, StudentGetDetailedModel>,
         IMapper<StudentPostModel, Student>,
-        IMapper<Student, StudentPostModel>
+        IMapper<Student, StudentPostModel>,
+        IMapper<Student, StudentSelectModel>
     {
         public StudentGetModel Map(Student student)
         {
@@ -86,6 +87,11 @@ namespace EDeanery.PL.Mappers
                 Email = student.CommunicationInfo.Email,
                 PhoneNumber = student.CommunicationInfo.PhoneNumber 
             };
+        }
+
+        StudentSelectModel IMapper<Student, StudentSelectModel>.Map(Student entity)
+        {
+            return new StudentSelectModel(false, Map(entity));
         }
     }
 }

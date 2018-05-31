@@ -19,8 +19,6 @@ namespace EDeanery.DAL.DAOs
         public int Course { get; set; }
         public bool OnBudget { get; set; }
         public DateTime StartOfLearning { get; set; }
-        public int? GroupStudentId { get; set; }
-        public GroupStudentEntity GroupStudentEntity { get; set; }
         public int? DormitoryRoomStudentId { get; set; }
         public DormitoryRoomStudentEntity DormitoryRoomStudentEntity { get; set; }
     }

@@ -6,6 +6,23 @@ namespace EDeanery.PL.Models
 {
     public class StudentGetModel
     {
+        public StudentGetModel()
+        {
+        }
+
+        public StudentGetModel(StudentGetModel studentGetModel)
+        {
+            StudentId = studentGetModel.StudentId;
+            FullName = studentGetModel.FullName;
+            Email = studentGetModel.Email;
+            PhoneNumber = studentGetModel.PhoneNumber;
+            IdentificationCode = studentGetModel.IdentificationCode;
+            BirthDate = studentGetModel.BirthDate;
+            PassportIdentifier = studentGetModel.PassportIdentifier;
+            StudentTicket = studentGetModel.StudentTicket;
+            FacultyName = studentGetModel.FacultyName;
+        }
+
         public int StudentId { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
