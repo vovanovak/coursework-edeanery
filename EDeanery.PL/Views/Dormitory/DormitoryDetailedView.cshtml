@@ -1,14 +1,62 @@
-﻿@model TModel
 
+﻿@using EDeanery.PL.Models
+@model DormitoryGetModel
 <!DOCTYPE html>
 
 <html>
 <head>
-    <title>title</title>
+    <title>Group: @Model.Name</title>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/js/deleteDormitory.js"></script>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+
+    <script>
+        function onBodyLoad() {
+            $("#deleteDormitory").click(function() {
+                var groupId = @Model.DormitoryId;
+                deleteDormitory(groupId);
+                window.location.href = "@Url.Action("Index")";
+            });
+        }
+    </script>
 </head>
 <body>
 <div>
-      
+    <h1>Dormitory: @Model.Name</h1>
+    <div class="row">
+        <label class="control-label col-sm-3">Address: </label>
+        <div class="col-sm-6">@Html.DisplayFor(m => m.Address)</div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">Max count of members: </label>
+        <div class="col-sm-6">@Html.DisplayFor(m => m.MaxCountOfMembers)</div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">Number of floors: </label>
+        <div class="col-sm-6">@Html.DisplayFor(m => m.NumberOfFlors)</div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">Faculties: </label>
+        <div class="col-sm-6">@Html.DisplayFor(m => m.Faculties)</div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">Students: </label>
+        <div class="col-sm-13">
+            @await Html.PartialAsync("../DormitoryRoom/ViewDormitoryRooms", (List<DormitoryRoomGetModel>) ViewBag.DormitoryRooms)
+        </div>
+    </div>
+    <div class="row">
+        <div class="btn-group btn-group-justified">
+            @Html.ActionLink("Update", "AddOrUpdateDormitory",
+                new {add = "false", dormitoryId = Model.DormitoryId},
+                new {@class = "btn btn-warning col-sm-10"})
+            <a id="deleteGroup" class="btn btn-danger col-sm-10">Delete</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>

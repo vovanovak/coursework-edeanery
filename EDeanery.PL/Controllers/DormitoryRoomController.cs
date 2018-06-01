@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EDeanery.PL.Controllers
 {
@@ -6,6 +8,12 @@ namespace EDeanery.PL.Controllers
     {
         // GET
         public IActionResult Index()
+        {
+            return null;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetDormitoryRoomById([FromQuery] int groupId)
         {
             return null;
         }

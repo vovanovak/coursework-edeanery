@@ -1,0 +1,28 @@
+﻿@model EDeanery.PL.Models.DormitoryRoomGetModel
+
+@using EDeanery.PL.Models
+@model List<EDeanery.PL.Models.DormitoryRoomGetModel>
+
+<table class="table table-striped">
+    <thead>
+    <th>Room name</th>
+    <th>Max count in room</th>
+    <th>Students</th>
+    </thead>
+    <tbody>
+    @foreach (DormitoryRoomGetModel dormitoryRoom in ViewBag.DormitoryRooms)
+    {
+        <tr>
+            <td>@Html.ActionLink(dormitoryRoom.DormityRoomName, "GetDormitoryRoomById", new { dormitoryRoomId = dormitoryRoom.DormitoryId })</td>
+            <td>@dormitoryRoom.MaxCountInRoom</td>
+            <td>
+                @foreach (var dormitoryRoomStudent in dormitoryRoom.DormitoryRoomStudents)
+                {
+                    @Html.ActionLink(dormitoryRoomStudent.FullName, "GetStudentById", "Student", new { studentId = dormitoryRoomStudent.StudentId })
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
