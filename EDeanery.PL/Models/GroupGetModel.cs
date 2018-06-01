@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace EDeanery.PL.Models
+﻿namespace EDeanery.PL.Models
 {
     public class GroupGetModel
     {

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using EDeanery.BLL.Domain.Entities;
 using EDeanery.BLL.Services.Abstract;
@@ -9,7 +8,6 @@ using EDeanery.PL.Constants;
 using EDeanery.PL.Models;
 using EDeanery.PL.Providers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EDeanery.PL.Controllers
 {
@@ -55,10 +53,7 @@ namespace EDeanery.PL.Controllers
         [HttpGet]
         public async Task<ActionResult> AddOrUpdateStudent([FromQuery] bool add, [FromQuery] int? studentId)
         {
-            await _viewBagDataProvider.InitFaculties(this.ViewBag);
-
-            int facultyId = this.ViewBag.Faculties.First().FacultyId;
-            await _viewBagDataProvider.InitSpecialities(this.ViewBag, facultyId);
+            await _viewBagDataProvider.InitFacultiesAndSpecialities(this.ViewBag);
 
             StudentPostModel model;
 

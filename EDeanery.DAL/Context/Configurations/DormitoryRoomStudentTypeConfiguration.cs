@@ -1,5 +1,4 @@
-﻿using EDeanery.BLL.Domain.Entities;
-using EDeanery.DAL.DAOs;
+﻿using EDeanery.DAL.DAOs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

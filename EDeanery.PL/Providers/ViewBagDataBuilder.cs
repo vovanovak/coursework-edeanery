@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using EDeanery.BLL.Domain.Entities;
 using EDeanery.BLL.Services.Abstract;
@@ -37,6 +38,16 @@ namespace EDeanery.PL.Providers
         {
             var specialities = await _specialityService.GetByFacultyId(facultyId);
             viewBag.Specialities = _specialitySelectListItemMapper.Map(specialities).ToList();
+        }
+
+        public async Task InitFacultiesAndSpecialities(dynamic viewBag)
+        {
+            await InitFaculties(viewBag);
+
+            var faculties = (List<SelectListItem>) viewBag.Faculties;
+            int facultyId = int.Parse(faculties.First().Value);
+            
+            await InitSpecialities(viewBag, facultyId);
         }
     }
 }

@@ -3,14 +3,18 @@ using EDeanery.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
 namespace EDeanery.DAL.Migrations
 {
     [DbContext(typeof(EdeaneryDbContext))]
-    partial class EdeaneryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180531235232_AddAddressAndMaxNumberOfFloors")]
+    partial class AddAddressAndMaxNumberOfFloors
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

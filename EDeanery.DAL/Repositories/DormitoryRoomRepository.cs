@@ -59,26 +59,21 @@ namespace EDeanery.DAL.Repositories
                 await _context.DormitoryRooms.SingleOrDefaultAsync(dr => dr.DormitoryRoomId == id));
         }
 
-        public async Task AddStudentAsync(int studentId, int dormitoryRoomId)
-        {
-            var dormitoryRoom =
-                await _context.DormitoryRooms.SingleOrDefaultAsync(dr => dr.DormitoryRoomId == dormitoryRoomId);
-            var student = await _context.Students.SingleOrDefaultAsync(s => s.StudentId == studentId);
 
-            var dormitoryRoomStudent = new DormitoryRoomStudentEntity
-            {
-                DormitoryRoomId = dormitoryRoom.DormitoryRoomId,
-                StudentId = student.StudentId,
-            };
-            
-            await _context.DormitoryRoomStudents.AddAsync(dormitoryRoomStudent);
-        }
-
-        public async Task DeleteStudentAsync(int studentId, int dormitoryRoomId)
+        public async Task SetStudentsAsync(int dormitoryRoomId, IReadOnlyCollection<int> studentIds)
         {
-            var dormitoryRoomStudent = await _context.DormitoryRoomStudents.SingleOrDefaultAsync(dr =>
-                dr.StudentId == studentId && dr.DormitoryRoomId == dormitoryRoomId);
-            _context.DormitoryRoomStudents.Remove(dormitoryRoomStudent);
+            var oldDormitoryRoomStudents =
+                _context.DormitoryRoomStudents.Where(drs => drs.DormitoryRoomId == dormitoryRoomId);
+
+            var newDormitoryRoomStudents =
+                studentIds.Select(studentId => new DormitoryRoomStudentEntity()
+                {
+                    StudentId = studentId,
+                    DormitoryRoomId = dormitoryRoomId
+                });
+
+            _context.DormitoryRoomStudents.RemoveRange(oldDormitoryRoomStudents);
+            await _context.DormitoryRoomStudents.AddRangeAsync(newDormitoryRoomStudents);
         }
 
         public async Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsWithFreeSpaces(int dormitoryId)

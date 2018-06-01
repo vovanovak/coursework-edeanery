@@ -3,7 +3,6 @@ using EDeanery.DAL.Context.Abstract;
 using EDeanery.DAL.Context.Configurations;
 using EDeanery.DAL.DAOs;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace EDeanery.DAL.Context

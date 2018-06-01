@@ -9,7 +9,6 @@ using EDeanery.PL.Constants;
 using EDeanery.PL.Models;
 using EDeanery.PL.Providers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EDeanery.PL.Controllers
 {
@@ -74,10 +73,7 @@ namespace EDeanery.PL.Controllers
             var students = await _studentService.GetAll();
             var selectStudents = _studentSelectModelMapper.Map(students).ToList();
 
-            await _viewBagDataProvider.InitFaculties(this.ViewBag);
-
-            int facultyId = int.Parse(((List<SelectListItem>) this.ViewBag.Faculties).First().Value);
-            await _viewBagDataProvider.InitSpecialities(this.ViewBag, facultyId);
+            await _viewBagDataProvider.InitFacultiesAndSpecialities(ViewBag);
 
             GroupPostModel model;
 

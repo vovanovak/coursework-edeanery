@@ -6,5 +6,6 @@ namespace EDeanery.PL.Providers
     {
         Task InitFaculties(dynamic viewBag);
         Task InitSpecialities(dynamic viewBag, int facultyId);
+        Task InitFacultiesAndSpecialities(dynamic viewBag);
     }
 }

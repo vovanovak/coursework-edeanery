@@ -1,6 +1,5 @@
 ﻿using EDeanery.DAL.Constants;
 using Microsoft.EntityFrameworkCore.Migrations;
-using EDeanery.DAL.DAOs;
 
 namespace EDeanery.DAL.Migrations
 {

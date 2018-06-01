@@ -14,16 +14,11 @@ namespace EDeanery.BLL.Services
         }
 
         protected override IRepository<DormitoryRoom, int> Repository => UnitOfWork.DormitoryRoomRepository;
-        public async Task AddStudentAsync(int studentId, int dormitoryRoomId)
-        {
-            await UnitOfWork.DormitoryRoomRepository.AddStudentAsync(studentId, dormitoryRoomId);
-            await UnitOfWork.SaveChangesAsync();
-        }
 
-        public async Task DeleteStudentAsync(int studentId, int dormitoryRoomId)
+
+        public async Task SetStudentsAsync(int studentId, IReadOnlyCollection<int> dormitoryRoomIds)
         {
-            await UnitOfWork.DormitoryRoomRepository.DeleteStudentAsync(studentId, dormitoryRoomId);
-            await UnitOfWork.SaveChangesAsync();
+            await UnitOfWork.DormitoryRoomRepository.SetStudentsAsync(studentId, dormitoryRoomIds);
         }
 
         public async Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsWithFreeSpaces(int dormitoryId)

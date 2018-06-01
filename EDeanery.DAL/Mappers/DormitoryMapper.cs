@@ -23,6 +23,8 @@ namespace EDeanery.DAL.Mappers
             {
                 DormitoryId = entity.DormitoryId,
                 MaxCountOfMembers = entity.MaxCountOfMembers,
+                Address = entity.Address,
+                NumberOfFlors = entity.NumberOfFlors,
                 Name = entity.Name,
                 DormitoryFaculties = entity.MainFaculties.Select(f => new DormitoryFacultyEntity
                 {
@@ -39,6 +41,8 @@ namespace EDeanery.DAL.Mappers
                 DormitoryId = entity.DormitoryId,
                 Name = entity.Name,
                 MaxCountOfMembers = entity.MaxCountOfMembers,
+                Address = entity.Address,
+                NumberOfFlors = entity.NumberOfFlors,
                 MainFaculties = entity.DormitoryFaculties.Select(f => new Faculty()
                 {
                     FacultyId = f.FacultyId,
