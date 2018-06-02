@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using EDeanery.BLL.Domain.Entities;
 using EDeanery.DAL.DAOs;
 using EDeanery.Mappers.Abstract;
@@ -43,12 +44,13 @@ namespace EDeanery.DAL.Mappers
                 MaxCountOfMembers = entity.MaxCountOfMembers,
                 Address = entity.Address,
                 NumberOfFlors = entity.NumberOfFlors,
-                MainFaculties = entity.DormitoryFaculties.Select(f => new Faculty()
-                {
-                    FacultyId = f.FacultyId,
-                    Name = f.FacultyEntity.Name
-                }).ToList(),
-                Rooms = _dormitoryRoomMapper.Map(entity.DormitoryRooms).ToList()
+                MainFaculties = (entity.DormitoryFaculties ?? new List<DormitoryFacultyEntity>())
+                    .Select(f => new Faculty()
+                    {
+                        FacultyId = f.FacultyId,
+                        Name = f.FacultyEntity.Name
+                    }).ToList(),
+                Rooms = entity.DormitoryRooms == null ? new List<DormitoryRoom>() : _dormitoryRoomMapper.Map(entity.DormitoryRooms).ToList()
             };
         }
     }

@@ -1,11 +1,10 @@
-
-﻿@using EDeanery.PL.Models
-@model DormitoryGetModel
+@using EDeanery.PL.Models
+@model EDeanery.PL.Models.DormitoryGetModel
 <!DOCTYPE html>
 
 <html>
 <head>
-    <title>Group: @Model.Name</title>
+    <title>Dormitory: @Model.Name</title>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/js/deleteDormitory.js"></script>
@@ -24,8 +23,8 @@
         }
     </script>
 </head>
-<body>
-<div>
+<body onload="onBodyLoad()">
+<div id="studentDetailedView">
     <h1>Dormitory: @Model.Name</h1>
     <div class="row">
         <label class="control-label col-sm-3">Address: </label>
@@ -44,7 +43,7 @@
         <div class="col-sm-6">@Html.DisplayFor(m => m.Faculties)</div>
     </div>
     <div class="row">
-        <label class="control-label col-sm-3">Students: </label>
+        <label class="control-label col-sm-3">Rooms: </label>
         <div class="col-sm-13">
             @await Html.PartialAsync("../DormitoryRoom/ViewDormitoryRooms", (List<DormitoryRoomGetModel>) ViewBag.DormitoryRooms)
         </div>

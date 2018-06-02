@@ -1,6 +1,4 @@
-﻿@model EDeanery.PL.Models.DormitoryRoomGetModel
-
-@using EDeanery.PL.Models
+﻿@using EDeanery.PL.Models
 @model List<EDeanery.PL.Models.DormitoryRoomGetModel>
 
 <table class="table table-striped">
@@ -13,12 +11,12 @@
     @foreach (DormitoryRoomGetModel dormitoryRoom in ViewBag.DormitoryRooms)
     {
         <tr>
-            <td>@Html.ActionLink(dormitoryRoom.DormityRoomName, "GetDormitoryRoomById", new { dormitoryRoomId = dormitoryRoom.DormitoryId })</td>
+            <td>@Html.ActionLink(dormitoryRoom.DormityRoomName, "GetDormitoryRoomById", new {dormitoryRoomId = dormitoryRoom.DormitoryId})</td>
             <td>@dormitoryRoom.MaxCountInRoom</td>
             <td>
                 @foreach (var dormitoryRoomStudent in dormitoryRoom.DormitoryRoomStudents)
                 {
-                    @Html.ActionLink(dormitoryRoomStudent.FullName, "GetStudentById", "Student", new { studentId = dormitoryRoomStudent.StudentId })
+                    @Html.ActionLink(dormitoryRoomStudent.FullName, "GetStudentById", "Student", new {studentId = dormitoryRoomStudent.StudentId})
                 }
             </td>
         </tr>

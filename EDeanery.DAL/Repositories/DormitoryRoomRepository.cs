@@ -27,6 +27,12 @@ namespace EDeanery.DAL.Repositories
             _daoDormitoryRoomMapper = daoDormitoryRoomMapper;
         }
 
+        private IQueryable<DormitoryRoomEntity> GetDormitoryRoomsWithStudents()
+        {
+            return _context.DormitoryRooms.Include(dr => dr.DormitoryEntity)
+                .Include(dr => dr.DormitoryRoomStudents);
+        }
+
         public async Task AddAsync(DormitoryRoom entity)
         {
             var dao = _dormitoryRoomMapper.Map(entity);
@@ -37,7 +43,7 @@ namespace EDeanery.DAL.Repositories
 
         public async Task DeleteAsync(int id)
         {
-            var dao = await _context.DormitoryRooms.SingleOrDefaultAsync(dr => dr.DormitoryRoomId == id);
+            var dao = await GetDormitoryRoomsWithStudents().SingleOrDefaultAsync(dr => dr.DormitoryRoomId == id);
             _context.DormitoryRooms.Remove(dao);
         }
 
@@ -49,37 +55,45 @@ namespace EDeanery.DAL.Repositories
 
         public async Task<ICollection<DormitoryRoom>> GetAll()
         {
-            var dormitoryRoomDaos = await _context.DormitoryRooms.ToListAsync();
+            var dormitoryRoomDaos = await GetDormitoryRoomsWithStudents().ToListAsync();
             return dormitoryRoomDaos.Select(dr => _daoDormitoryRoomMapper.Map(dr)).ToList();
         }
 
         public async Task<DormitoryRoom> GetById(int id)
         {
             return _daoDormitoryRoomMapper.Map(
-                await _context.DormitoryRooms.SingleOrDefaultAsync(dr => dr.DormitoryRoomId == id));
+                await GetDormitoryRoomsWithStudents().SingleOrDefaultAsync(dr => dr.DormitoryRoomId == id));
         }
 
 
-        public async Task SetStudentsAsync(int dormitoryRoomId, IReadOnlyCollection<int> studentIds)
+        public async Task SetDormitoryRoomsAsync(int dormitoryId, IReadOnlyCollection<int> dormitoryRoomIds)
         {
-            var oldDormitoryRoomStudents =
-                _context.DormitoryRoomStudents.Where(drs => drs.DormitoryRoomId == dormitoryRoomId);
+            var oldDormitoryRooms = _context.DormitoryRooms.Where(dr => dr.DormitoryId == dormitoryId);
 
-            var newDormitoryRoomStudents =
-                studentIds.Select(studentId => new DormitoryRoomStudentEntity()
-                {
-                    StudentId = studentId,
-                    DormitoryRoomId = dormitoryRoomId
-                });
+            foreach (var dormitoryRoom in oldDormitoryRooms)
+            {
+                dormitoryRoom.DormitoryId = null;
+            }
+            
+            var dormitoryRooms = _context.DormitoryRooms.Where(dr => dormitoryRoomIds.Contains(dr.DormitoryRoomId));
 
-            _context.DormitoryRoomStudents.RemoveRange(oldDormitoryRoomStudents);
-            await _context.DormitoryRoomStudents.AddRangeAsync(newDormitoryRoomStudents);
+            foreach (var dormitoryRoom in dormitoryRooms)
+            {
+                dormitoryRoom.DormitoryId = dormitoryId;
+            }
         }
 
+        public async Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsByDormitoryId(int dormitoryId)
+        {
+            var dormitoryRoomsDaos = await GetDormitoryRoomsWithStudents().Where(dr => dr.DormitoryId == dormitoryId).ToListAsync();
+            return _daoDormitoryRoomMapper.Map(dormitoryRoomsDaos).ToList();
+        }
+        
         public async Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsWithFreeSpaces(int dormitoryId)
         {
-            var freeDormitoryRooms = await _context.DormitoryRooms.Include(dr => dr.DormitoryRoomStudents)
-                .Where(dr => dr.DormitoryRoomStudents.Count() < dr.MaxCountInRoom).ToListAsync();
+            var freeDormitoryRooms = await GetDormitoryRoomsWithStudents()
+                .Where(dr => dr.DormitoryRoomStudents.Count() < dr.MaxCountInRoom)
+                .ToListAsync();
 
             return _daoDormitoryRoomMapper.Map(freeDormitoryRooms).ToList();
         }

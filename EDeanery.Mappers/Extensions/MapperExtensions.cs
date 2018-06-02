@@ -8,7 +8,7 @@ namespace EDeanery.Mappers.Extensions
     {
         public static IEnumerable<TOut> Map<TIn, TOut>(this IMapper<TIn, TOut> mapper, IEnumerable<TIn> entities)
         {
-            return entities.Select(e => mapper.Map(e));
+            return entities.Select(mapper.Map);
         }
     }
 }

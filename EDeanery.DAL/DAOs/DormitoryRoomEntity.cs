@@ -7,7 +7,7 @@ namespace EDeanery.DAL.DAOs
         public int DormitoryRoomId { get; set; }
         public string DormityRoomName { get; set; }
         public int MaxCountInRoom { get; set; }
-        public int DormitoryId { get; set; }
+        public int? DormitoryId { get; set; }
         public DormitoryEntity DormitoryEntity { get; set; }
         public ICollection<DormitoryRoomStudentEntity> DormitoryRoomStudents { get; set; }
     }

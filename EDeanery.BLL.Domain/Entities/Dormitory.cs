@@ -11,5 +11,11 @@ namespace EDeanery.BLL.Domain.Entities
         public int NumberOfFlors { get; set; }
         public ICollection<Faculty> MainFaculties { get; set; }
         public ICollection<DormitoryRoom> Rooms { get; set; }
+
+        public Dormitory()
+        {
+            MainFaculties = new List<Faculty>();
+            Rooms = new List<DormitoryRoom>();
+        }
     }
 }

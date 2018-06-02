@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EDeanery.BLL.Domain.Entities;
 using EDeanery.DAL.Context.Abstract;
+using EDeanery.DAL.DAOs;
 using EDeanery.DAL.Repositories.Abstract;
 using EDeanery.Mappers.Abstract;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,14 @@ namespace EDeanery.DAL.Repositories
             _daoDormitoryMapper = daoDormitoryMapper;
         }
 
+        private IQueryable<DormitoryEntity> GetDormitoriesWithIncludes()
+        {
+            return _context.Dormitories
+                .Include(d => d.DormitoryFaculties)
+                    .ThenInclude(df => df.FacultyEntity)
+                .Include(d => d.DormitoryRooms);
+        } 
+        
         public async Task AddAsync(Dormitory entity)
         {
             var dao = _dormitoryMapper.Map(entity);
@@ -47,13 +56,14 @@ namespace EDeanery.DAL.Repositories
 
         public async Task<ICollection<Dormitory>> GetAll()
         {
-            var dormitoryDaos = await _context.Dormitories.ToListAsync();
+            var dormitoryDaos = await GetDormitoriesWithIncludes().ToListAsync();
             return dormitoryDaos.Select(d => _daoDormitoryMapper.Map(d)).ToList();
         }
 
         public async Task<Dormitory> GetById(int id)
         {
-            return _daoDormitoryMapper.Map(await _context.Dormitories.SingleOrDefaultAsync(d => d.DormitoryId == id));
+            var dormitoryEntity = await GetDormitoriesWithIncludes().SingleOrDefaultAsync(d => d.DormitoryId == id);
+            return _daoDormitoryMapper.Map(dormitoryEntity);
         }
     }
 }

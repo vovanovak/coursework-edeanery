@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using EDeanery.BLL.Domain.Entities;
 using EDeanery.DAL.DAOs;
 using EDeanery.Mappers.Abstract;
@@ -33,7 +34,8 @@ namespace EDeanery.DAL.Mappers
                 MaxCountInRoom = entity.MaxCountInRoom,
                 DormitoryId = entity.DormitoryId,
                 DormitoryName = entity.DormitoryEntity.Name,
-                Roomers = entity.DormitoryRoomStudents.Select(s => _studentMapper.Map(s.StudentEntity)).ToList()
+                Roomers = (entity.DormitoryRoomStudents ?? new List<DormitoryRoomStudentEntity>())
+                    .Select(s => _studentMapper.Map(s.StudentEntity)).ToList(),
             };
         }
     }

@@ -8,7 +8,7 @@ namespace EDeanery.PL.Models
         public int DormitoryRoomId { get; set; }
         public string DormityRoomName { get; set; }
         public int MaxCountInRoom { get; set; }
-        public int DormitoryId { get; set; }
+        public int? DormitoryId { get; set; }
         public IReadOnlyCollection<StudentGetModel> DormitoryRoomStudents { get; set; }
 
         public DormitoryRoomGetModel()

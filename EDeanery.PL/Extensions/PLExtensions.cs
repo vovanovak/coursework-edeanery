@@ -25,6 +25,7 @@ namespace EDeanery.PL.Extensions
         private static IServiceCollection AddMappers(this IServiceCollection services)
         {
             services.AddSingleton<IMapper<Faculty, SelectListItem>, FacultyMapper>();
+            services.AddSingleton<IMapper<Faculty, FacultySelectModel>, FacultyMapper>();
             services.AddSingleton<IMapper<Speciality, SelectListItem>, SpecialityMapper>();
 
             services.AddSingleton<IMapper<Student, StudentGetModel>, StudentMapper>();
@@ -37,7 +38,14 @@ namespace EDeanery.PL.Extensions
             services.AddSingleton<IMapper<Group, GroupGetDetailedModel>, GroupMapper>();
             services.AddSingleton<IMapper<GroupPostModel, Group>, GroupMapper>();
             services.AddSingleton<IMapper<Group, GroupPostModel>, GroupMapper>();
+            
+            services.AddSingleton<IMapper<Dormitory, DormitoryGetModel>, DormitoryMapper>();
+            services.AddSingleton<IMapper<DormitoryPostModel, Dormitory>, DormitoryMapper>();
+            services.AddSingleton<IMapper<Dormitory, DormitoryPostModel>, DormitoryMapper>();
 
+            services.AddSingleton<IMapper<DormitoryRoom, DormitoryRoomGetModel>, DormitoryRoomMapper>();
+            services.AddSingleton<IMapper<DormitoryRoom, DormitoryRoomSelectModel>, DormitoryRoomMapper>();
+            
             return services;
         }
     }

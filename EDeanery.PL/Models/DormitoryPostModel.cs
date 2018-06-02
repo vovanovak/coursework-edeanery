@@ -7,9 +7,9 @@ namespace EDeanery.PL.Models
         public int DormitoryId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
-        public int NumberOfFlors { get; set; }
+        public int NumberOfFloors { get; set; }
         public int MaxCountOfMembers { get; set; }
-        public string Faculties { get; set; }
+        public ICollection<int> Faculties { get; set; }
         public ICollection<int> DormitoryRooms { get; set; }
     }
 }

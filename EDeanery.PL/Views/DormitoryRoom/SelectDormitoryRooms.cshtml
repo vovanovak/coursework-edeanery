@@ -1,2 +1,36 @@
-﻿@model TModel
+﻿@using EDeanery.PL.Models
+@model List<EDeanery.PL.Models.DormitoryRoomSelectModel>
+
+<table id="selectDormitoryRoomsTable" class="table table-striped">
+    <thead>
+    <th></th>
+    <th>Room name</th>
+    <th>Max count in room</th>
+    <th>Students</th>
+    </thead>
+    <tbody>
+    @{
+        var dormitoryRooms = (List<DormitoryRoomSelectModel>) ViewData["DormitoryRooms"];
+
+        for (var i = 0; i < dormitoryRooms.Count; i++)
+        {
+            <tr>
+                <td>@Html.CheckBox($"groupPostModel.DormitoryRooms[{i}]", 
+                        dormitoryRooms[i].Checked, 
+                        new {@class = "dormitoryRoomCheckBox", value = dormitoryRooms[i].DormitoryId})</td>
+                <td>@Html.ActionLink(dormitoryRooms[i].DormityRoomName, 
+                        "GetDormitoryRoomById", 
+                        new { dormitoryRoomId = dormitoryRooms[i].DormitoryRoomId })</td>
+                <td>@dormitoryRooms[i].MaxCountInRoom</td>
+                <td>
+                    @foreach (var student in dormitoryRooms[i].DormitoryRoomStudents)
+                    {
+                        @Html.ActionLink(student.FullName, "GetStudentById", "Student", new {studentId = student.StudentId})
+                    }
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
 

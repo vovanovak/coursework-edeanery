@@ -57,13 +57,7 @@ namespace EDeanery.DAL.Mappers
                     _specialityMapper.Map(entity.SpecialityEntity),
                     entity.Course, 
                     entity.OnBudget),
-                CommunicationInfo = new CommunicationInfo(entity.Email, entity.PhoneNumber),
-                DormitoryRoom = entity.DormitoryRoomStudentEntity == null ? null : new DormitoryRoom
-                {
-                    DormitoryRoomId = entity.DormitoryRoomStudentEntity.DormitoryRoomEntity.DormitoryRoomId,
-                    DormityRoomName = entity.DormitoryRoomStudentEntity.DormitoryRoomEntity.DormityRoomName,
-                    MaxCountInRoom = entity.DormitoryRoomStudentEntity.DormitoryRoomEntity.MaxCountInRoom
-                }
+                CommunicationInfo = new CommunicationInfo(entity.Email, entity.PhoneNumber)
             };
         }
     }

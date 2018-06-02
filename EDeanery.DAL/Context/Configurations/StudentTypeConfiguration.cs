@@ -11,7 +11,6 @@ namespace EDeanery.DAL.Context.Configurations
             builder.ToTable("Students");
             builder.HasKey(s => s.StudentId);
             builder.HasOne(s => s.SpecialityEntity).WithMany(s => s.Students).HasForeignKey(s => s.SpecialityId);
-            builder.HasOne(s => s.DormitoryRoomStudentEntity).WithOne(g => g.StudentEntity);
         }
     }
 }

@@ -74,9 +74,7 @@ namespace EDeanery.DAL.Repositories
         {
             return _context.Students
                 .Include(s => s.SpecialityEntity)
-                    .ThenInclude(s => s.FacultyEntity)
-                .Include(s => s.DormitoryRoomStudentEntity)
-                    .ThenInclude(d => d.DormitoryRoomEntity);
+                    .ThenInclude(s => s.FacultyEntity);
         }
     }
 }
