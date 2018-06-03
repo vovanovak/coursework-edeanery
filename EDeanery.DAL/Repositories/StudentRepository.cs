@@ -84,7 +84,7 @@ namespace EDeanery.DAL.Repositories
         {
             return _context.Students
                 .Include(s => s.SpecialityEntity)
-                    .ThenInclude(s => s.FacultyEntity);
+                .ThenInclude(s => s.FacultyEntity);
         }
     }
 }

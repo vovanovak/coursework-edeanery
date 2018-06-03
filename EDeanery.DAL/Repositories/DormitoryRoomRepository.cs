@@ -116,6 +116,14 @@ namespace EDeanery.DAL.Repositories
             return dormitoryRooms.Select(_daoDormitoryRoomMapper.Map).ToList();
         }
 
+        public async Task<DormitoryRoom> GetDormitoryRoomByStudentId(int studentId)
+        {
+            var dormitoryRoomDao = await GetDormitoryRoomsWithStudents()
+                .FirstOrDefaultAsync(dr => dr.DormitoryRoomStudents.Any(drs => drs.StudentId == studentId));
+
+            return dormitoryRoomDao == null ? null : _daoDormitoryRoomMapper.Map(dormitoryRoomDao);
+        }
+
         public async Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsWithFreeSpaces(int dormitoryId)
         {
             var freeDormitoryRooms = await GetDormitoryRoomsWithStudents()

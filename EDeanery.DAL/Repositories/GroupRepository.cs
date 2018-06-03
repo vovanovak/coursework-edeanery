@@ -31,12 +31,11 @@ namespace EDeanery.DAL.Repositories
         {
             return _context.Groups
                 .Include(g => g.GroupStudents)
-                    .ThenInclude(gs => gs.StudentEntity)
-                        .ThenInclude(s => s.SpecialityEntity)
-                            .ThenInclude(s => s.FacultyEntity)
+                .ThenInclude(gs => gs.StudentEntity)
+                .ThenInclude(s => s.SpecialityEntity)
+                .ThenInclude(s => s.FacultyEntity)
                 .Include(g => g.SpecialityEntity)
-                    .ThenInclude(g => g.FacultyEntity);
-
+                .ThenInclude(g => g.FacultyEntity);
         }
 
         public async Task AddAsync(Group entity)
@@ -81,6 +80,14 @@ namespace EDeanery.DAL.Repositories
 
             _context.GroupStudents.RemoveRange(existingGroupStudents);
             await _context.GroupStudents.AddRangeAsync(newGroupStudents);
+        }
+
+        public async Task<Group> GetGroupByStudentId(int studentId)
+        {
+            var group = await GetGroupsWithIncludes()
+                .FirstOrDefaultAsync(g => g.GroupStudents.Any(gs => gs.StudentId == studentId));
+
+            return group == null ? null : _daoGroupMapper.Map(group);
         }
     }
 }

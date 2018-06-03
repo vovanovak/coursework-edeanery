@@ -15,6 +15,16 @@ namespace EDeanery.BLL.Services
 
         protected override IRepository<Student, int> Repository => UnitOfWork.StudentRepository;
 
+        public override async Task<Student> GetById(int id)
+        {
+            var baseStudent = await base.GetById(id);
+
+            baseStudent.Group = await UnitOfWork.GroupRepository.GetGroupByStudentId(id);
+            baseStudent.DormitoryRoom = await UnitOfWork.DormitoryRoomRepository.GetDormitoryRoomByStudentId(id);
+            
+            return baseStudent;
+        }
+
         public async Task<IReadOnlyCollection<Student>> GetStudentsByFullName(string search)
         {
             return await UnitOfWork.StudentRepository.GetStudentsByFullName(search);

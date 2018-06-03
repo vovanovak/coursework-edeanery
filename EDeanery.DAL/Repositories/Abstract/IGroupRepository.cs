@@ -7,5 +7,6 @@ namespace EDeanery.DAL.Repositories.Abstract
     public interface IGroupRepository : IRepository<Group, int>
     {
         Task SetStudentsForGroup(int groupId, IReadOnlyCollection<int> studentIds);
+        Task<Group> GetGroupByStudentId(int studentId);
     }
 }
