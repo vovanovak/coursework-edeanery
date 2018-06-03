@@ -1,6 +1,6 @@
-function deleteGroup(groupId) {
+function deleteEntity(entityUrl) {
     $.ajax({
-        url: "/Group/DeleteGroup?groupId=" + groupId,
+        url: entityUrl,
         type: "DELETE",
         success: function (data) {
             console.log("Ok");

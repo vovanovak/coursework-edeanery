@@ -9,7 +9,7 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/js/selectStudent.js"></script>
+    <script src="~/js/selectEntity.js"></script>
     
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
@@ -22,7 +22,7 @@
                 var dormitoryRoomNameVal = $("#DormitoryRoomName").val();
                 var maxCountInRoomVal = $("#MaxCountInRoom").val();
                 var dormitoryIdVal = $("#dormitoriesSelect option:selected").val();
-                var studentIdsVal = getCheckedStudentIds();
+                var studentIdsVal = getCheckedIds("#selectStudentsTable", ".studentCheckBox");
                 
                 $.ajax({
                     method: "POST",

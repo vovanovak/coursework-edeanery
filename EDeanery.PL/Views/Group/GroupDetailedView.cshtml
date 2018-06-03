@@ -8,7 +8,7 @@
     <title>Group: @Model.GroupName</title>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/js/deleteGroup.js"></script>
+    <script src="~/js/deleteEntity.js"></script>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
@@ -18,7 +18,7 @@
         function onBodyLoad() {
             $("#deleteGroup").click(function() {
                 var groupId = @Model.GroupId;
-                deleteGroup(groupId);
+                deleteEntity("/Group/DeleteGroup?groupId=" + groupId);
                 window.location.href = "@Url.Action("Index")";
             });
         }

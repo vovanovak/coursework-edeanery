@@ -7,7 +7,7 @@
     <title>Student: @Model.FullName </title>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/js/deleteStudent.js"></script>
+    <script src="~/js/deleteEntity.js"></script>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
@@ -17,7 +17,7 @@
         function onBodyLoad() {
             $("#deleteStudent").click(function() {
                 var studentId = @Model.StudentId;
-                deleteStudent(studentId);
+                deleteEntity("/Student/DeleteStudent?studentId=" + studentId);
                 window.location.href = "/Student";
             });
         }

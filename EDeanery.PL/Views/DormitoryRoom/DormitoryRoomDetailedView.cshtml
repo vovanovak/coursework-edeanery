@@ -8,7 +8,7 @@
     <title>Dormitory: @Model.DormitoryRoomName</title>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/js/deleteDormitoryRoom.js"></script>
+    <script src="~/js/deleteEntity.js"></script>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
@@ -17,8 +17,8 @@
     <script>
         function onBodyLoad() {
             $("#deleteDormitoryRoom").click(function() {
-                var groupId = @Model.DormitoryRoomId;
-                deleteDormitory(groupId);
+                var dormitoryRoomId = @Model.DormitoryRoomId;
+                deleteEntity("/Dormitory/DeleteDormitoryRoom?dormitoryId=" + dormitoryRoomId);
                 window.location.href = "@Url.Action("Index")";
             });
         }

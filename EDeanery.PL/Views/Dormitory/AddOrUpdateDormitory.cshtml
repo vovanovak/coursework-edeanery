@@ -1,5 +1,5 @@
 ﻿@using EDeanery.PL.Models
-@model EDeanery.PL.Models.DormitoryPostModel
+@model DormitoryPostModel
 
 <!DOCTYPE html>
 
@@ -9,8 +9,7 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/js/selectFaculty.js"></script>
-    <script src="~/js/selectDormitoryRoom.js"></script>
+    <script src="~/js/selectEntity.js"></script>
     
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
@@ -24,8 +23,8 @@
                 var addressVal = $("#Address").val();
                 var numberOfFloorsVal = $("#NumberOfFloors").val();
                 var maxCountOfMembersVal = $("#MaxCountOfMembers").val();
-                var facultiesVal = getCheckedFacultyIds();
-                var dormitoryRoomsVal = getCheckedDormitoryRoomIds();
+                var facultiesVal = getCheckedIds("#selectFacultiesTable", ".facultyCheckBox");
+                var dormitoryRoomsVal = getCheckedIds("#selectDormitoryRoomsTable", ".dormitoryRoomCheckBox");
                 
                 $.ajax({
                     method: "POST",

@@ -10,7 +10,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/js/setSpecialitiesByFaculty.js"></script>
-    <script src="~/js/selectStudent.js"></script>
+    <script src="~/js/selectEntity.js"></script>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
@@ -29,7 +29,7 @@
                 var groupNameVal = $("#GroupName").val();
                 var facultyIdVal = $("#facultiesSelect :selected").val();
                 var specialityIdVal = $("#specialitiesSelect :selected").val();
-                var studentsVal = getCheckedStudentIds();
+                var studentsVal = getCheckedIds("#selectStudentsTable", ".studentCheckBox");
 
                 console.log(groupNameVal);
                 console.log(facultyIdVal);
