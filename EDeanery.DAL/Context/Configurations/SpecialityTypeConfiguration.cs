@@ -10,6 +10,7 @@ namespace EDeanery.DAL.Context.Configurations
         {
             builder.ToTable("Specialities");
             builder.HasKey(s => s.SpecialityId);
+            builder.HasIndex(s => new { s.FacultyId, s.SpecialityName }).IsUnique();
             builder.HasOne(s => s.FacultyEntity);
         }
     }

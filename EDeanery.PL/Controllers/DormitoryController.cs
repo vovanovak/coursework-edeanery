@@ -19,6 +19,7 @@ namespace EDeanery.PL.Controllers
         private readonly IMapper<DormitoryRoom, DormitoryRoomGetModel> _dormitoryRoomGetModelMapper;
         private readonly IMapper<DormitoryRoom, DormitoryRoomSelectModel> _dormitoryRoomSelectModelMapper;
         private readonly IMapper<Faculty, FacultySelectModel> _facultySelectModelMapper;
+        private readonly IMapper<Student, StudentGetModel> _studentGetModelMapper;
         private readonly IFacultyService _facultyService;
         private readonly IDormitoryService _dormitoryService;
         private readonly IDormitoryRoomService _dormitoryRoomService;
@@ -30,6 +31,7 @@ namespace EDeanery.PL.Controllers
             IMapper<DormitoryRoom, DormitoryRoomGetModel> dormitoryRoomGetModelMapper,
             IMapper<DormitoryRoom, DormitoryRoomSelectModel> dormitoryRoomSelectModelMapper,
             IMapper<Faculty, FacultySelectModel> facultySelectModelMapper,
+            IMapper<Student, StudentGetModel> studentGetModelMapper, 
             IDormitoryService dormitoryService,
             IDormitoryRoomService dormitoryRoomService,
             IFacultyService facultyService)
@@ -40,6 +42,7 @@ namespace EDeanery.PL.Controllers
             _dormitoryRoomGetModelMapper = dormitoryRoomGetModelMapper;
             _dormitoryRoomSelectModelMapper = dormitoryRoomSelectModelMapper;
             _facultySelectModelMapper = facultySelectModelMapper;
+            _studentGetModelMapper = studentGetModelMapper;
             _dormitoryService = dormitoryService;
             _dormitoryRoomService = dormitoryRoomService;
             _facultyService = facultyService;
@@ -61,8 +64,10 @@ namespace EDeanery.PL.Controllers
         {
             var dormitoryRooms = await _dormitoryRoomService.GetRoomsByDormitoryId(dormitoryId);
             var dormitory = await _dormitoryService.GetById(dormitoryId);
-
+            var students = dormitoryRooms.SelectMany(dr => dr.Roomers).ToList();
+            
             ViewBag.DormitoryRooms = _dormitoryRoomGetModelMapper.Map(dormitoryRooms).ToList();
+            ViewBag.Students = _studentGetModelMapper.Map(students).ToList();
 
             return View("DormitoryDetailedView", _dormitoryGetModelMapper.Map(dormitory));
         }

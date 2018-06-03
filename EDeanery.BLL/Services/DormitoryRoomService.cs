@@ -17,7 +17,7 @@ namespace EDeanery.BLL.Services
 
         public async Task SetDormitoryRoomsAsync(int dormitoryId, IReadOnlyCollection<int> dormitoryRoomIds)
         {
-            await UnitOfWork.DormitoryRoomRepository.SetDormitoryRoomsAsync(dormitoryId, dormitoryRoomIds);
+            UnitOfWork.DormitoryRoomRepository.SetDormitoryRooms(dormitoryId, dormitoryRoomIds);
             await UnitOfWork.SaveChangesAsync();
         }
 

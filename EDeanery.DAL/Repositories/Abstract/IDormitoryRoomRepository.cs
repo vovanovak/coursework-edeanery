@@ -6,7 +6,7 @@ namespace EDeanery.DAL.Repositories.Abstract
 {
     public interface IDormitoryRoomRepository : IRepository<DormitoryRoom, int>
     {
-        Task SetDormitoryRoomsAsync(int dormitoryRoomId, IReadOnlyCollection<int> studentIds);
+        void SetDormitoryRooms(int dormitoryRoomId, IReadOnlyCollection<int> studentIds);
         Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsWithFreeSpaces(int dormitoryId);
         Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsByDormitoryId(int dormitoryId);
         Task SetDormitoryRoomStudentsAsync(int dormitoryRoomId, IReadOnlyCollection<int> studentIds);

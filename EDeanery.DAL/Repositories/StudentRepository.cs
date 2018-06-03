@@ -68,7 +68,15 @@ namespace EDeanery.DAL.Repositories
 
         public async Task<IReadOnlyCollection<Student>> GetStudentsByGroup(string search)
         {
-            return null;
+            var students = await _context.Groups.Include(g => g.GroupStudents)
+                .ThenInclude(g => g.StudentEntity)
+                .ThenInclude(s => s.SpecialityEntity)
+                .ThenInclude(s => s.FacultyEntity)
+                .Where(g => EF.Functions.Like(g.GroupName, $"%{search}%"))
+                .SelectMany(g => g.GroupStudents).Select(g => g.StudentEntity)
+                .ToListAsync();
+
+            return _daoStudentMapper.Map(students).ToList();
         }
 
         public async Task<IReadOnlyCollection<Student>> GetStudentsWithoutRooms()

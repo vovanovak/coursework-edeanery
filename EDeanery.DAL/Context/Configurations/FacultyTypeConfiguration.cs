@@ -10,6 +10,7 @@ namespace EDeanery.DAL.Context.Configurations
         {
             builder.ToTable("Faculties");
             builder.HasKey(f => f.FacultyId);
+            builder.HasIndex(f => f.Name).IsUnique();
             builder.HasMany(f => f.DormitoryFaculties).WithOne(df => df.FacultyEntity);
         }
     }

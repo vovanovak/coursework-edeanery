@@ -70,7 +70,7 @@ namespace EDeanery.DAL.Repositories
         }
 
 
-        public async Task SetDormitoryRoomsAsync(int dormitoryId, IReadOnlyCollection<int> dormitoryRoomIds)
+        public void SetDormitoryRooms(int dormitoryId, IReadOnlyCollection<int> dormitoryRoomIds)
         {
             var oldDormitoryRooms = _context.DormitoryRooms.Where(dr => dr.DormitoryId == dormitoryId);
 

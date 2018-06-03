@@ -54,6 +54,12 @@
         </div>
     </div>
     <div class="row">
+        <label class="control-label col-sm-3">Students: </label>
+        <div class="col-sm-13">
+            @await Html.PartialAsync("../Student/ViewStudents", (List<StudentGetModel>) ViewBag.Students)
+        </div>
+    </div>
+    <div class="row">
         <div class="btn-group btn-group-justified">
             @Html.ActionLink("Update", "AddOrUpdateDormitory",
                 new {add = "false", dormitoryId = Model.DormitoryId},
