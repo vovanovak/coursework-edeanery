@@ -6,7 +6,6 @@ using EDeanery.Mappers.Abstract;
 using EDeanery.Mappers.Extensions;
 using EDeanery.PL.Constants;
 using EDeanery.PL.Models;
-using EDeanery.PL.Providers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EDeanery.PL.Controllers
@@ -31,7 +30,7 @@ namespace EDeanery.PL.Controllers
             IMapper<DormitoryRoom, DormitoryRoomGetModel> dormitoryRoomGetModelMapper,
             IMapper<DormitoryRoom, DormitoryRoomSelectModel> dormitoryRoomSelectModelMapper,
             IMapper<Faculty, FacultySelectModel> facultySelectModelMapper,
-            IMapper<Student, StudentGetModel> studentGetModelMapper, 
+            IMapper<Student, StudentGetModel> studentGetModelMapper,
             IDormitoryService dormitoryService,
             IDormitoryRoomService dormitoryRoomService,
             IFacultyService facultyService)
@@ -65,7 +64,7 @@ namespace EDeanery.PL.Controllers
             var dormitoryRooms = await _dormitoryRoomService.GetRoomsByDormitoryId(dormitoryId);
             var dormitory = await _dormitoryService.GetById(dormitoryId);
             var students = dormitoryRooms.SelectMany(dr => dr.Roomers).ToList();
-            
+
             ViewBag.DormitoryRooms = _dormitoryRoomGetModelMapper.Map(dormitoryRooms).ToList();
             ViewBag.Students = _studentGetModelMapper.Map(students).ToList();
 
@@ -80,6 +79,7 @@ namespace EDeanery.PL.Controllers
 
             var selectedDormitoryRooms = _dormitoryRoomSelectModelMapper.Map(dormitoryRooms).ToList();
             var selectedFaculties = _facultySelectModelMapper.Map(faculties).ToList();
+
             DormitoryPostModel model;
 
             if (add)
@@ -114,6 +114,13 @@ namespace EDeanery.PL.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public JsonResult CheckDormitoryName([FromQuery] string name)
+        {
+            var isValid = _dormitoryService.IsDormitoryNameUnique(name);
+            return Json(new {IsValid = isValid, Message = ValidatorConstants.DormitoryNameIsNotUnique});
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddOrUpdateDormitory(
             [FromBody] DormitoryPostModel dormitoryPostModel,
@@ -127,7 +134,7 @@ namespace EDeanery.PL.Controllers
                 await _dormitoryService.UpdateAsync(dormitory);
 
             await _dormitoryRoomService.SetDormitoryRoomsAsync(
-                dormitory.DormitoryId, 
+                dormitory.DormitoryId,
                 dormitoryPostModel.DormitoryRooms.ToList());
 
             return RedirectToAction("Index");

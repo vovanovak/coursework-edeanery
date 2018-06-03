@@ -12,9 +12,11 @@ namespace EDeanery.PL.Extensions
     {
         public static IServiceCollection AddPL(this IServiceCollection services)
         {
-            return services.AddProviders().AddMappers();
+            return services
+                .AddProviders()
+                .AddMappers();
         }
-
+        
         private static IServiceCollection AddProviders(this IServiceCollection services)
         {
             services.AddScoped<IViewBagDataProvider, ViewBagDataProvider>();

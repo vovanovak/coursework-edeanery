@@ -12,5 +12,9 @@ namespace EDeanery.BLL.Services
         }
 
         protected override IRepository<Dormitory, int> Repository => UnitOfWork.DormitoryRepository;
+        public bool IsDormitoryNameUnique(string dormitoryName)
+        {
+            return UnitOfWork.DormitoryRepository.IsDormitoryNameUnique(dormitoryName);
+        }
     }
 }

@@ -69,5 +69,10 @@ namespace EDeanery.DAL.Repositories
             var dormitoryEntity = await GetDormitoriesWithIncludes().SingleOrDefaultAsync(d => d.DormitoryId == id);
             return _daoDormitoryMapper.Map(dormitoryEntity);
         }
+
+        public bool IsDormitoryNameUnique(string dormitoryName)
+        {
+            return _context.Dormitories.All(d => d.Name != dormitoryName);
+        }
     }
 }

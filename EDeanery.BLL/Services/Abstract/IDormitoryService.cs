@@ -4,5 +4,6 @@ namespace EDeanery.BLL.Services.Abstract
 {
     public interface IDormitoryService : IService<Dormitory, int>
     {
+        bool IsDormitoryNameUnique(string dormitoryName);
     }
 }

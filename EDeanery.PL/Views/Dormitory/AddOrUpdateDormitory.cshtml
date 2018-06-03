@@ -8,8 +8,12 @@
     <title>@ViewBag.Header</title>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>`
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/js/selectEntity.js"></script>
+    <script src="~/js/validate.js"></script>
     
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
@@ -25,6 +29,9 @@
                 var maxCountOfMembersVal = $("#MaxCountOfMembers").val();
                 var facultiesVal = getCheckedIds("#selectFacultiesTable", ".facultyCheckBox");
                 var dormitoryRoomsVal = getCheckedIds("#selectDormitoryRoomsTable", ".dormitoryRoomCheckBox");
+
+                if (!validateDormitory())
+                    return;
                 
                 $.ajax({
                     method: "POST",
@@ -57,15 +64,24 @@
                 @Html.HiddenFor(m => m.DormitoryId)
                 <div class="form-group">
                     <label class="control-label col-sm-2">Name: </label>
-                    <div class="col-sm-10">@Html.TextBoxFor(m => m.Name, new {@class = "form-control"})</div>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Name, new {@class = "form-control", required="required"})
+                        <div id="NameValidationMsg" class="validationMsg"></div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2">Address: </label>
-                    <div class="col-sm-10">@Html.TextBoxFor(m => m.Address, new {@class = "form-control"})</div>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Address, new {@class = "form-control", required="required"})
+                        @Html.ValidationMessageFor(m => m.Name)
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2">Max count of members: </label>
-                    <div class="col-sm-10">@Html.TextBoxFor(m => m.MaxCountOfMembers, new {type = "number", @class = "form-control"})</div>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.MaxCountOfMembers, new {type = "number", @class = "form-control", required="required"})
+                        @Html.ValidationMessageFor(m => m.MaxCountOfMembers)
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2">Faculties: </label>
