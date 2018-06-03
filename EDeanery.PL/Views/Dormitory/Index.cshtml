@@ -15,15 +15,16 @@
     <link rel="stylesheet" href="~/css/site.css"/>
 </head>
 <body>
+@await Html.PartialAsync("NavBar")
 <div id="indexContainer">
     <h1>Dormitories</h1>
     <table class="table table-striped">
         <thead>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Max count of members</th>
-            <th>Number of floors</th>
-            <th>Faculties</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Max count of members</th>
+        <th>Number of floors</th>
+        <th>Faculties</th>
         </thead>
         <tbody>
         @foreach (DormitoryGetModel dormitoryGetModel in ViewBag.Dormitories)

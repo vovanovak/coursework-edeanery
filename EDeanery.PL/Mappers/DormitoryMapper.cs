@@ -1,15 +1,18 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using EDeanery.BLL.Domain.Entities;
 using EDeanery.Mappers.Abstract;
 using EDeanery.Mappers.Extensions;
 using EDeanery.PL.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EDeanery.PL.Mappers
 {
     public class DormitoryMapper :
         IMapper<Dormitory, DormitoryGetModel>,
         IMapper<DormitoryPostModel, Dormitory>,
-        IMapper<Dormitory, DormitoryPostModel>
+        IMapper<Dormitory, DormitoryPostModel>,
+        IMapper<Dormitory, SelectListItem>
     {
         private readonly IMapper<DormitoryRoom, DormitoryRoomGetModel> _dormitoryRoomGetModelMapper;
 
@@ -26,6 +29,7 @@ namespace EDeanery.PL.Mappers
                 Name = entity.Name,
                 Address = entity.Address,
                 NumberOfFlors = entity.NumberOfFlors,
+                CountOfFreeSpaces = entity.CountOfFreeSpaces,
                 MaxCountOfMembers = entity.MaxCountOfMembers,
                 Faculties = string.Join(", ", entity.MainFaculties.Select(f => f.Name)),
                 DormitoryRoomGetModels =
@@ -60,5 +64,11 @@ namespace EDeanery.PL.Mappers
                 DormitoryRooms = entity.Rooms?.Select(r => r.DormitoryRoomId).ToList(),
             };
         }
+
+        public SelectListItem Map(Dormitory entity) => new SelectListItem
+        {
+            Value = Convert.ToString(entity.DormitoryId),
+            Text = entity.Name
+        };
     }
 }

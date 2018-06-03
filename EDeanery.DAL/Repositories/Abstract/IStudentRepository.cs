@@ -8,5 +8,6 @@ namespace EDeanery.DAL.Repositories.Abstract
     {
         Task<IReadOnlyCollection<Student>> GetStudentsByFullName(string search);
         Task<IReadOnlyCollection<Student>> GetStudentsByGroup(string search);
+        Task<IReadOnlyCollection<Student>> GetStudentsWithoutRooms();
     }
 }

@@ -24,5 +24,10 @@ namespace EDeanery.BLL.Services
         {
             return await UnitOfWork.StudentRepository.GetStudentsByGroup(search);
         }
+
+        public async Task<IReadOnlyCollection<Student>> GetStudentsWithoutRooms()
+        {
+            return await UnitOfWork.StudentRepository.GetStudentsWithoutRooms();
+        }
     }
 }

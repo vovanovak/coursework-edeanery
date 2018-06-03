@@ -30,10 +30,14 @@ namespace EDeanery.DAL.Repositories
         {
             return _context.Dormitories
                 .Include(d => d.DormitoryFaculties)
-                    .ThenInclude(df => df.FacultyEntity)
-                .Include(d => d.DormitoryRooms);
-        } 
-        
+                .ThenInclude(df => df.FacultyEntity)
+                .Include(d => d.DormitoryRooms)
+                .ThenInclude(d => d.DormitoryRoomStudents)
+                .ThenInclude(drs => drs.StudentEntity)
+                .ThenInclude(s => s.SpecialityEntity)
+                .ThenInclude(s => s.FacultyEntity);
+        }
+
         public async Task AddAsync(Dormitory entity)
         {
             var dao = _dormitoryMapper.Map(entity);

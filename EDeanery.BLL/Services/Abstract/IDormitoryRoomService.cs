@@ -6,8 +6,10 @@ namespace EDeanery.BLL.Services.Abstract
 {
     public interface IDormitoryRoomService : IService<DormitoryRoom, int>
     {
-        Task SetDormitoryRoomsAsync(int dormitoryId, IReadOnlyCollection<int> studentIds);
+        Task SetDormitoryRoomsAsync(int dormitoryId, IReadOnlyCollection<int> dormitoryRoomIds);
+        Task SetDormitoryRoomStudentsAsync(int dormitoryRoomId, IReadOnlyCollection<int> studentIds);
         Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsWithFreeSpaces(int dormitoryId);
         Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsByDormitoryId(int dormitoryId);
+        Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsWithoutDormitory();
     }
 }

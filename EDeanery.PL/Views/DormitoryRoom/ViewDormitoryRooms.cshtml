@@ -5,14 +5,17 @@
     <thead>
     <th>Room name</th>
     <th>Max count in room</th>
+    <th>Free spaces</th>
     <th>Students</th>
     </thead>
     <tbody>
     @foreach (DormitoryRoomGetModel dormitoryRoom in ViewBag.DormitoryRooms)
     {
         <tr>
-            <td>@Html.ActionLink(dormitoryRoom.DormityRoomName, "GetDormitoryRoomById", new {dormitoryRoomId = dormitoryRoom.DormitoryId})</td>
+            <td>@Html.ActionLink(dormitoryRoom.DormitoryRoomName, "GetDormitoryRoomById", 
+                    new {dormitoryRoomId = dormitoryRoom.Dormitory.DormitoryId})</td>
             <td>@dormitoryRoom.MaxCountInRoom</td>
+            <td>@dormitoryRoom.FreeSpacesCount</td>
             <td>
                 @foreach (var dormitoryRoomStudent in dormitoryRoom.DormitoryRoomStudents)
                 {

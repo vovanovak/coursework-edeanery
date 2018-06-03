@@ -1,6 +1,6 @@
-function deleteDormitory(dormitoryId) {
+function deleteDormitoryRoom(dormitoryRoomId) {
     $.ajax({
-        url: "/Dormitory/DeleteDormitory?dormitoryId=" + dormitoryId,
+        url: "/Dormitory/DeleteDormitoryRoom?dormitoryId=" + dormitoryRoomId,
         type: "DELETE",
         success: function (data) {
             console.log("Ok");

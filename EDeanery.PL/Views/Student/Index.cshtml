@@ -15,11 +15,12 @@
     <link rel="stylesheet" href="~/css/site.css"/>
 </head>
 <body>
+@await Html.PartialAsync("NavBar")
 <div id="indexContainer">
     <h1>Students</h1>
-    @await Html.PartialAsync("ViewStudents", (object)ViewBag.Students);
+    @await Html.PartialAsync("ViewStudents", (object) ViewBag.Students)
     <div>
-        <a href="@Url.Action("AddOrUpdateStudent", new { add = "true" })" class="btn btn-info">Add</a>
+        <a href="@Url.Action("AddOrUpdateStudent", new {add = "true"})" class="btn btn-info">Add</a>
     </div>
 </div>
 </body>

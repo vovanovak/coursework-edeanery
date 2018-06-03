@@ -42,9 +42,12 @@ namespace EDeanery.PL.Extensions
             services.AddSingleton<IMapper<Dormitory, DormitoryGetModel>, DormitoryMapper>();
             services.AddSingleton<IMapper<DormitoryPostModel, Dormitory>, DormitoryMapper>();
             services.AddSingleton<IMapper<Dormitory, DormitoryPostModel>, DormitoryMapper>();
+            services.AddSingleton<IMapper<Dormitory, SelectListItem>, DormitoryMapper>();
 
             services.AddSingleton<IMapper<DormitoryRoom, DormitoryRoomGetModel>, DormitoryRoomMapper>();
             services.AddSingleton<IMapper<DormitoryRoom, DormitoryRoomSelectModel>, DormitoryRoomMapper>();
+            services.AddSingleton<IMapper<DormitoryRoom, DormitoryRoomPostModel>, DormitoryRoomMapper>();
+            services.AddSingleton<IMapper<DormitoryRoomPostModel, DormitoryRoom>, DormitoryRoomMapper>();
             
             return services;
         }

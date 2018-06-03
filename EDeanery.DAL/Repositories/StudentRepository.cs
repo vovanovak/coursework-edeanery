@@ -6,6 +6,7 @@ using EDeanery.DAL.Context.Abstract;
 using EDeanery.DAL.DAOs;
 using EDeanery.DAL.Repositories.Abstract;
 using EDeanery.Mappers.Abstract;
+using EDeanery.Mappers.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace EDeanery.DAL.Repositories
@@ -62,12 +63,21 @@ namespace EDeanery.DAL.Repositories
                     EF.Functions.Like(s.FirstName, $"%{search}%") || EF.Functions.Like(s.LastName, $"%{search}%"))
                 .ToListAsync();
             
-            return studentDaos.Select(s => _daoStudentMapper.Map(s)).ToList();
+            return studentDaos.Select(_daoStudentMapper.Map).ToList();
         }
 
         public async Task<IReadOnlyCollection<Student>> GetStudentsByGroup(string search)
         {
             return null;
+        }
+
+        public async Task<IReadOnlyCollection<Student>> GetStudentsWithoutRooms()
+        {
+            var studentDaos = await GetStudentsWithIncludes()
+                .Where(s => !_context.DormitoryRoomStudents.Any(dr => dr.StudentId == s.StudentId))
+                .ToListAsync();
+
+            return _daoStudentMapper.Map(studentDaos).ToList();
         }
 
         private IQueryable<StudentEntity> GetStudentsWithIncludes()

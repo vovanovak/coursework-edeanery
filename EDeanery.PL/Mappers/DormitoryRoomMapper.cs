@@ -8,6 +8,8 @@ namespace EDeanery.PL.Mappers
 {
     public class DormitoryRoomMapper : 
         IMapper<DormitoryRoom, DormitoryRoomGetModel>,
+        IMapper<DormitoryRoomPostModel, DormitoryRoom>,
+        IMapper<DormitoryRoom, DormitoryRoomPostModel>,
         IMapper<DormitoryRoom, DormitoryRoomSelectModel>
     {
         private readonly IMapper<Student, StudentGetModel> _studentGetModelMapper;
@@ -22,9 +24,14 @@ namespace EDeanery.PL.Mappers
             return new DormitoryRoomGetModel
             {
                 DormitoryRoomId = entity.DormitoryRoomId,
-                DormityRoomName = entity.DormityRoomName,
+                DormitoryRoomName = entity.DormitoryRoomName,
                 MaxCountInRoom = entity.MaxCountInRoom,
-                DormitoryId = entity.DormitoryId,
+                FreeSpacesCount = entity.CountOfFreeSpaces,
+                Dormitory = entity.DormitoryId == null ? null : new DormitoryGetModel
+                {
+                    DormitoryId = entity.DormitoryId,
+                    Name = entity.DormitoryName
+                },
                 DormitoryRoomStudents = _studentGetModelMapper.Map(entity.Roomers).ToList(),
             };
         }
@@ -33,6 +40,33 @@ namespace EDeanery.PL.Mappers
         {
             var dormitoryGetModelMapper = (IMapper<DormitoryRoom, DormitoryRoomGetModel>) this;
             return new DormitoryRoomSelectModel(false, dormitoryGetModelMapper.Map(entity));
+        }
+
+        public DormitoryRoom Map(DormitoryRoomPostModel entity)
+        {
+            return new DormitoryRoom
+            {
+                DormitoryId = entity.DormitoryId,
+                DormitoryRoomName = entity.DormitoryRoomName,
+                MaxCountInRoom = entity.MaxCountInRoom,
+                DormitoryRoomId = entity.DormitoryRoomId,
+                Roomers = entity.Students.Select(s => new Student
+                {
+                    StudentId = s
+                }).ToList()
+            };
+        }
+
+        public DormitoryRoomPostModel Map(DormitoryRoom entity)
+        {
+            return new DormitoryRoomPostModel
+            {
+                DormitoryId = entity.DormitoryId == null ? -1 : entity.DormitoryId.Value,
+                DormitoryRoomId = entity.DormitoryRoomId,
+                DormitoryRoomName = entity.DormitoryRoomName,
+                MaxCountInRoom = entity.MaxCountInRoom,
+                Students = entity.Roomers.Select(s => s.StudentId).ToList()
+            };
         }
     }
 }

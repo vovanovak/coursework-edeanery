@@ -1,0 +1,62 @@
+﻿@using EDeanery.PL.Models
+@model List<EDeanery.PL.Models.DormitoryRoomGetModel>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Dormitory rooms</title>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+</head>
+<body>
+@await Html.PartialAsync("NavBar")
+<div>
+    <div id="indexContainer">
+        <h1>Dormitory rooms</h1>
+        <table class="table table-striped">
+            <thead>
+            <th>Name</th>
+            <th>Dormitory</th>
+            <th>Max count in room</th>
+            <th>Free spaces</th>
+            <th>Students</th>
+            </thead>
+            <tbody>
+            @foreach (DormitoryRoomGetModel dormitoryRoom in ViewBag.DormitoryRooms)
+            {
+                <tr>
+                    <td>@Html.ActionLink(dormitoryRoom.DormitoryRoomName ?? "", "GetDormitoryRoomById",
+                            new {dormitoryRoomId = dormitoryRoom.DormitoryRoomId})</td>
+                    <td>
+                        @Html.ActionLink(dormitoryRoom.Dormitory?.Name ?? "", "GetDormitoryById", "Dormitory",
+                            new {dormitoryId = dormitoryRoom.Dormitory?.DormitoryId})
+                    </td>
+                    <td>
+                        @dormitoryRoom.MaxCountInRoom
+                    </td>
+                    <td>
+                        @dormitoryRoom.FreeSpacesCount
+                    </td>
+                    <td>
+                        @foreach (var student in dormitoryRoom.DormitoryRoomStudents)
+                        {
+                            @Html.ActionLink(student.FullName, "GetStudentById", "Student", new {studentId = student.StudentId})
+                        }
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <div>
+            <a href="@Url.Action("AddOrUpdateDormitoryRoom", new {add = "true"})" class="btn btn-info">Add</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

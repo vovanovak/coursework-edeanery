@@ -61,7 +61,7 @@ namespace EDeanery.PL.Mappers
                 OnBudget = student.StudentTicketInfo.OnBudget,
                 GroupName = student.Group?.GroupName,
                 DormitoryName = student.DormitoryRoom?.DormitoryName,
-                DormitoryRoomName = student.DormitoryRoom?.DormityRoomName,
+                DormitoryRoomName = student.DormitoryRoom?.DormitoryRoomName,
                 Email = student.CommunicationInfo.Email,
                 PhoneNumber = student.CommunicationInfo.PhoneNumber
             };

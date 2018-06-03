@@ -9,5 +9,7 @@ namespace EDeanery.DAL.Repositories.Abstract
         Task SetDormitoryRoomsAsync(int dormitoryRoomId, IReadOnlyCollection<int> studentIds);
         Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsWithFreeSpaces(int dormitoryId);
         Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsByDormitoryId(int dormitoryId);
+        Task SetDormitoryRoomStudentsAsync(int dormitoryRoomId, IReadOnlyCollection<int> studentIds);
+        Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsWithoutDormitory();
     }
 }

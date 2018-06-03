@@ -25,6 +25,7 @@
     </script>
 </head>
 <body onload="onBodyLoad()">
+@await Html.PartialAsync("NavBar")
 <div id="studentDetailedView">
     <h1>Group: @Model.GroupName</h1>
     <div class="row">

@@ -17,8 +17,8 @@
             <tr>
                 <td>@Html.CheckBox($"groupPostModel.DormitoryRooms[{i}]", 
                         dormitoryRooms[i].Checked, 
-                        new {@class = "dormitoryRoomCheckBox", value = dormitoryRooms[i].DormitoryId})</td>
-                <td>@Html.ActionLink(dormitoryRooms[i].DormityRoomName, 
+                        new {@class = "dormitoryRoomCheckBox", value = dormitoryRooms[i].Dormitory?.DormitoryId})</td>
+                <td>@Html.ActionLink(dormitoryRooms[i].DormitoryRoomName, 
                         "GetDormitoryRoomById", 
                         new { dormitoryRoomId = dormitoryRooms[i].DormitoryRoomId })</td>
                 <td>@dormitoryRooms[i].MaxCountInRoom</td>

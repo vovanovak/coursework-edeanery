@@ -57,11 +57,12 @@
     </script>
 </head>
 <body onload="onBodyLoad()">
+@await Html.PartialAsync("NavBar")
 <div>
     <div id="addOrUpdateContainer">
         <h1>@ViewBag.Header</h1>
         <div id="groupForm" class="form-horizontal">
-            <input type="hidden" id="GroupId" value="@Model.GroupId" />
+            <input type="hidden" id="GroupId" value="@Model.GroupId"/>
             <div class="form-group">
                 <label class="control-label col-sm-2">Group name: </label>
                 <div class="col-sm-10">@Html.TextBoxFor(m => m.GroupName, new {@class = "form-control"})</div>
@@ -85,7 +86,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-2">Students: </label>
                 <div class="col-sm-10">
-                    @await Html.PartialAsync("../Student/SelectStudents", (List<StudentSelectModel>)ViewBag.Students);
+                    @await Html.PartialAsync("../Student/SelectStudents", (List<StudentSelectModel>) ViewBag.Students);
                     @Html.HiddenFor(m => m.Students, new {id = "Students"})
                 </div>
             </div>

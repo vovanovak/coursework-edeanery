@@ -10,7 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDeanery.BLL.Domain", "EDea
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deploy", "Deploy", "{EF83D341-D31F-4DFA-BCC3-0F5B6D6519BF}"
 ProjectSection(SolutionItems) = preProject
-	Deploy\init_code_first.ps1 = Deploy\init_code_first.ps1
+	Deploy\init_code_first.bat = Deploy\init_code_first.bat
 EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDeanery.Mappers", "EDeanery.Mappers\EDeanery.Mappers.csproj", "{BFF18105-25E1-4F67-8633-CE307712C789}"

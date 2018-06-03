@@ -70,7 +70,7 @@ namespace EDeanery.PL.Controllers
         [HttpGet]
         public async Task<ActionResult> AddOrUpdateDormitory([FromQuery] bool add, [FromQuery] int? dormitoryId)
         {
-            var dormitoryRooms = await _dormitoryRoomService.GetAll();
+            var dormitoryRooms = await _dormitoryRoomService.GetRoomsWithoutDormitory();
             var faculties = await _facultyService.GetAll();
 
             var selectedDormitoryRooms = _dormitoryRoomSelectModelMapper.Map(dormitoryRooms).ToList();
@@ -128,11 +128,10 @@ namespace EDeanery.PL.Controllers
             return RedirectToAction("Index");
         }
 
-
         [HttpDelete]
-        public async Task<ActionResult> DeleteDormitory([FromQuery] int groupId)
+        public async Task<ActionResult> DeleteDormitory([FromQuery] int dormitoryId)
         {
-            await _dormitoryService.DeleteAsync(groupId);
+            await _dormitoryService.DeleteAsync(dormitoryId);
             return Ok();
         }
     }

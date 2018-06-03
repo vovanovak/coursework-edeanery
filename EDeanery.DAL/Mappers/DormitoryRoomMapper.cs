@@ -20,7 +20,8 @@ namespace EDeanery.DAL.Mappers
             return new DormitoryRoomEntity
             {
                 DormitoryRoomId = entity.DormitoryRoomId,
-                DormityRoomName = entity.DormityRoomName,
+                DormitoryRoomName = entity.DormitoryRoomName,
+                DormitoryId = entity.DormitoryId,
                 MaxCountInRoom = entity.MaxCountInRoom
             };
         }
@@ -30,10 +31,11 @@ namespace EDeanery.DAL.Mappers
             return new DormitoryRoom
             {
                 DormitoryRoomId = entity.DormitoryRoomId,
-                DormityRoomName = entity.DormityRoomName,
+                DormitoryRoomName = entity.DormitoryRoomName,
                 MaxCountInRoom = entity.MaxCountInRoom,
+                CountOfFreeSpaces = entity.MaxCountInRoom - entity.DormitoryRoomStudents.Count,
                 DormitoryId = entity.DormitoryId,
-                DormitoryName = entity.DormitoryEntity.Name,
+                DormitoryName = entity.DormitoryEntity?.Name,
                 Roomers = (entity.DormitoryRoomStudents ?? new List<DormitoryRoomStudentEntity>())
                     .Select(s => _studentMapper.Map(s.StudentEntity)).ToList(),
             };

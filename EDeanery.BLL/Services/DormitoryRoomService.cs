@@ -21,6 +21,12 @@ namespace EDeanery.BLL.Services
             await UnitOfWork.SaveChangesAsync();
         }
 
+        public async Task SetDormitoryRoomStudentsAsync(int dormitoryRoomId, IReadOnlyCollection<int> studentIds)
+        {
+            await UnitOfWork.DormitoryRoomRepository.SetDormitoryRoomStudentsAsync(dormitoryRoomId, studentIds);
+            await UnitOfWork.SaveChangesAsync();
+        }
+
         public async Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsWithFreeSpaces(int dormitoryId)
         {
             return await UnitOfWork.DormitoryRoomRepository.GetRoomsWithFreeSpaces(dormitoryId);
@@ -29,6 +35,11 @@ namespace EDeanery.BLL.Services
         public async Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsByDormitoryId(int dormitoryId)
         {
             return await UnitOfWork.DormitoryRoomRepository.GetRoomsByDormitoryId(dormitoryId);
+        }
+
+        public async Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsWithoutDormitory()
+        {
+            return await UnitOfWork.DormitoryRoomRepository.GetRoomsWithoutDormitory();
         }
     }
 }

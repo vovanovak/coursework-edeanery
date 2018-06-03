@@ -8,5 +8,7 @@
         public const string UpdateGroupHeader = "Update group";
         public const string AddDormitoryHeader = "Add dormitory";
         public const string UpdateDormitoryHeader = "Update dormitory";
+        public const string AddDormitoryRoomHeader = "Add dormitory room";
+        public const string UpdateDormitoryRoomHeader = "Update dormitory room";
     }
 }

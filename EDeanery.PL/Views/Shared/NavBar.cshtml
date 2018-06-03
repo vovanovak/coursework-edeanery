@@ -1,0 +1,14 @@
+﻿@model object
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">EDeanery</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li>@Html.ActionLink("Students", "Index", "Student")</li>
+            <li>@Html.ActionLink("Groups", "Index", "Group")</li>
+            <li>@Html.ActionLink("Dormitories", "Index", "Dormitory")</li>
+            <li>@Html.ActionLink("Rooms", "Index", "DormitoryRoom")</li>
+        </ul>
+    </div>
+</nav>

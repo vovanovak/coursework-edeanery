@@ -6,9 +6,10 @@ namespace EDeanery.PL.Models
     public class DormitoryRoomGetModel
     {
         public int DormitoryRoomId { get; set; }
-        public string DormityRoomName { get; set; }
+        public string DormitoryRoomName { get; set; }
         public int MaxCountInRoom { get; set; }
-        public int? DormitoryId { get; set; }
+        public int FreeSpacesCount { get; set; }
+        public DormitoryGetModel Dormitory { get; set; }
         public IReadOnlyCollection<StudentGetModel> DormitoryRoomStudents { get; set; }
 
         public DormitoryRoomGetModel()
@@ -18,9 +19,9 @@ namespace EDeanery.PL.Models
         public DormitoryRoomGetModel(DormitoryRoomGetModel dormitoryRoomGetModel)
         {
             DormitoryRoomId = dormitoryRoomGetModel.DormitoryRoomId;
-            DormityRoomName = dormitoryRoomGetModel.DormityRoomName;
+            DormitoryRoomName = dormitoryRoomGetModel.DormitoryRoomName;
             MaxCountInRoom = dormitoryRoomGetModel.MaxCountInRoom;
-            DormitoryId = dormitoryRoomGetModel.DormitoryId;
+            Dormitory = dormitoryRoomGetModel.Dormitory;
             DormitoryRoomStudents = dormitoryRoomGetModel.DormitoryRoomStudents;
         }
     }

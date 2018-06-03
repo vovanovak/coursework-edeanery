@@ -49,41 +49,42 @@
     </script>
 </head>
 <body onload="onBodyLoad()">
+@await Html.PartialAsync("NavBar")
 <div>
     <div id="addOrUpdateContainer">
-    <h1>@ViewBag.Header</h1>
-    @{
-        <div id="groupForm" class="form-horizontal">
-            @Html.HiddenFor(m => m.DormitoryId)
-            <div class="form-group">
-                <label class="control-label col-sm-2">Name: </label>
-                <div class="col-sm-10">@Html.TextBoxFor(m => m.Name, new {@class = "form-control"})</div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2">Address: </label>
-                <div class="col-sm-10">@Html.TextBoxFor(m => m.Address, new {@class = "form-control"})</div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2">Max count of members: </label>
-                <div class="col-sm-10">@Html.TextBoxFor(m => m.MaxCountOfMembers, new {type="number", @class = "form-control"})</div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2">Faculties: </label>
-                <div class="col-sm-10">
-                    @await Html.PartialAsync("../Faculty/SelectFaculties", (List<FacultySelectModel>)ViewBag.Faculties)
+        <h1>@ViewBag.Header</h1>
+        @{
+            <div id="groupForm" class="form-horizontal">
+                @Html.HiddenFor(m => m.DormitoryId)
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Name: </label>
+                    <div class="col-sm-10">@Html.TextBoxFor(m => m.Name, new {@class = "form-control"})</div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Address: </label>
+                    <div class="col-sm-10">@Html.TextBoxFor(m => m.Address, new {@class = "form-control"})</div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Max count of members: </label>
+                    <div class="col-sm-10">@Html.TextBoxFor(m => m.MaxCountOfMembers, new {type = "number", @class = "form-control"})</div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Faculties: </label>
+                    <div class="col-sm-10">
+                        @await Html.PartialAsync("../Faculty/SelectFaculties", (List<FacultySelectModel>) ViewBag.Faculties)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Dormitory rooms: </label>
+                    <div class="col-sm-10">
+                        @await Html.PartialAsync("../DormitoryRoom/SelectDormitoryRooms", (List<DormitoryRoomSelectModel>) ViewBag.DormitoryRooms)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="button" value="Submit" class="btn btn-default col-sm-10 col-sm-offset-2"/>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2">Dormitory rooms: </label>
-                <div class="col-sm-10">
-                    @await Html.PartialAsync("../DormitoryRoom/SelectDormitoryRooms", (List<DormitoryRoomSelectModel>)ViewBag.DormitoryRooms)
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="button" value="Submit" class="btn btn-default col-sm-10 col-sm-offset-2"/>
-            </div>
-        </div>
-    }
+        }
     </div>
 </div>
 </body>

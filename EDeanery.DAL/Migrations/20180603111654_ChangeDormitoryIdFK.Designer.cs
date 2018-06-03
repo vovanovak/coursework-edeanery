@@ -11,9 +11,10 @@ using System;
 namespace EDeanery.DAL.Migrations
 {
     [DbContext(typeof(EdeaneryDbContext))]
-    partial class EdeaneryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180603111654_ChangeDormitoryIdFK")]
+    partial class ChangeDormitoryIdFK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,7 +64,7 @@ namespace EDeanery.DAL.Migrations
 
                     b.Property<int?>("DormitoryId");
 
-                    b.Property<string>("DormitoryRoomName");
+                    b.Property<string>("DormityRoomName");
 
                     b.Property<int>("MaxCountInRoom");
 

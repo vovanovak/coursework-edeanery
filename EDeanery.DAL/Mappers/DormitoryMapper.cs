@@ -41,7 +41,9 @@ namespace EDeanery.DAL.Mappers
             {
                 DormitoryId = entity.DormitoryId,
                 Name = entity.Name,
-                MaxCountOfMembers = entity.MaxCountOfMembers,
+                CountOfFreeSpaces = entity.DormitoryRooms.Sum(dr => dr.MaxCountInRoom) - 
+                                    entity.DormitoryRooms.Select(dr => dr.DormitoryRoomStudents.Count).Sum(),
+                MaxCountOfMembers = entity.DormitoryRooms?.Sum(dr => dr.MaxCountInRoom) ?? 0,
                 Address = entity.Address,
                 NumberOfFlors = entity.NumberOfFlors,
                 MainFaculties = (entity.DormitoryFaculties ?? new List<DormitoryFacultyEntity>())
