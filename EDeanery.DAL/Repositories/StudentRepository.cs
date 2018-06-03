@@ -57,26 +57,106 @@ namespace EDeanery.DAL.Repositories
             return _daoStudentMapper.Map(await GetStudentsWithIncludes().SingleOrDefaultAsync(d => d.StudentId == id));
         }
 
-        public async Task<IReadOnlyCollection<Student>> GetStudentsByFullName(string search)
+        private List<StudentEntity> FilterByGroup(List<StudentEntity> studentDaos, int? groupId)
+        {
+            if (groupId.HasValue)
+            {
+                var studentIds = _context.GroupStudents
+                    .Where(g => g.GroupId == groupId.Value)
+                    .Select(s => s.StudentId)
+                    .ToList();
+
+                studentDaos = studentDaos.Where(s => studentIds.Contains(s.StudentId)).ToList();
+            }
+
+            return studentDaos;
+        }
+        
+        private List<StudentEntity> FilterByDormitory(List<StudentEntity> studentDaos, int? dormitoryId)
+        {
+            if (dormitoryId.HasValue)
+            {
+                var studentIds = _context.DormitoryRoomStudents
+                    .Include(drs => drs.DormitoryRoomEntity)
+                    .Include(drs => drs.StudentEntity)
+                    .Where(drs => drs.DormitoryRoomEntity.DormitoryId == dormitoryId.Value)
+                    .Select(drs => drs.StudentEntity.StudentId).ToList();
+                
+                studentDaos = studentDaos.Where(s => studentIds.Contains(s.StudentId)).ToList();
+            }
+
+            return studentDaos;
+        }
+        
+        private List<StudentEntity> FilterByDormitoryRoom(List<StudentEntity> studentDaos, int? dormitoryRoomId)
+        {
+            if (dormitoryRoomId.HasValue)
+            {
+                var studentIds = _context.DormitoryRoomStudents
+                    .Include(drs => drs.DormitoryRoomEntity)
+                    .Include(drs => drs.StudentEntity)
+                    .Where(drs => drs.DormitoryRoomEntity.DormitoryRoomId == dormitoryRoomId.Value)
+                    .Select(drs => drs.StudentEntity.StudentId).ToList();
+                
+                studentDaos = studentDaos.Where(s => studentIds.Contains(s.StudentId)).ToList();
+            }
+
+            return studentDaos;
+        }
+
+        private async Task SetSpecialities(List<StudentEntity> studentDaos)
+        {
+            var distinctSpecialityIds = studentDaos.Select(s => s.SpecialityId).Distinct().ToList();
+
+            var specialities = await _context.Specialities
+                .Include(s => s.FacultyEntity)
+                .Where(s => distinctSpecialityIds.Contains(s.SpecialityId))
+                .ToDictionaryAsync(s => s.SpecialityId, s => s);
+
+            foreach (var student in studentDaos)
+            {
+                student.SpecialityEntity = specialities[student.SpecialityId];
+            }
+        }
+
+        public async Task<IReadOnlyCollection<Student>> GetStudentsByFullName(
+            string search, 
+            int? groupId, 
+            int? dormitoryId,
+            int? dormitoryRoomId)
         {
             var studentDaos = await GetStudentsWithIncludes().Where(s =>
                     EF.Functions.Like(s.FirstName, $"%{search}%") || EF.Functions.Like(s.LastName, $"%{search}%"))
                 .ToListAsync();
+
+            studentDaos = FilterByGroup(studentDaos, groupId);
+            studentDaos = FilterByDormitory(studentDaos, dormitoryId);
+            studentDaos = FilterByDormitoryRoom(studentDaos, dormitoryRoomId);
             
+            await SetSpecialities(studentDaos);
+   
             return studentDaos.Select(_daoStudentMapper.Map).ToList();
         }
 
-        public async Task<IReadOnlyCollection<Student>> GetStudentsByGroup(string search)
+        public async Task<IReadOnlyCollection<Student>> GetStudentsByGroup(
+            string search,
+            int? groupId, 
+            int? dormitoryId,
+            int? dormitoryRoomId)
         {
-            var students = await _context.Groups.Include(g => g.GroupStudents)
+            var studentDaos = await _context.Groups.Include(g => g.GroupStudents)
                 .ThenInclude(g => g.StudentEntity)
-                .ThenInclude(s => s.SpecialityEntity)
-                .ThenInclude(s => s.FacultyEntity)
                 .Where(g => EF.Functions.Like(g.GroupName, $"%{search}%"))
                 .SelectMany(g => g.GroupStudents).Select(g => g.StudentEntity)
                 .ToListAsync();
 
-            return _daoStudentMapper.Map(students).ToList();
+            studentDaos = FilterByGroup(studentDaos, groupId);
+            studentDaos = FilterByDormitory(studentDaos, dormitoryId);
+            studentDaos = FilterByDormitoryRoom(studentDaos, dormitoryRoomId);
+
+            await SetSpecialities(studentDaos);
+            
+            return _daoStudentMapper.Map(studentDaos).ToList();
         }
 
         public async Task<IReadOnlyCollection<Student>> GetStudentsWithoutRooms()

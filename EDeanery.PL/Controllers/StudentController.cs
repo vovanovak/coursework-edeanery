@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using EDeanery.BLL.Domain.Entities;
 using EDeanery.BLL.Services.Abstract;
+using EDeanery.DAL.UnitOfWork;
 using EDeanery.Mappers.Abstract;
 using EDeanery.Mappers.Extensions;
 using EDeanery.PL.Constants;
@@ -41,6 +43,30 @@ namespace EDeanery.PL.Controllers
             ViewBag.Students = _studentGetModelMapper.Map(await _studentService.GetAll()).ToList();
 
             return View();
+        }
+        
+        [HttpGet]
+        public async Task<IReadOnlyCollection<StudentGetModel>> GetStudentsByFullName(
+            [FromQuery] string search, 
+            [FromQuery] int? groupId,
+            [FromQuery] int? dormitoryId,
+            [FromQuery] int? dormitoryRoomId)
+        {
+            var students = await _studentService.GetStudentsByFullName(search, groupId, dormitoryId, dormitoryRoomId);
+            var responseModels = _studentGetModelMapper.Map(students).ToList();
+            return responseModels;
+        }
+
+        [HttpGet]
+        public async Task<IReadOnlyCollection<StudentGetModel>> GetStudentsByGroup(
+            [FromQuery] string search,
+            [FromQuery] int? groupId,
+            [FromQuery] int? dormitoryId,
+            [FromQuery] int? dormitoryRoomId)
+        {
+            var students = await _studentService.GetStudentsByGroup(search, groupId, dormitoryId, dormitoryRoomId);
+            var responseModels = _studentGetModelMapper.Map(students).ToList();
+            return responseModels;
         }
 
         [HttpGet]

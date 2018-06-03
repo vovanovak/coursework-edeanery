@@ -18,7 +18,9 @@
 @await Html.PartialAsync("NavBar")
 <div id="indexContainer">
     <h1>Students</h1>
-    @await Html.PartialAsync("ViewStudents", (object) ViewBag.Students)
+    <div>
+        @await Html.PartialAsync("ViewStudents", (object) ViewBag.Students)
+    </div>
     <div>
         <a href="@Url.Action("AddOrUpdateStudent", new {add = "true"})" class="btn btn-info">Add</a>
     </div>

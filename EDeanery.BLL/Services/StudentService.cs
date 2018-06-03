@@ -25,14 +25,18 @@ namespace EDeanery.BLL.Services
             return baseStudent;
         }
 
-        public async Task<IReadOnlyCollection<Student>> GetStudentsByFullName(string search)
+        public async Task<IReadOnlyCollection<Student>> GetStudentsByFullName(
+            string search,
+            int? groupId, 
+            int? dormitoryId,
+            int? dormitoryRoomId)
         {
-            return await UnitOfWork.StudentRepository.GetStudentsByFullName(search);
+            return await UnitOfWork.StudentRepository.GetStudentsByFullName(search, groupId, dormitoryId, dormitoryRoomId);
         }
 
-        public async Task<IReadOnlyCollection<Student>> GetStudentsByGroup(string search)
+        public async Task<IReadOnlyCollection<Student>> GetStudentsByGroup(string search, int? groupId, int? dormitoryId, int? dormitoryRoomId)
         {
-            return await UnitOfWork.StudentRepository.GetStudentsByGroup(search);
+            return await UnitOfWork.StudentRepository.GetStudentsByGroup(search, groupId, dormitoryId, dormitoryRoomId);
         }
 
         public async Task<IReadOnlyCollection<Student>> GetStudentsWithoutRooms()
