@@ -21,5 +21,10 @@ namespace EDeanery.BLL.Services
             await UnitOfWork.GroupRepository.SetStudentsForGroup(groupId, studentIds);
             await UnitOfWork.SaveChangesAsync();
         }
+
+        public bool IsGroupNameUnique(string name)
+        {
+            return UnitOfWork.GroupRepository.IsGroupNameUnique(name);
+        }
     }
 }

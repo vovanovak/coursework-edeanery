@@ -11,5 +11,6 @@ namespace EDeanery.BLL.Services.Abstract
         Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsWithFreeSpaces(int dormitoryId);
         Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsByDormitoryId(int dormitoryId);
         Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsWithoutDormitory();
+        bool IsDormitoryRoomNameUnique(string name);
     }
 }

@@ -129,8 +129,14 @@ namespace EDeanery.PL.Controllers
 
             return RedirectToAction("Index");
         }
-
-
+        
+        [HttpGet]
+        public JsonResult CheckDormitoryRoomName([FromQuery] string name)
+        {
+            var isValid = _dormitoryRoomService.IsDormitoryRoomNameUnique(name);
+            return Json(new {IsValid = isValid, Message = ValidatorConstants.DormitoryNameIsNotUnique});
+        }
+        
         [HttpDelete]
         public async Task<ActionResult> DeleteDormitoryRoom([FromQuery] int dormitoryRoomId)
         {

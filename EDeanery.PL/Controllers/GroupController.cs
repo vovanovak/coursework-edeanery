@@ -120,6 +120,12 @@ namespace EDeanery.PL.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public JsonResult CheckGroupName([FromQuery] string name)
+        {
+            var isValid = _groupService.IsGroupNameUnique(name);
+            return Json(new {IsValid = isValid, Message = ValidatorConstants.DormitoryNameIsNotUnique});
+        }
 
         [HttpDelete]
         public async Task<ActionResult> DeleteGroup([FromQuery] int groupId)

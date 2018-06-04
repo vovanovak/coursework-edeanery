@@ -8,5 +8,6 @@ namespace EDeanery.DAL.Repositories.Abstract
     {
         Task SetStudentsForGroup(int groupId, IReadOnlyCollection<int> studentIds);
         Task<Group> GetGroupByStudentId(int studentId);
+        bool IsGroupNameUnique(string name);
     }
 }

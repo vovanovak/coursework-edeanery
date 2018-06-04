@@ -11,7 +11,8 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/js/setSpecialitiesByFaculty.js"></script>
     <script src="~/js/selectEntity.js"></script>
-
+    <script src="~/js/validate.js"></script>
+    
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
     <link rel="stylesheet" href="~/css/site.css"/>
@@ -23,7 +24,7 @@
                 console.log(facultyId);
                 setSpecialtiesByFacultyId(facultyId);
             });
-           
+
             $(".btn").click(function() {
                 var groupIdVal = $("#GroupId").val();
                 var groupNameVal = $("#GroupName").val();
@@ -31,27 +32,24 @@
                 var specialityIdVal = $("#specialitiesSelect :selected").val();
                 var studentsVal = getCheckedIds("#selectStudentsTable", ".studentCheckBox");
 
-                console.log(groupNameVal);
-                console.log(facultyIdVal);
-                console.log(specialityIdVal);
-                console.log(studentsVal);
-
-                $.ajax({
-                    method: "POST",
-                    url: "@Url.Action("AddOrUpdateGroup",
-                              new {add = this.Context.Request.Query["add"]})",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({
-                        GroupId: groupIdVal,
-                        GroupName: groupNameVal,
-                        FacultyId: facultyIdVal,
-                        SpecialityId: specialityIdVal,
-                        Students: studentsVal
-                    })
-                }).done(function(html) {
-                    window.location.href = "@Url.Action("Index")";
+                validateGroup(function(data) {
+                    if (data.isValid == false) return;
+                    $.ajax({
+                        method: "POST",
+                        url: "@Url.Action("AddOrUpdateGroup",
+                                  new {add = this.Context.Request.Query["add"]})",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({
+                            GroupId: groupIdVal,
+                            GroupName: groupNameVal,
+                            FacultyId: facultyIdVal,
+                            SpecialityId: specialityIdVal,
+                            Students: studentsVal
+                        })
+                    }).done(function(html) {
+                        window.location.href = "@Url.Action("Index")";
+                    });
                 });
-                getCheckedStudentIds();
             });
         }
     </script>
@@ -65,7 +63,10 @@
             <input type="hidden" id="GroupId" value="@Model.GroupId"/>
             <div class="form-group">
                 <label class="control-label col-sm-2">Group name: </label>
-                <div class="col-sm-10">@Html.TextBoxFor(m => m.GroupName, new {@class = "form-control"})</div>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.GroupName, new {@class = "form-control"})
+                    <div id="GroupNameValidationMsg" class="validationMsg"></div>
+                </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">Faculty: </label>

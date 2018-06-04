@@ -10,6 +10,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/js/selectEntity.js"></script>
+    <script src="~/js/validate.js"></script>
     
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
@@ -23,21 +24,24 @@
                 var maxCountInRoomVal = $("#MaxCountInRoom").val();
                 var dormitoryIdVal = $("#dormitoriesSelect option:selected").val();
                 var studentIdsVal = getCheckedIds("#selectStudentsTable", ".studentCheckBox");
-                
-                $.ajax({
-                    method: "POST",
-                    url: "@Url.Action("AddOrUpdateDormitoryRoom",
-                              new {add = this.Context.Request.Query["add"]})",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({
-                        DormitoryRoomId: dormitoryRoomIdVal,
-                        DormitoryRoomName: dormitoryRoomNameVal,
-                        MaxCountInRoom: maxCountInRoomVal,
-                        DormitoryId: dormitoryIdVal,
-                        Students: studentIdsVal
-                    })
-                }).done(function(html) {
-                    window.location.href = "@Url.Action("Index")";
+
+                validateDormitoryRoom(function(data) {
+                    if (data.isValid == false) return;
+                    $.ajax({
+                        method: "POST",
+                        url: "@Url.Action("AddOrUpdateDormitoryRoom",
+                                  new {add = this.Context.Request.Query["add"]})",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({
+                            DormitoryRoomId: dormitoryRoomIdVal,
+                            DormitoryRoomName: dormitoryRoomNameVal,
+                            MaxCountInRoom: maxCountInRoomVal,
+                            DormitoryId: dormitoryIdVal,
+                            Students: studentIdsVal
+                        })
+                    }).done(function(html) {
+                        window.location.href = "@Url.Action("Index")";
+                    });
                 });
             });
         }
@@ -55,12 +59,14 @@
                     <label class="control-label col-sm-2">Name: </label>
                     <div class="col-sm-10">
                         @Html.TextBoxFor(m => m.DormitoryRoomName, new {@class = "form-control"})
+                        <div id="DormitoryRoomNameValidationMsg" class="validationMsg"></div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2">Max count: </label>
                     <div class="col-sm-10">
                         @Html.TextBoxFor(m => m.MaxCountInRoom, new {type = "number", @class = "form-control"})
+                        <div id="MaxCountInRoomValidationMsg" class="validationMsg"></div>
                     </div>
                 </div>
                 <div class="form-group">

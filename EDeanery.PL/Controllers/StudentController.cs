@@ -44,10 +44,10 @@ namespace EDeanery.PL.Controllers
 
             return View();
         }
-        
+
         [HttpGet]
         public async Task<IReadOnlyCollection<StudentGetModel>> GetStudentsByFullName(
-            [FromQuery] string search, 
+            [FromQuery] string search,
             [FromQuery] int? groupId,
             [FromQuery] int? dormitoryId,
             [FromQuery] int? dormitoryRoomId)
@@ -103,11 +103,19 @@ namespace EDeanery.PL.Controllers
             [FromForm] StudentPostModel studentPostModel,
             [FromQuery] bool add)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Header = add ? ControllerConstants.AddStudentHeader : ControllerConstants.UpdateStudentHeader;
+                await _viewBagDataProvider.InitFacultiesAndSpecialities(this.ViewBag);
+                return View(studentPostModel);
+            }
+
             var student = _studentPostModelMapper.Map(studentPostModel);
             if (add)
                 await _studentService.AddAsync(student);
             else
                 await _studentService.UpdateAsync(student);
+
             return RedirectToAction("Index");
         }
 

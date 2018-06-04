@@ -41,5 +41,10 @@ namespace EDeanery.BLL.Services
         {
             return await UnitOfWork.DormitoryRoomRepository.GetRoomsWithoutDormitory();
         }
+
+        public bool IsDormitoryRoomNameUnique(string name)
+        {
+            return UnitOfWork.DormitoryRoomRepository.IsDormitoryRoomNameUnique(name);
+        }
     }
 }

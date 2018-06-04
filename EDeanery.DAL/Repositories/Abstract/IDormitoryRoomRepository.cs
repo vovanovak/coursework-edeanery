@@ -12,5 +12,6 @@ namespace EDeanery.DAL.Repositories.Abstract
         Task SetDormitoryRoomStudentsAsync(int dormitoryRoomId, IReadOnlyCollection<int> studentIds);
         Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsWithoutDormitory();
         Task<DormitoryRoom> GetDormitoryRoomByStudentId(int studentId);
+        bool IsDormitoryRoomNameUnique(string name);
     }
 }

@@ -89,5 +89,10 @@ namespace EDeanery.DAL.Repositories
 
             return group == null ? null : _daoGroupMapper.Map(group);
         }
+
+        public bool IsGroupNameUnique(string name)
+        {
+            return !_context.Groups.Any(g => g.GroupName == name);
+        }
     }
 }

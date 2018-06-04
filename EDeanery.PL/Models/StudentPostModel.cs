@@ -27,6 +27,7 @@ namespace EDeanery.PL.Models
         public DateTime BirthDate { get; set; }
         
         [Required]
+        [EmailAddress]
         public string Email { get; set; }
         
         [Required]
