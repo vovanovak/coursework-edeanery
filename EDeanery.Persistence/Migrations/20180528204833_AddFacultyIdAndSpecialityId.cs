@@ -16,7 +16,7 @@ namespace EDeanery.Persistence.Migrations
                 GO
                 
                 ALTER TABLE [dbo].[Students] ADD CONSTRAINT [FK_Students_Specialities_SpecialityId]
-                FOREIGN KEY [SpecialityId] REFERENCES [dbo].[Specialities]([SpecialityId])
+                FOREIGN KEY ([SpecialityId]) REFERENCES [dbo].[Specialities]([SpecialityId])
                 GO
             ");
         }

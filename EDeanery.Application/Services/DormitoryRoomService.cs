@@ -9,7 +9,7 @@ namespace EDeanery.Application.Services
     internal class DormitoryRoomService : Service<DormitoryRoom, int>, IDormitoryRoomService
     {
         private readonly IDormitoryRoomRepository _dormitoryRoomRepository;
-        
+
         public DormitoryRoomService(IDormitoryRoomRepository dormitoryRoomRepository) : base(dormitoryRoomRepository)
         {
             _dormitoryRoomRepository = dormitoryRoomRepository;
