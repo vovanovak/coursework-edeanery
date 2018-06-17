@@ -1,6 +1,6 @@
 ﻿using EDeanery.Application.DI;
-using EDeanery.DAL.DI;
 using EDeanery.Host.Extensions;
+using EDeanery.Persistence.DI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

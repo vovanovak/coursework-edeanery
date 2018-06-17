@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDeanery.Host", "EDeanery.H
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDeanery.Application", "EDeanery.Application\EDeanery.Application.csproj", "{5CACA84E-A40F-4A08-A92A-B801EC458169}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDeanery.DAL", "EDeanery.DAL\EDeanery.DAL.csproj", "{4A0F911C-EEBC-45D1-B6C0-3798FBA72408}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDeanery.Persistence", "EDeanery.Persistence\EDeanery.Persistence.csproj", "{4A0F911C-EEBC-45D1-B6C0-3798FBA72408}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDeanery.Domain", "EDeanery.Domain\EDeanery.Domain.csproj", "{BB2CEE33-5DFB-41CE-A939-58672BFA6372}"
 EndProject

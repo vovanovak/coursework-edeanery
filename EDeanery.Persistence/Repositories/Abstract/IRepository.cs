@@ -1,0 +1,14 @@
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace EDeanery.Persistence.Repositories.Abstract
+{
+    public interface IRepository<TEntity, in TIdentity>
+    {
+        Task AddAsync(TEntity entity);
+        Task DeleteAsync(TIdentity id);
+        void UpdateAsync(TEntity entity);
+        Task<ICollection<TEntity>> GetAll();
+        Task<TEntity> GetById(TIdentity id);
+    }
+}

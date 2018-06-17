@@ -10,7 +10,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EDeanery.Application\EDeanery.Application.csproj" />
-    <ProjectReference Include="..\EDeanery.DAL\EDeanery.DAL.csproj" />
+    <ProjectReference Include="..\EDeanery.Persistence\EDeanery.Persistence.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="appsettings.json">

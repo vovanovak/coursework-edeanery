@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using EDeanery.Application.Services.Abstract;
-using EDeanery.DAL.Repositories.Abstract;
-using EDeanery.DAL.UnitOfWork.Abstract;
 using EDeanery.Domain.Entities;
+using EDeanery.Persistence.Repositories.Abstract;
+using EDeanery.Persistence.UnitOfWork.Abstract;
 
 namespace EDeanery.Application.Services
 {
