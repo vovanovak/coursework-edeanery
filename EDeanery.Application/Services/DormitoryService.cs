@@ -1,9 +1,9 @@
-﻿using EDeanery.BLL.Domain.Entities;
-using EDeanery.BLL.Services.Abstract;
+﻿using EDeanery.Application.Services.Abstract;
+using EDeanery.BLL.Domain.Entities;
 using EDeanery.DAL.Repositories.Abstract;
 using EDeanery.DAL.UnitOfWork.Abstract;
 
-namespace EDeanery.BLL.Services
+namespace EDeanery.Application.Services
 {
     internal class DormitoryService : Service<Dormitory, int>, IDormitoryService
     {

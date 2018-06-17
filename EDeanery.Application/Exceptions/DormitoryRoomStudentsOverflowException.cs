@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace EDeanery.BLL.Exceptions
+namespace EDeanery.Application.Exceptions
 {
     public class DormitoryRoomStudentsOverflowException : ApplicationException
     {

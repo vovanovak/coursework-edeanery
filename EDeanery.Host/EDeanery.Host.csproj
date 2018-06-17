@@ -9,7 +9,7 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EDeanery.BLL\EDeanery.BLL.csproj" />
+    <ProjectReference Include="..\EDeanery.Application\EDeanery.Application.csproj" />
     <ProjectReference Include="..\EDeanery.DAL\EDeanery.DAL.csproj" />
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using EDeanery.BLL.Domain.Entities;
 
-namespace EDeanery.BLL.Services.Abstract
+namespace EDeanery.Application.Services.Abstract
 {
     public interface IGroupService : IService<Group, int>
     {

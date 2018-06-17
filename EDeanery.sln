@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDeanery.Host", "EDeanery.Host\EDeanery.Host.csproj", "{EFC9CAFF-91DE-41A5-8007-ED7D564057CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDeanery.BLL", "EDeanery.BLL\EDeanery.BLL.csproj", "{5CACA84E-A40F-4A08-A92A-B801EC458169}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDeanery.Application", "EDeanery.Application\EDeanery.Application.csproj", "{5CACA84E-A40F-4A08-A92A-B801EC458169}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDeanery.DAL", "EDeanery.DAL\EDeanery.DAL.csproj", "{4A0F911C-EEBC-45D1-B6C0-3798FBA72408}"
 EndProject

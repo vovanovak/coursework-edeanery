@@ -1,6 +1,6 @@
 ﻿using EDeanery.BLL.Domain.Entities;
 
-namespace EDeanery.BLL.Services.Abstract
+namespace EDeanery.Application.Services.Abstract
 {
     public interface IDormitoryService : IService<Dormitory, int>
     {

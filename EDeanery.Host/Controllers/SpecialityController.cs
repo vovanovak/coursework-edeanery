@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EDeanery.Application.Services.Abstract;
 using EDeanery.BLL.Domain.Entities;
-using EDeanery.BLL.Services.Abstract;
 using EDeanery.Mappers.Abstract;
 using EDeanery.Mappers.Extensions;
 using Microsoft.AspNetCore.Mvc;

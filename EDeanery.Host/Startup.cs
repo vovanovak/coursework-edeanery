@@ -1,4 +1,4 @@
-﻿using EDeanery.BLL.DI;
+﻿using EDeanery.Application.DI;
 using EDeanery.DAL.DI;
 using EDeanery.Host.Extensions;
 using Microsoft.AspNetCore.Builder;

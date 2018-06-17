@@ -1,8 +1,8 @@
-﻿using EDeanery.BLL.Services;
-using EDeanery.BLL.Services.Abstract;
+﻿using EDeanery.Application.Services;
+using EDeanery.Application.Services.Abstract;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace EDeanery.BLL.DI
+namespace EDeanery.Application.DI
 {
     public static class BLLExtensions
     {

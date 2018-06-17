@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using EDeanery.Application.Services.Abstract;
 using EDeanery.BLL.Domain.Entities;
-using EDeanery.BLL.Services.Abstract;
 using EDeanery.Host.Constants;
 using EDeanery.Host.Models;
 using EDeanery.Mappers.Abstract;

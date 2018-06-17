@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace EDeanery.BLL.Services.Abstract
+namespace EDeanery.Application.Services.Abstract
 {
     public interface IService<TEntity, in TIdentity>
     {
