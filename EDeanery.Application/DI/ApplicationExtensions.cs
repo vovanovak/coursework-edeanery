@@ -4,9 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace EDeanery.Application.DI
 {
-    public static class BLLExtensions
+    public static class ApplicationExtensions
     {
-        public static IServiceCollection AddBLL(this IServiceCollection services)
+        public static IServiceCollection AddApplicationDependencies(this IServiceCollection services)
         {
             return AddServices(services);
         }

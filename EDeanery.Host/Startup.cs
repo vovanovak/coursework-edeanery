@@ -26,9 +26,9 @@ namespace EDeanery.Host
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddDAL(Configuration)
-                .AddBLL()
-                .AddPL();
+                .AddPersistenceDependencies(Configuration)
+                .AddApplicationDependencies()
+                .AddHostDependencies();
             
             services.AddMvc();
         }

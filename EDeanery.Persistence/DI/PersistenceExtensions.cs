@@ -13,9 +13,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace EDeanery.Persistence.DI
 {
-    public static class DALExtensions
+    public static class PersistenceExtensions
     {
-        public static IServiceCollection AddDAL(this IServiceCollection serviceCollection, IConfiguration configuration)
+        public static IServiceCollection AddPersistenceDependencies(this IServiceCollection serviceCollection, IConfiguration configuration)
         {
             return serviceCollection
                 .AddContext(configuration)

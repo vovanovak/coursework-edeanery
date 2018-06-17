@@ -8,9 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace EDeanery.Host.Extensions
 {
-    public static class PLExtensions
+    public static class HostExtensions
     {
-        public static IServiceCollection AddPL(this IServiceCollection services)
+        public static IServiceCollection AddHostDependencies(this IServiceCollection services)
         {
             return services
                 .AddProviders()
