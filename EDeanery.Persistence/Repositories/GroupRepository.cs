@@ -57,7 +57,7 @@ namespace EDeanery.Persistence.Repositories
         {
             var dao = _groupMapper.Map(entity);
             _context.Groups.Update(dao);
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
         public async Task<ICollection<Group>> GetAll()
