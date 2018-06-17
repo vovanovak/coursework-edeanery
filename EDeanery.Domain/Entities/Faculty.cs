@@ -1,4 +1,4 @@
-﻿namespace EDeanery.BLL.Domain.Entities
+﻿namespace EDeanery.Domain.Entities
 {
     public class Faculty
     {

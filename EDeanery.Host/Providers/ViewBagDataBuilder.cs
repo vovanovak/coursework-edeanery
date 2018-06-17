@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using EDeanery.Application.Services.Abstract;
-using EDeanery.BLL.Domain.Entities;
+using EDeanery.Domain.Entities;
 using EDeanery.Mappers.Abstract;
 using EDeanery.Mappers.Extensions;
 using Microsoft.AspNetCore.Mvc.Rendering;

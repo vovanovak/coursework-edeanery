@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using EDeanery.BLL.Domain.Entities;
 using EDeanery.DAL.DAOs;
+using EDeanery.Domain.Entities;
 using EDeanery.Mappers.Abstract;
-using Group = EDeanery.BLL.Domain.Entities.Group;
+using Group = EDeanery.Domain.Entities.Group;
 
 
 namespace EDeanery.DAL.Mappers

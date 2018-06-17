@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using EDeanery.BLL.Domain.Entities;
+using EDeanery.Domain.Entities;
 
 namespace EDeanery.Application.Services.Abstract
 {

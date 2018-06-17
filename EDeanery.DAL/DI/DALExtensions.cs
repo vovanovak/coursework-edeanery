@@ -1,11 +1,11 @@
-﻿using EDeanery.BLL.Domain.Entities;
-using EDeanery.DAL.Context;
+﻿using EDeanery.DAL.Context;
 using EDeanery.DAL.Context.Abstract;
 using EDeanery.DAL.DAOs;
 using EDeanery.DAL.Mappers;
 using EDeanery.DAL.Repositories;
 using EDeanery.DAL.Repositories.Abstract;
 using EDeanery.DAL.UnitOfWork.Abstract;
+using EDeanery.Domain.Entities;
 using EDeanery.Mappers.Abstract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

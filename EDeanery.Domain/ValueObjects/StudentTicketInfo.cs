@@ -1,6 +1,6 @@
-﻿using EDeanery.BLL.Domain.Entities;
+﻿using EDeanery.Domain.Entities;
 
-namespace EDeanery.BLL.Domain.ValueObjects
+namespace EDeanery.Domain.ValueObjects
 {
     public class StudentTicketInfo
     {

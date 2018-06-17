@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using EDeanery.BLL.Domain.Entities;
 using EDeanery.DAL.DAOs;
+using EDeanery.Domain.Entities;
 using EDeanery.Mappers.Abstract;
 
 namespace EDeanery.DAL.Mappers

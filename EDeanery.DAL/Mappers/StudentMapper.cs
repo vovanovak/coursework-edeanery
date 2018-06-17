@@ -1,6 +1,6 @@
-﻿using EDeanery.BLL.Domain.Entities;
-using EDeanery.BLL.Domain.ValueObjects;
-using EDeanery.DAL.DAOs;
+﻿using EDeanery.DAL.DAOs;
+using EDeanery.Domain.Entities;
+using EDeanery.Domain.ValueObjects;
 using EDeanery.Mappers.Abstract;
 
 namespace EDeanery.DAL.Mappers

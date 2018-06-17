@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EDeanery.BLL.Domain.Entities;
 using EDeanery.DAL.Context.Abstract;
 using EDeanery.DAL.Repositories.Abstract;
+using EDeanery.Domain.Entities;
 using EDeanery.Mappers.Abstract;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,4 +1,4 @@
-﻿using EDeanery.BLL.Domain.Entities;
+﻿using EDeanery.Domain.Entities;
 using EDeanery.Host.Mappers;
 using EDeanery.Host.Models;
 using EDeanery.Host.Providers;

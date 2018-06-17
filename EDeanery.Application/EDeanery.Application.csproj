@@ -3,7 +3,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EDeanery.BLL.Domain\EDeanery.BLL.Domain.csproj" />
     <ProjectReference Include="..\EDeanery.DAL\EDeanery.DAL.csproj" />
+    <ProjectReference Include="..\EDeanery.Domain\EDeanery.Domain.csproj" />
   </ItemGroup>
 </Project>

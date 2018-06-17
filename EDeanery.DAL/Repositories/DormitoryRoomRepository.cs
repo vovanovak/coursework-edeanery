@@ -7,7 +7,7 @@ using EDeanery.DAL.Repositories.Abstract;
 using EDeanery.Mappers.Abstract;
 using EDeanery.Mappers.Extensions;
 using Microsoft.EntityFrameworkCore;
-using DormitoryRoom = EDeanery.BLL.Domain.Entities.DormitoryRoom;
+using DormitoryRoom = EDeanery.Domain.Entities.DormitoryRoom;
 
 namespace EDeanery.DAL.Repositories
 {

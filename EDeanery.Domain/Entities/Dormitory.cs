@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace EDeanery.BLL.Domain.Entities
+namespace EDeanery.Domain.Entities
 {
     public class Dormitory
     {

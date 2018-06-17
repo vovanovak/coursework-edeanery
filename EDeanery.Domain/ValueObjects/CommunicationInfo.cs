@@ -1,4 +1,4 @@
-﻿namespace EDeanery.BLL.Domain.ValueObjects
+﻿namespace EDeanery.Domain.ValueObjects
 {
     public class CommunicationInfo
     {

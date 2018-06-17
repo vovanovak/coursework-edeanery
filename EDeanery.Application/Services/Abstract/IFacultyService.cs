@@ -1,4 +1,4 @@
-﻿using EDeanery.BLL.Domain.Entities;
+﻿using EDeanery.Domain.Entities;
 
 namespace EDeanery.Application.Services.Abstract
 {

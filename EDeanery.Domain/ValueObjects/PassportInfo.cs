@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EDeanery.BLL.Domain.ValueObjects
+namespace EDeanery.Domain.ValueObjects
 {
     public class PassportInfo
     {

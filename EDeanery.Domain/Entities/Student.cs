@@ -1,7 +1,7 @@
 ﻿using System;
-using EDeanery.BLL.Domain.ValueObjects;
+using EDeanery.Domain.ValueObjects;
 
-namespace EDeanery.BLL.Domain.Entities
+namespace EDeanery.Domain.Entities
 {
     public class Student
     {

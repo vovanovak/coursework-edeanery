@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDeanery.Application", "EDe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDeanery.DAL", "EDeanery.DAL\EDeanery.DAL.csproj", "{4A0F911C-EEBC-45D1-B6C0-3798FBA72408}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDeanery.BLL.Domain", "EDeanery.BLL.Domain\EDeanery.BLL.Domain.csproj", "{BB2CEE33-5DFB-41CE-A939-58672BFA6372}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDeanery.Domain", "EDeanery.Domain\EDeanery.Domain.csproj", "{BB2CEE33-5DFB-41CE-A939-58672BFA6372}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deploy", "Deploy", "{EF83D341-D31F-4DFA-BCC3-0F5B6D6519BF}"
 ProjectSection(SolutionItems) = preProject

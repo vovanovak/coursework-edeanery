@@ -1,5 +1,5 @@
-﻿using EDeanery.BLL.Domain.Entities;
-using EDeanery.BLL.Domain.ValueObjects;
+﻿using EDeanery.Domain.Entities;
+using EDeanery.Domain.ValueObjects;
 using EDeanery.Host.Models;
 using EDeanery.Mappers.Abstract;
 
