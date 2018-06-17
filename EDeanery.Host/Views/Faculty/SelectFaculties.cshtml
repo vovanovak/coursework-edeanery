@@ -1,0 +1,24 @@
+﻿@using EDeanery.Host.Models
+@model List<EDeanery.Host.Models.FacultySelectModel>
+
+<table id="selectFacultiesTable" class="table table-striped">
+    <thead>
+        <th></th>
+        <th>Name</th>
+    </thead>
+    <tbody>
+    @{
+        var faculties = (List<FacultySelectModel>)ViewData["Faculties"];
+        for (var i = 0; i < faculties.Count; i++)
+        {
+            <tr>
+                <td>@Html.CheckBox($"groupPostModel.Faculties[{i}]", 
+                        faculties[i].Checked, 
+                        new {@class = "facultyCheckBox", value = faculties[i].Id})</td>
+                <td>@faculties[i].Name</td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
+

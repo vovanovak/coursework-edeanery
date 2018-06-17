@@ -1,0 +1,57 @@
+﻿@using EDeanery.Host.Models
+@model EDeanery.Host.Models.GroupGetDetailedModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Group: @Model.GroupName</title>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/js/deleteEntity.js"></script>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+
+    <script>
+        var groupId = @Model.GroupId;
+        
+        function onBodyLoad() {
+            $("#deleteGroup").click(function() {
+                var groupId = @Model.GroupId;
+                deleteEntity("/Group/DeleteGroup?groupId=" + groupId);
+                window.location.href = "@Url.Action("Index")";
+            });
+        }
+    </script>
+</head>
+<body onload="onBodyLoad()">
+@await Html.PartialAsync("NavBar")
+<div id="studentDetailedView">
+    <h1>Group: @Model.GroupName</h1>
+    <div class="row">
+        <label class="control-label col-sm-3">Faculty: </label>
+        <div class="col-sm-6">@Html.DisplayFor(m => m.FacultyName)</div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">Speciality: </label>
+        <div class="col-sm-6">@Html.DisplayFor(m => m.SpecialityName)</div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">Students: </label>
+        <div class="col-sm-13">
+            @await Html.PartialAsync("../Student/ViewStudents", (List<StudentGetModel>) ViewBag.Students)
+        </div>
+    </div>
+    <div class="row">
+        <div class="btn-group btn-group-justified">
+            @Html.ActionLink("Update", "AddOrUpdateGroup",
+                new {add = "false", groupId = Model.GroupId},
+                new {@class = "btn btn-warning col-sm-10"})
+            <a id="deleteGroup" class="btn btn-danger col-sm-10">Delete</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

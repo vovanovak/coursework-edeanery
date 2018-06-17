@@ -1,0 +1,47 @@
+﻿@using EDeanery.Host.Models
+@model List<EDeanery.Host.Models.DormitoryGetModel>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Dormitories</title>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+</head>
+<body>
+@await Html.PartialAsync("NavBar")
+<div id="indexContainer">
+    <h1>Dormitories</h1>
+    <table class="table table-striped">
+        <thead>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Max count of members</th>
+        <th>Number of floors</th>
+        <th>Faculties</th>
+        </thead>
+        <tbody>
+        @foreach (DormitoryGetModel dormitoryGetModel in ViewBag.Dormitories)
+        {
+            <tr>
+                <td>@Html.ActionLink(dormitoryGetModel.Name, "GetDormitoryById", new {dormitoryId = dormitoryGetModel.DormitoryId})</td>
+                <td>@dormitoryGetModel.Address</td>
+                <td>@dormitoryGetModel.MaxCountOfMembers</td>
+                <td>@dormitoryGetModel.NumberOfFlors</td>
+                <td>@dormitoryGetModel.Faculties</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <div>
+        <a href="@Url.Action("AddOrUpdateDormitory", new {add = "true"})" class="btn btn-info">Add</a>
+    </div>
+</div>
+</body>
+</html>

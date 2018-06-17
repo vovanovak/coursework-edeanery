@@ -1,0 +1,45 @@
+﻿@using EDeanery.Host.Models
+@model List<EDeanery.Host.Models.GroupGetModel>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Groups</title>
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+</head>
+<body>
+<div>
+    @await Html.PartialAsync("NavBar")
+    <div id="indexContainer">
+        <h1>Groups</h1>
+        <table class="table table-striped">
+            <thead>
+            <th>Group name</th>
+            <th>Faculty</th>
+            <th>Speciality</th>
+            </thead>
+            <tbody>
+            @foreach (GroupGetModel group in ViewBag.Groups)
+            {
+                <tr>
+                    <td>@Html.ActionLink(group.GroupName, "GetGroupById", new {groupId = group.GroupId})</td>
+                    <td>@group.FacultyName</td>
+                    <td>@group.SpecialityName</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <div>
+            <a href="@Url.Action("AddOrUpdateGroup", new {add = "true"})" class="btn btn-info">Add</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

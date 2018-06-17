@@ -1,0 +1,98 @@
+﻿@using EDeanery.Host.Models
+@model EDeanery.Host.Models.DormitoryRoomPostModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Header</title>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/js/selectEntity.js"></script>
+    <script src="~/js/validate.js"></script>
+    
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+    
+    <script>
+
+        var isAdd = @this.Context.Request.Query["add"];
+
+        function onBodyLoad() {
+            $(".btn").click(function() {
+                var dormitoryRoomIdVal = $("#DormitoryRoomId").val();
+                var dormitoryRoomNameVal = $("#DormitoryRoomName").val();
+                var maxCountInRoomVal = $("#MaxCountInRoom").val();
+                var dormitoryIdVal = $("#dormitoriesSelect option:selected").val();
+                var studentIdsVal = getCheckedIds("#selectStudentsTable", ".studentCheckBox");
+
+                validateDormitoryRoom(function(data) {
+                    if (data.isValid == false) return;
+                    $.ajax({
+                        method: "POST",
+                        url: "@Url.Action("AddOrUpdateDormitoryRoom",
+                                  new {add = this.Context.Request.Query["add"]})",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({
+                            DormitoryRoomId: dormitoryRoomIdVal,
+                            DormitoryRoomName: dormitoryRoomNameVal,
+                            MaxCountInRoom: maxCountInRoomVal,
+                            DormitoryId: dormitoryIdVal,
+                            Students: studentIdsVal
+                        })
+                    }).done(function(html) {
+                        window.location.href = "@Url.Action("Index")";
+                    });
+                });
+            });
+        }
+    </script>
+</head>
+<body onload="onBodyLoad()">
+@await Html.PartialAsync("NavBar")
+<div>
+    <div id="addOrUpdateContainer">
+        <h1>@ViewBag.Header</h1>
+        @{
+            <div id="groupForm" class="form-horizontal">
+                @Html.HiddenFor(m => m.DormitoryRoomId)
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Name: </label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.DormitoryRoomName, new {@class = "form-control"})
+                        <div id="DormitoryRoomNameValidationMsg" class="validationMsg"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Max count: </label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.MaxCountInRoom, new {type = "number", @class = "form-control"})
+                        <div id="MaxCountInRoomValidationMsg" class="validationMsg"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Dormitory: </label>
+                    <div class="col-sm-10">
+                        @Html.DropDownListFor(m => m.DormitoryId,
+                            (IEnumerable<SelectListItem>) ViewBag.Dormitories,
+                            null,
+                            new {Id = "dormitoriesSelect", @class = "form-control"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Students: </label>
+                    <div class="col-sm-10">
+                        @await Html.PartialAsync("../Student/SelectStudents", (List<StudentSelectModel>) ViewBag.Students)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="button" value="Submit" class="btn btn-default col-sm-10 col-sm-offset-2"/>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+</body>
+</html>

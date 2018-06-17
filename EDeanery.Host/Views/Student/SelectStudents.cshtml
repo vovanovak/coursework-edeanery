@@ -1,0 +1,38 @@
+﻿@using EDeanery.Host.Models
+@model List<EDeanery.Host.Models.StudentSelectModel>
+
+<table id="selectStudentsTable" class="table table-striped">
+    <thead>
+    <th></th>
+    <th>FullName</th>
+    <th>Email</th>
+    <th>Phone Number</th>
+    <th>Identification Code</th>
+    <th>Birth Date</th>
+    <th>Passport Identifier</th>
+    <th>Student Ticket</th>
+    <th>Faculty</th>
+    </thead>
+    <tbody>
+    @{
+        int i = 0;
+        foreach (StudentSelectModel student in (List<StudentSelectModel>)ViewData["Students"])
+        {
+            <tr>
+                <td>@Html.CheckBox($"groupPostModel.Students[{i}]", student.Checked, new {@class = "studentCheckBox", value = student.StudentId})</td>
+                <td>@Html.ActionLink(student.FullName, "GetStudentById", new {studentId = student.StudentId})</td>
+                <td>@student.Email</td>
+                <td>@student.PhoneNumber</td>
+                <td>@student.IdentificationCode</td>
+                <td>@student.BirthDate</td>
+                <td>@student.PassportIdentifier</td>
+                <td>@student.StudentTicket</td>
+                <td>@student.FacultyName</td>
+            </tr>
+
+            i++;
+        }
+    }
+    </tbody>
+</table>
+

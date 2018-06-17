@@ -33,7 +33,7 @@ namespace EDeanery.DAL.Mappers
                 DormitoryRoomId = entity.DormitoryRoomId,
                 DormitoryRoomName = entity.DormitoryRoomName,
                 MaxCountInRoom = entity.MaxCountInRoom,
-                CountOfFreeSpaces = entity.MaxCountInRoom - entity.DormitoryRoomStudents.Count,
+                CountOfFreeSpaces = entity.MaxCountInRoom - entity.DormitoryRoomStudents?.Count ?? 0,
                 DormitoryId = entity.DormitoryId,
                 DormitoryName = entity.DormitoryEntity?.Name,
                 Roomers = (entity.DormitoryRoomStudents ?? new List<DormitoryRoomStudentEntity>())

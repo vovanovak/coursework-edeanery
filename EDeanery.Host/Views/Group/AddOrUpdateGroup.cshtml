@@ -1,0 +1,106 @@
+﻿@using EDeanery.Host.Models
+@model EDeanery.Host.Models.GroupPostModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Header</title>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/js/setSpecialitiesByFaculty.js"></script>
+    <script src="~/js/selectEntity.js"></script>
+    <script src="~/js/validate.js"></script>
+    
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+
+    <script>
+        
+        var isAdd = @this.Context.Request.Query["add"];
+
+
+        function onBodyLoad() {
+            $("#facultiesSelect").change(() => {
+                var facultyId = $("#facultiesSelect option:selected").val();
+                console.log(facultyId);
+                setSpecialtiesByFacultyId(facultyId);
+            });
+
+            $(".btn").click(function() {
+                var groupIdVal = $("#GroupId").val();
+                var groupNameVal = $("#GroupName").val();
+                var facultyIdVal = $("#facultiesSelect :selected").val();
+                var specialityIdVal = $("#specialitiesSelect :selected").val();
+                var studentsVal = getCheckedIds("#selectStudentsTable", ".studentCheckBox");
+
+                
+                validateGroup(function(data) {
+                    if (data.isValid == false) return;
+                    $.ajax({
+                        method: "POST",
+                        url: "@Url.Action("AddOrUpdateGroup",
+                                  new {add = this.Context.Request.Query["add"]})",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({
+                            GroupId: groupIdVal,
+                            GroupName: groupNameVal,
+                            FacultyId: facultyIdVal,
+                            SpecialityId: specialityIdVal,
+                            Students: studentsVal
+                        })
+                    }).done(function(html) {
+                        window.location.href = "@Url.Action("Index")";
+                    });
+                });
+            });
+        }
+    </script>
+</head>
+<body onload="onBodyLoad()">
+@await Html.PartialAsync("NavBar")
+<div>
+    <div id="addOrUpdateContainer">
+        <h1>@ViewBag.Header</h1>
+        <div id="groupForm" class="form-horizontal">
+            <input type="hidden" id="GroupId" value="@Model.GroupId"/>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Group name: </label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.GroupName, new {@class = "form-control"})
+                    <div id="GroupNameValidationMsg" class="validationMsg"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Faculty: </label>
+                <div class="col-sm-10">
+                    @Html.DropDownListFor(m => m.FacultyId,
+                        (IEnumerable<SelectListItem>) ViewBag.Faculties,
+                        null,
+                        new {Id = "facultiesSelect", @class = "form-control"})</div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Speciality: </label>
+                <div class="col-sm-10">
+                    @Html.DropDownListFor(m => m.SpecialityId,
+                        (IEnumerable<SelectListItem>) ViewBag.Specialities,
+                        null,
+                        new {Id = "specialitiesSelect", @class = "form-control"})</div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Students: </label>
+                <div class="col-sm-10">
+                    @await Html.PartialAsync("../Student/SelectStudents", (List<StudentSelectModel>) ViewBag.Students);
+                    @Html.HiddenFor(m => m.Students, new {id = "Students"})
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="button" value="Submit" class="btn btn-default col-sm-10 col-sm-offset-2"/>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

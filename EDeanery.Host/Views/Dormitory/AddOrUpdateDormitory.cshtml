@@ -1,0 +1,112 @@
+﻿@using EDeanery.Host.Models
+@model EDeanery.Host.Models.DormitoryPostModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Header</title>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>`
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/js/selectEntity.js"></script>
+    <script src="~/js/validate.js"></script>
+    
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+    
+    <script>
+        var isAdd = @this.Context.Request.Query["add"];
+        function onBodyLoad() {
+            $(".btn").click(function() {
+                var dormitoryIdVal = $("#DormitoryId").val();
+                var nameVal = $("#Name").val();
+                var addressVal = $("#Address").val();
+                var numberOfFloorsVal = $("#NumberOfFloors").val();
+                var maxCountOfMembersVal = $("#MaxCountOfMembers").val();
+                var facultiesVal = getCheckedIds("#selectFacultiesTable", ".facultyCheckBox");
+                var dormitoryRoomsVal = getCheckedIds("#selectDormitoryRoomsTable", ".dormitoryRoomCheckBox");
+
+                
+               
+
+                
+                validateDormitory(function(data) {
+                    if (data.isValid == false) return;
+                    
+                    $.ajax({
+                        method: "POST",
+                        url: "@Url.Action("AddOrUpdateDormitory",
+                              new {add = this.Context.Request.Query["add"]})",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({
+                            DormitoryId: dormitoryIdVal,
+                            Name: nameVal,
+                            Address: addressVal,
+                            NumberOfFloors: numberOfFloorsVal,
+                            MaxCountOfMembers: maxCountOfMembersVal,
+                            Faculties: facultiesVal,
+                            DormitoryRooms: dormitoryRoomsVal
+                        })
+                    }).done(function(html) {
+                        window.location.href = "@Url.Action("Index")";
+                    });
+                });
+                
+            });
+        }
+    </script>
+</head>
+<body onload="onBodyLoad()">
+@await Html.PartialAsync("NavBar")
+<div>
+    <div id="addOrUpdateContainer">
+        <h1>@ViewBag.Header</h1>
+        @{
+            <div id="groupForm" class="form-horizontal">
+                @Html.HiddenFor(m => m.DormitoryId)
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Name: </label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Name, new {@class = "form-control", required="required"})
+                        <div id="NameValidationMsg" class="validationMsg"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Address: </label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Address, new {@class = "form-control", required="required"})
+                        <div id="AddressValidationMsg" class="validationMsg"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Max count of members: </label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.MaxCountOfMembers, new {type = "number", @class = "form-control", required="required"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Faculties: </label>
+                    <div class="col-sm-10">
+                        @await Html.PartialAsync("../Faculty/SelectFaculties", (List<FacultySelectModel>) ViewBag.Faculties)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Dormitory rooms: </label>
+                    <div class="col-sm-10">
+                        @await Html.PartialAsync("../DormitoryRoom/SelectDormitoryRooms", (List<DormitoryRoomSelectModel>) ViewBag.DormitoryRooms)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="button" value="Submit" class="btn btn-default col-sm-10 col-sm-offset-2"/>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+</body>
+</html>

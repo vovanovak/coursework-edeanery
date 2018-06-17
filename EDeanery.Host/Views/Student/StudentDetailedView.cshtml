@@ -1,0 +1,107 @@
+﻿@using EDeanery.Host.Models
+@model EDeanery.Host.Models.StudentGetDetailedModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Student: @Model.FullName </title>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/js/deleteEntity.js"></script>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+
+    <script>
+        function onBodyLoad() {
+            $("#deleteStudent").click(function() {
+                var studentId = @Model.StudentId;
+                deleteEntity("/Student/DeleteStudent?studentId=" + studentId);
+                window.location.href = "/Student";
+            });
+        }
+    </script>
+</head>
+<body onload="onBodyLoad()">
+@await Html.PartialAsync("NavBar")
+<div id="studentDetailedView">
+    <h1>Student: @Model.FullName</h1>
+    <div class="row">
+        <label class="col-sm-3">Full Name: </label>
+        <div class="col-sm-6">@Html.DisplayFor(m => m.FullName)</div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">Passport Identifier: </label>
+        <div class="col-sm-6">@Html.DisplayFor(m => m.PassportIdentifier)</div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">Birth Date: </label>
+        <div class="col-sm-6">
+            @Html.DisplayFor(m => m.BirthDate)
+        </div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">Start Of Learning Date: </label>
+        <div class="col-sm-6">
+            @Html.DisplayFor(m => m.StartOfLearningDate)
+        </div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">Email: </label>
+        <div class="col-sm-6">
+            @Html.DisplayFor(s => s.Email)
+        </div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">Phone Number: </label>
+        <div class="col-sm-6">
+            @Html.DisplayFor(s => s.PhoneNumber)
+        </div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">Identification Code: </label>
+        <div class="col-sm-6">@Html.DisplayFor(m => m.IdentificationCode)</div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">Student Ticket Id: </label>
+        <div class="col-sm-6">@Html.DisplayFor(m => m.StudentTicket)</div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">Faculty: </label>
+        <div class="col-sm-6">@Html.DisplayFor(m => m.FacultyName)</div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">Speciality: </label>
+        <div class="col-sm-6">@Html.DisplayFor(m => m.SpecialityName)</div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">Course: </label>
+        <div class="col-sm-6">@Html.DisplayFor(m => m.Course)</div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">On budget: </label>
+        <div class="col-sm-6">@Html.DisplayFor(m => m.OnBudget)</div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">Group: </label>
+        <div class="col-sm-6">@Html.DisplayFor(m => m.GroupName)</div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">Dormitory: </label>
+        <div class="col-sm-6">@Html.DisplayFor(m => m.DormitoryName)</div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">Dormitory Room: </label>
+        <div class="col-sm-6">@Html.DisplayFor(m => m.DormitoryRoomName)</div>
+    </div>
+    <div class="row">
+        <div class="btn-group btn-group-justified">
+            @Html.ActionLink("Update", "AddOrUpdateStudent", new {add = "false", studentId = Model.StudentId}, new {@class = "btn btn-warning col-sm-4"})
+            <a id="deleteStudent" class="btn btn-danger col-sm-4">Delete</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
