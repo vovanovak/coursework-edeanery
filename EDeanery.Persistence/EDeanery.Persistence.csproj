@@ -7,14 +7,6 @@
     <ProjectReference Include="..\EDeanery.Mappers\EDeanery.Mappers.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.EntityFrameworkCore, Version=2.0.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
-      <HintPath>..\..\..\.nuget\packages\microsoft.entityframeworkcore\2.0.1\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.EntityFrameworkCore.SqlServer, Version=2.0.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
-      <HintPath>..\..\..\.nuget\packages\microsoft.entityframeworkcore.sqlserver\2.0.1\lib\netstandard2.0\Microsoft.EntityFrameworkCore.SqlServer.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.0.3" />
