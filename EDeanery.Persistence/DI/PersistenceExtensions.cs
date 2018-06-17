@@ -6,7 +6,6 @@ using EDeanery.Persistence.DAOs;
 using EDeanery.Persistence.Mappers;
 using EDeanery.Persistence.Repositories;
 using EDeanery.Persistence.Repositories.Abstract;
-using EDeanery.Persistence.UnitOfWork.Abstract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,7 +19,6 @@ namespace EDeanery.Persistence.DI
             return serviceCollection
                 .AddContext(configuration)
                 .AddRepositories()
-                .AddUnitOfWork()
                 .AddMappers();
         }
 
@@ -65,13 +63,6 @@ namespace EDeanery.Persistence.DI
             serviceCollection.AddScoped<IGroupRepository, GroupRepository>();
             serviceCollection.AddScoped<ISpecialityRepository, SpecialityRepository>();
             serviceCollection.AddScoped<IStudentRepository, StudentRepository>();
-
-            return serviceCollection;
-        }
-
-        private static IServiceCollection AddUnitOfWork(this IServiceCollection serviceCollection)
-        {
-            serviceCollection.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
 
             return serviceCollection;
         }

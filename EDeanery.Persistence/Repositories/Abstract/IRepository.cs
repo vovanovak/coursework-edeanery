@@ -7,7 +7,7 @@ namespace EDeanery.Persistence.Repositories.Abstract
     {
         Task AddAsync(TEntity entity);
         Task DeleteAsync(TIdentity id);
-        void UpdateAsync(TEntity entity);
+        Task UpdateAsync(TEntity entity);
         Task<ICollection<TEntity>> GetAll();
         Task<TEntity> GetById(TIdentity id);
     }

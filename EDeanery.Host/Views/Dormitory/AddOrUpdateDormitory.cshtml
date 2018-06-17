@@ -1,5 +1,5 @@
 ﻿@using EDeanery.Host.Models
-@model EDeanery.Host.Models.DormitoryPostModel
+@model DormitoryPostModel
 
 <!DOCTYPE html>
 
@@ -20,7 +20,8 @@
     <link rel="stylesheet" href="~/css/site.css"/>
     
     <script>
-        var isAdd = @this.Context.Request.Query["add"];
+        var isAdd = @Context.Request.Query["add"];
+
         function onBodyLoad() {
             $(".btn").click(function() {
                 var dormitoryIdVal = $("#DormitoryId").val();
@@ -31,17 +32,15 @@
                 var facultiesVal = getCheckedIds("#selectFacultiesTable", ".facultyCheckBox");
                 var dormitoryRoomsVal = getCheckedIds("#selectDormitoryRoomsTable", ".dormitoryRoomCheckBox");
 
-                
-               
 
-                
                 validateDormitory(function(data) {
-                    if (data.isValid == false) return;
-                    
+                    if (data.isValid == false)
+                        return;
+
                     $.ajax({
                         method: "POST",
                         url: "@Url.Action("AddOrUpdateDormitory",
-                              new {add = this.Context.Request.Query["add"]})",
+                                  new {add = Context.Request.Query["add"]})",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify({
                             DormitoryId: dormitoryIdVal,

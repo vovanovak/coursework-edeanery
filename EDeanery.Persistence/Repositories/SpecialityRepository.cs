@@ -39,12 +39,14 @@ namespace EDeanery.Persistence.Repositories
         {
             var speciality = await _context.Specialities.SingleOrDefaultAsync(d => d.SpecialityId == id);
             _context.Specialities.Remove(speciality);
+            await _context.SaveChangesAsync();
         }
 
-        public void UpdateAsync(Speciality entity)
+        public async Task UpdateAsync(Speciality entity)
         {
             var dao = _specialityMapper.Map(entity);
             _context.Specialities.Update(dao);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<ICollection<Speciality>> GetAll()

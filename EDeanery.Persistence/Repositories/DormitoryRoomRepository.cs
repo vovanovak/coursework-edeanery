@@ -49,12 +49,14 @@ namespace EDeanery.Persistence.Repositories
         {
             var dao = await GetDormitoryRoomsWithStudents().SingleOrDefaultAsync(dr => dr.DormitoryRoomId == id);
             _context.DormitoryRooms.Remove(dao);
+            await _context.SaveChangesAsync();
         }
 
-        public void UpdateAsync(DormitoryRoom entity)
+        public async Task UpdateAsync(DormitoryRoom entity)
         {
             var dao = _dormitoryRoomMapper.Map(entity);
             _context.DormitoryRooms.Update(dao);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<ICollection<DormitoryRoom>> GetAll()
@@ -85,6 +87,8 @@ namespace EDeanery.Persistence.Repositories
             {
                 dormitoryRoom.DormitoryId = dormitoryId;
             }
+
+            _context.SaveChanges();
         }
 
         public async Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsByDormitoryId(int dormitoryId)
@@ -108,6 +112,7 @@ namespace EDeanery.Persistence.Repositories
             }).ToList();
 
             await _context.DormitoryRoomStudents.AddRangeAsync(newDormitoryRoomStudents);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsWithoutDormitory()

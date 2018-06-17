@@ -37,12 +37,14 @@ namespace EDeanery.Persistence.Repositories
         {
             var faculty = await _context.Faculties.SingleOrDefaultAsync(d => d.FacultyId == id);
             _context.Faculties.Remove(faculty);
+            await _context.SaveChangesAsync();
         }
 
-        public void UpdateAsync(Faculty entity)
+        public async Task UpdateAsync(Faculty entity)
         {
             var dao = _facultyMapper.Map(entity);
             _context.Faculties.Update(dao);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<ICollection<Faculty>> GetAll()

@@ -39,12 +39,14 @@ namespace EDeanery.Persistence.Repositories
         {
             var student = await _context.Students.SingleOrDefaultAsync(d => d.StudentId == id);
             _context.Students.Remove(student);
+            await _context.SaveChangesAsync();
         }
 
-        public void UpdateAsync(Student entity)
+        public async Task UpdateAsync(Student entity)
         {
             var dao = _studentMapper.Map(entity);
             _context.Students.Update(dao);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<ICollection<Student>> GetAll()
@@ -117,6 +119,8 @@ namespace EDeanery.Persistence.Repositories
             {
                 student.SpecialityEntity = specialities[student.SpecialityId];
             }
+            
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IReadOnlyCollection<Student>> GetStudentsByFullName(

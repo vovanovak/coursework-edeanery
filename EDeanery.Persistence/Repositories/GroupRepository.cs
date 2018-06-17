@@ -50,12 +50,14 @@ namespace EDeanery.Persistence.Repositories
         {
             var group = await _context.Groups.SingleOrDefaultAsync(d => d.GroupId == id);
             _context.Groups.Remove(group);
+            await _context.SaveChangesAsync();
         }
 
-        public void UpdateAsync(Group entity)
+        public async Task UpdateAsync(Group entity)
         {
             var dao = _groupMapper.Map(entity);
             _context.Groups.Update(dao);
+            _context.SaveChangesAsync();
         }
 
         public async Task<ICollection<Group>> GetAll()
@@ -80,6 +82,7 @@ namespace EDeanery.Persistence.Repositories
 
             _context.GroupStudents.RemoveRange(existingGroupStudents);
             await _context.GroupStudents.AddRangeAsync(newGroupStudents);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<Group> GetGroupByStudentId(int studentId)

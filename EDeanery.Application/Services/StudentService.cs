@@ -3,24 +3,31 @@ using System.Threading.Tasks;
 using EDeanery.Application.Services.Abstract;
 using EDeanery.Domain.Entities;
 using EDeanery.Persistence.Repositories.Abstract;
-using EDeanery.Persistence.UnitOfWork.Abstract;
 
 namespace EDeanery.Application.Services
 {
     internal class StudentService : Service<Student, int>, IStudentService
     {
-        public StudentService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
-        }
+        private readonly IStudentRepository _studentRepository;
+        private readonly IGroupRepository _groupRepository;
+        private readonly IDormitoryRoomRepository _dormitoryRoomRepository;
 
-        protected override IRepository<Student, int> Repository => UnitOfWork.StudentRepository;
+        public StudentService(
+            IStudentRepository studentRepository,
+            IGroupRepository groupRepository,
+            IDormitoryRoomRepository dormitoryRoomRepository) : base(studentRepository)
+        {
+            _studentRepository = studentRepository;
+            _groupRepository = groupRepository;
+            _dormitoryRoomRepository = dormitoryRoomRepository;
+        }
 
         public override async Task<Student> GetById(int id)
         {
             var baseStudent = await base.GetById(id);
 
-            baseStudent.Group = await UnitOfWork.GroupRepository.GetGroupByStudentId(id);
-            baseStudent.DormitoryRoom = await UnitOfWork.DormitoryRoomRepository.GetDormitoryRoomByStudentId(id);
+            baseStudent.Group = await _groupRepository.GetGroupByStudentId(id);
+            baseStudent.DormitoryRoom = await _dormitoryRoomRepository.GetDormitoryRoomByStudentId(id);
             
             return baseStudent;
         }
@@ -31,17 +38,17 @@ namespace EDeanery.Application.Services
             int? dormitoryId,
             int? dormitoryRoomId)
         {
-            return await UnitOfWork.StudentRepository.GetStudentsByFullName(search, groupId, dormitoryId, dormitoryRoomId);
+            return await _studentRepository.GetStudentsByFullName(search, groupId, dormitoryId, dormitoryRoomId);
         }
 
         public async Task<IReadOnlyCollection<Student>> GetStudentsByGroup(string search, int? groupId, int? dormitoryId, int? dormitoryRoomId)
         {
-            return await UnitOfWork.StudentRepository.GetStudentsByGroup(search, groupId, dormitoryId, dormitoryRoomId);
+            return await _studentRepository.GetStudentsByGroup(search, groupId, dormitoryId, dormitoryRoomId);
         }
 
         public async Task<IReadOnlyCollection<Student>> GetStudentsWithoutRooms()
         {
-            return await UnitOfWork.StudentRepository.GetStudentsWithoutRooms();
+            return await _studentRepository.GetStudentsWithoutRooms();
         }
     }
 }

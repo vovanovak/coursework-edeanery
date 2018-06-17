@@ -3,28 +3,26 @@ using System.Threading.Tasks;
 using EDeanery.Application.Services.Abstract;
 using EDeanery.Domain.Entities;
 using EDeanery.Persistence.Repositories.Abstract;
-using EDeanery.Persistence.UnitOfWork.Abstract;
 
 namespace EDeanery.Application.Services
 {
     internal class GroupService : Service<Group, int>, IGroupService
     {
-        public GroupService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        private readonly IGroupRepository _groupRepository;
+
+        public GroupService(IGroupRepository groupRepository) : base(groupRepository)
         {
+            _groupRepository = groupRepository;
         }
-
-        protected override IRepository<Group, int> Repository => UnitOfWork.GroupRepository;
-
 
         public async Task SetStudentsFromGroup(int groupId, IReadOnlyCollection<int> studentIds)
         {
-            await UnitOfWork.GroupRepository.SetStudentsForGroup(groupId, studentIds);
-            await UnitOfWork.SaveChangesAsync();
+            await _groupRepository.SetStudentsForGroup(groupId, studentIds);
         }
 
         public bool IsGroupNameUnique(string name)
         {
-            return UnitOfWork.GroupRepository.IsGroupNameUnique(name);
+            return _groupRepository.IsGroupNameUnique(name);
         }
     }
 }

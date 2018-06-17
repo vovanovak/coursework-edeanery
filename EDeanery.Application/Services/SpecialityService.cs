@@ -3,20 +3,21 @@ using System.Threading.Tasks;
 using EDeanery.Application.Services.Abstract;
 using EDeanery.Domain.Entities;
 using EDeanery.Persistence.Repositories.Abstract;
-using EDeanery.Persistence.UnitOfWork.Abstract;
 
 namespace EDeanery.Application.Services
 {
     internal class SpecialityService : Service<Speciality, int>, ISpecialityService
     {
-        public SpecialityService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        private readonly ISpecialityRepository _specialityRepository;
+
+        public SpecialityService(ISpecialityRepository specialityRepository) : base(specialityRepository)
         {
+            _specialityRepository = specialityRepository;
         }
 
-        protected override IRepository<Speciality, int> Repository => UnitOfWork.SpecialityRepository;
         public async Task<IReadOnlyCollection<Speciality>> GetByFacultyId(int facultyId)
         {
-            return await UnitOfWork.SpecialityRepository.GetByFacultyId(facultyId);
+            return await _specialityRepository.GetByFacultyId(facultyId);
         }
     }
 }

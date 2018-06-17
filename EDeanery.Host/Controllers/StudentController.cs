@@ -78,7 +78,7 @@ namespace EDeanery.Host.Controllers
         [HttpGet]
         public async Task<ActionResult> AddOrUpdateStudent([FromQuery] bool add, [FromQuery] int? studentId)
         {
-            await _viewBagDataProvider.InitFacultiesAndSpecialities(this.ViewBag);
+            await _viewBagDataProvider.InitFacultiesAndSpecialities(ViewBag);
 
             StudentPostModel model;
 
@@ -105,7 +105,7 @@ namespace EDeanery.Host.Controllers
             if (!ModelState.IsValid)
             {
                 ViewBag.Header = add ? ControllerConstants.AddStudentHeader : ControllerConstants.UpdateStudentHeader;
-                await _viewBagDataProvider.InitFacultiesAndSpecialities(this.ViewBag);
+                await _viewBagDataProvider.InitFacultiesAndSpecialities(ViewBag);
                 return View(studentPostModel);
             }
 

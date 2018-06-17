@@ -1,5 +1,5 @@
 ﻿@using EDeanery.Host.Models
-@model EDeanery.Host.Models.GroupPostModel
+@model GroupPostModel
 
 <!DOCTYPE html>
 
@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="~/css/site.css"/>
 
     <script>
-        
-        var isAdd = @this.Context.Request.Query["add"];
+
+        var isAdd = @Context.Request.Query["add"];
 
 
         function onBodyLoad() {
@@ -36,13 +36,14 @@
                 var specialityIdVal = $("#specialitiesSelect :selected").val();
                 var studentsVal = getCheckedIds("#selectStudentsTable", ".studentCheckBox");
 
-                
+
                 validateGroup(function(data) {
-                    if (data.isValid == false) return;
+                    if (data.isValid == false)
+                        return;
                     $.ajax({
                         method: "POST",
                         url: "@Url.Action("AddOrUpdateGroup",
-                                  new {add = this.Context.Request.Query["add"]})",
+                                  new {add = Context.Request.Query["add"]})",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify({
                             GroupId: groupIdVal,

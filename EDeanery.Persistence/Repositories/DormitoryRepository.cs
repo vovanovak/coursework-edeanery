@@ -13,13 +13,13 @@ namespace EDeanery.Persistence.Repositories
     internal class DormitoryRepository : IDormitoryRepository
     {
         private readonly IEdeaneryDbContext _context;
-        private readonly IMapper<Dormitory, DAOs.DormitoryEntity> _dormitoryMapper;
-        private readonly IMapper<DAOs.DormitoryEntity, Dormitory> _daoDormitoryMapper;
+        private readonly IMapper<Dormitory, DormitoryEntity> _dormitoryMapper;
+        private readonly IMapper<DormitoryEntity, Dormitory> _daoDormitoryMapper;
 
         public DormitoryRepository(
             IEdeaneryDbContext context,
-            IMapper<Dormitory, DAOs.DormitoryEntity> dormitoryMapper,
-            IMapper<DAOs.DormitoryEntity, Dormitory> daoDormitoryMapper)
+            IMapper<Dormitory, DormitoryEntity> dormitoryMapper,
+            IMapper<DormitoryEntity, Dormitory> daoDormitoryMapper)
         {
             _context = context;
             _dormitoryMapper = dormitoryMapper;
@@ -50,12 +50,14 @@ namespace EDeanery.Persistence.Repositories
         {
             var dormitory = await _context.Dormitories.SingleOrDefaultAsync(d => d.DormitoryId == id);
             _context.Dormitories.Remove(dormitory);
+            await _context.SaveChangesAsync();
         }
 
-        public void UpdateAsync(Dormitory entity)
+        public async Task UpdateAsync(Dormitory entity)
         {
             var dao = _dormitoryMapper.Map(entity);
             _context.Dormitories.Update(dao);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<ICollection<Dormitory>> GetAll()

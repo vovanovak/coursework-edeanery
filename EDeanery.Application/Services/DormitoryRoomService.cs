@@ -3,48 +3,46 @@ using System.Threading.Tasks;
 using EDeanery.Application.Services.Abstract;
 using EDeanery.Domain.Entities;
 using EDeanery.Persistence.Repositories.Abstract;
-using EDeanery.Persistence.UnitOfWork.Abstract;
 
 namespace EDeanery.Application.Services
 {
     internal class DormitoryRoomService : Service<DormitoryRoom, int>, IDormitoryRoomService
     {
-        public DormitoryRoomService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        private readonly IDormitoryRoomRepository _dormitoryRoomRepository;
+        
+        public DormitoryRoomService(IDormitoryRoomRepository dormitoryRoomRepository) : base(dormitoryRoomRepository)
         {
+            _dormitoryRoomRepository = dormitoryRoomRepository;
         }
-
-        protected override IRepository<DormitoryRoom, int> Repository => UnitOfWork.DormitoryRoomRepository;
 
         public async Task SetDormitoryRoomsAsync(int dormitoryId, IReadOnlyCollection<int> dormitoryRoomIds)
         {
-            UnitOfWork.DormitoryRoomRepository.SetDormitoryRooms(dormitoryId, dormitoryRoomIds);
-            await UnitOfWork.SaveChangesAsync();
+            _dormitoryRoomRepository.SetDormitoryRooms(dormitoryId, dormitoryRoomIds);
         }
 
         public async Task SetDormitoryRoomStudentsAsync(int dormitoryRoomId, IReadOnlyCollection<int> studentIds)
         {
-            await UnitOfWork.DormitoryRoomRepository.SetDormitoryRoomStudentsAsync(dormitoryRoomId, studentIds);
-            await UnitOfWork.SaveChangesAsync();
+            await _dormitoryRoomRepository.SetDormitoryRoomStudentsAsync(dormitoryRoomId, studentIds);
         }
 
         public async Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsWithFreeSpaces(int dormitoryId)
         {
-            return await UnitOfWork.DormitoryRoomRepository.GetRoomsWithFreeSpaces(dormitoryId);
+            return await _dormitoryRoomRepository.GetRoomsWithFreeSpaces(dormitoryId);
         }
 
         public async Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsByDormitoryId(int dormitoryId)
         {
-            return await UnitOfWork.DormitoryRoomRepository.GetRoomsByDormitoryId(dormitoryId);
+            return await _dormitoryRoomRepository.GetRoomsByDormitoryId(dormitoryId);
         }
 
         public async Task<IReadOnlyCollection<DormitoryRoom>> GetRoomsWithoutDormitory()
         {
-            return await UnitOfWork.DormitoryRoomRepository.GetRoomsWithoutDormitory();
+            return await _dormitoryRoomRepository.GetRoomsWithoutDormitory();
         }
 
         public bool IsDormitoryRoomNameUnique(string name)
         {
-            return UnitOfWork.DormitoryRoomRepository.IsDormitoryRoomNameUnique(name);
+            return _dormitoryRoomRepository.IsDormitoryRoomNameUnique(name);
         }
     }
 }

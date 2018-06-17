@@ -1,5 +1,5 @@
 ﻿@using EDeanery.Host.Models
-@model EDeanery.Host.Models.StudentPostModel
+@model StudentPostModel
 
 <!DOCTYPE html>
 
@@ -31,7 +31,7 @@
     <div id="addOrUpdateContainer">
         <h1>@ViewBag.Header</h1>
         @{
-            <form action="@Url.Action("AddOrUpdateStudent", new {add = this.Context.Request.Query["add"]})" method="post" class="form-horizontal">
+            <form action="@Url.Action("AddOrUpdateStudent", new {add = Context.Request.Query["add"]})" method="post" class="form-horizontal">
                 @Html.HiddenFor(m => m.StudentId)
                 <div class="form-group">
                     <label class="control-label col-sm-2">Passport Identifier: </label>

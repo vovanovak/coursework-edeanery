@@ -2,18 +2,16 @@
 using System.Threading.Tasks;
 using EDeanery.Application.Services.Abstract;
 using EDeanery.Persistence.Repositories.Abstract;
-using EDeanery.Persistence.UnitOfWork.Abstract;
 
 namespace EDeanery.Application.Services
 {
     internal abstract class Service<TEntity, TIdentity> : IService<TEntity, TIdentity>
     {
-        protected readonly IUnitOfWork UnitOfWork;
-        protected abstract IRepository<TEntity, TIdentity> Repository { get; }
+        protected IRepository<TEntity, TIdentity> Repository { get; }
 
-        protected Service(IUnitOfWork unitOfWork)
+        protected Service(IRepository<TEntity, TIdentity> repository)
         {
-            UnitOfWork = unitOfWork;
+            Repository = repository;
         }
 
         public virtual async Task AddAsync(TEntity entity)
@@ -24,13 +22,11 @@ namespace EDeanery.Application.Services
         public virtual async Task DeleteAsync(TIdentity id)
         {
             await Repository.DeleteAsync(id);
-            await UnitOfWork.SaveChangesAsync();
         }
 
         public virtual async Task UpdateAsync(TEntity entity)
         {
-            Repository.UpdateAsync(entity);
-            await UnitOfWork.SaveChangesAsync();
+            await Repository.UpdateAsync(entity);
         }
 
         public virtual async Task<ICollection<TEntity>> GetAll()
